@@ -1,0 +1,7 @@
+.ihav_space/
+__pycache__/
+*.pyc
+.venv/
+.DS_Store
+ref_repos/
+agents_space/

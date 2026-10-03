@@ -1,0 +1,12 @@
+{
+  "name": "ihav-leaderboards",
+  "interface": {"displayName": "ihav-leaderboards"},
+  "plugins": [
+    {
+      "name": "ihav-leaderboards",
+      "source": {"source": "local", "path": "./plugins/ihav-leaderboards"},
+      "policy": {"installation": "AVAILABLE"},
+      "category": "Productivity"
+    }
+  ]
+}

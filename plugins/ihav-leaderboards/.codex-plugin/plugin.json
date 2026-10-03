@@ -1,0 +1,25 @@
+{
+  "name": "ihav-leaderboards",
+  "version": "0.1.0",
+  "description": "Find the most-visited public leaderboards for any domain and merge them into one quality-first leaderboard with confidence, cost dimensions and Pareto charts.",
+  "author": {"name": "hiendang7613"},
+  "license": "MIT",
+  "keywords": ["leaderboard", "benchmark", "pareto", "vendor-comparison", "claude-code", "codex"],
+  "skills": "./core/",
+  "interface": {
+    "displayName": "ihav-leaderboards",
+    "shortDescription": "One leaderboard from the most-visited public leaderboards of a domain",
+    "longDescription": "Name what you need, for example an OCR API. The agent asks web chatbots for public leaderboards, keeps the 32 most visited, extracts their tables, matches candidate names and merges the scores into one 0-100 quality ranking. Each score carries a confidence (the share of source weight behind it). Cost, speed and other dimensions get their own Pareto charts.",
+    "developerName": "hiendang7613",
+    "category": "Productivity",
+    "capabilities": ["Interactive"],
+    "defaultPrompt": [
+      "Build a leaderboard of OCR APIs.",
+      "Which speech-to-text API is best for the price?",
+      "Merge the public leaderboards for text-to-image models."
+    ],
+    "websiteURL": "https://github.com/hiendang7613/ihav-leaderboards"
+  },
+  "homepage": "https://github.com/hiendang7613/ihav-leaderboards",
+  "repository": "https://github.com/hiendang7613/ihav-leaderboards"
+}

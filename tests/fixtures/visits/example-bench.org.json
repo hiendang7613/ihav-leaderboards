@@ -1,0 +1,29 @@
+{
+  "input": "example-bench.org",
+  "domain": "example-bench.org",
+  "kind": "rank_only",
+  "monthly_visits": null,
+  "period": null,
+  "analyzed_at": null,
+  "range": null,
+  "confidence": null,
+  "rank": {
+    "value": 250000,
+    "list": "Tranco",
+    "date": "2026-10-03"
+  },
+  "history": null,
+  "history_source": null,
+  "countries": null,
+  "countries_source": null,
+  "source": {
+    "name": "Tranco",
+    "layer": "fallback"
+  },
+  "calibration": null,
+  "fetched_at": "2026-10-03T10:00:00Z",
+  "cached": false,
+  "notes": [
+    "Synthetic fixture: rank_only shape from the visit-counter contract."
+  ]
+}

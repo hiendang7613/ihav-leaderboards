@@ -1,0 +1,60 @@
+{
+  "input": "huggingface.co",
+  "domain": "huggingface.co",
+  "kind": "estimate",
+  "monthly_visits": 40000000,
+  "period": null,
+  "analyzed_at": "2026-10-03T10:35:44.099Z",
+  "range": null,
+  "confidence": null,
+  "rank": {
+    "value": 1000,
+    "list": "WebTrafficChecker global rank",
+    "date": "2026-10-03"
+  },
+  "history": [
+    {
+      "date": "2026-09-30",
+      "visits": 40000000
+    },
+    {
+      "date": "2026-10-02",
+      "visits": 40000000
+    }
+  ],
+  "history_source": {
+    "name": "WebTrafficChecker",
+    "layer": "primary"
+  },
+  "countries": [
+    {
+      "country": "US",
+      "share": 0.4,
+      "visits": 16000000
+    },
+    {
+      "country": "IN",
+      "share": 0.1,
+      "visits": 4000000
+    }
+  ],
+  "countries_source": {
+    "name": "WebTrafficChecker",
+    "layer": "primary",
+    "analyzed_at": "2026-10-03T10:35:44.099Z"
+  },
+  "source": {
+    "name": "WebTrafficChecker",
+    "layer": "primary",
+    "method": "provider-modelled",
+    "url": "https://webtrafficchecker.com/traffic/huggingface.co",
+    "api_url": "https://webtrafficchecker.com/api/traffic?domain=huggingface.co",
+    "analyzed_at": "2026-10-03T10:35:44.099Z"
+  },
+  "calibration": null,
+  "fetched_at": "2026-10-03T10:35:46.813080Z",
+  "cached": false,
+  "notes": [
+    "Synthetic values. The shape is copied from a real ihav-web-visit-counter --json output on 2026-10-03."
+  ]
+}

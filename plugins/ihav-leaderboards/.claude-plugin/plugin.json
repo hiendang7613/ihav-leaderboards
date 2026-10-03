@@ -1,0 +1,12 @@
+{
+  "name": "ihav-leaderboards",
+  "displayName": "ihav-leaderboards",
+  "version": "0.1.0",
+  "description": "Find the most-visited public leaderboards for any domain and merge them into one quality-first leaderboard with confidence, cost dimensions and Pareto charts.",
+  "author": {"name": "hiendang7613"},
+  "license": "MIT",
+  "keywords": ["leaderboard", "benchmark", "pareto", "vendor-comparison", "claude-code", "codex"],
+  "homepage": "https://github.com/hiendang7613/ihav-leaderboards",
+  "repository": "https://github.com/hiendang7613/ihav-leaderboards",
+  "skills": "./claude/skills"
+}
