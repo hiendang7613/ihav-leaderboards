@@ -34,32 +34,26 @@ Steps 1, 2, 4 and 5 are done by your agent, guided by the skill. Steps 3, 6 and 
 
 ## Install
 
-Requires Python 3.9 or later.
+Requires Python 3.9 or later. Install from the [ihav catalog](https://github.com/hiendang7613/ihav), which lists every public ihav plugin.
 
-Claude Code:
-
-```bash
-claude plugin marketplace add hiendang7613/ihav-leaderboards
-claude plugin install ihav-leaderboards@ihav-leaderboards
-```
-
-Codex:
+Claude Code (also installs ihav-web-visit-counter, which ihav-leaderboards needs):
 
 ```bash
-codex plugin marketplace add hiendang7613/ihav-leaderboards
-codex plugin add ihav-leaderboards@ihav-leaderboards
+claude plugin marketplace add hiendang7613/ihav
+claude plugin install ihav-leaderboards@ihav
 ```
 
-Or install from the [ihav catalog](https://github.com/hiendang7613/ihav), which lists every public ihav plugin:
+Codex has no dependency install, so add both plugins:
 
 ```bash
-claude plugin marketplace add hiendang7613/ihav && claude plugin install ihav-leaderboards@ihav
-codex plugin marketplace add hiendang7613/ihav && codex plugin add ihav-leaderboards@ihav
+codex plugin marketplace add hiendang7613/ihav
+codex plugin add ihav-web-visit-counter@ihav
+codex plugin add ihav-leaderboards@ihav
 ```
 
-Both install paths were tested on 2026-10-03 with an empty Claude Code and Codex configuration.
+This repository is also its own marketplace (`hiendang7613/ihav-leaderboards`). In Claude Code, add the ihav catalog first, because the dependency comes from there. Without it, Claude Code installs ihav-leaderboards but does not load it.
 
-Discovery uses [ihav-web-chat](https://github.com/hiendang7613/ihav-web-chat) and weighting uses [ihav-web-visit-counter](https://github.com/hiendang7613/ihav-web-visit-counter). Install them the same way. Automatic dependency install is not available yet.
+Discovery uses [ihav-web-chat](https://github.com/hiendang7613/ihav-web-chat), which is not released yet. Weighting uses [ihav-web-visit-counter](https://github.com/hiendang7613/ihav-web-visit-counter).
 
 ## Usage
 

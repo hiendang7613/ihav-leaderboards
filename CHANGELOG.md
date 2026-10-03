@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.2 - 2026-10-04
+
+- Claude Code installs ihav-web-visit-counter automatically as a dependency (from the ihav catalog). Codex has no dependency install; the skill still checks and prints the install command.
+- Docs: ihav-web-chat's CLI option is `--providers`.
+
 ## 0.2.1 - 2026-10-03
 
 - Weights accept visit-counter estimates that carry only a rounded label such as `631.0M` (`monthly_visits_text`).

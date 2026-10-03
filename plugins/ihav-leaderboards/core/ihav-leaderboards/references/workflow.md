@@ -30,7 +30,7 @@ codex plugin marketplace add hiendang7613/ihav
 codex plugin add <plugin>@ihav
 ```
 
-Installing a plugin needs the user's permission in the host; this check does not grant it. After an install, check the list again and resume the run from its saved files. Never resend a chatbot request that already has a saved answer.
+In Claude Code, installing ihav-leaderboards from the ihav catalog also installs ihav-web-visit-counter. Codex installs no dependencies. Installing a plugin needs the user's permission in the host; this check does not grant it. After an install, check the list again and resume the run from its saved files. Never resend a chatbot request that already has a saved answer.
 
 ### 1. New run
 

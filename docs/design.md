@@ -41,7 +41,7 @@ Every stage writes its output to `./.ihav_space/ihav-leaderboards/runs/<run-id>/
 ### S1 discover (proposed)
 
 - The plugin writes one deep-research prompt per run. It asks each chatbot for up to 32 public leaderboards or benchmarks for the domain, each with URL, owner, what it measures, main metric and direction, and last update date. Answer format: a fenced JSON list, so parsing is deterministic.
-- Default providers: ChatGPT and Gemini (owner). Option `--providers a,b,c` or `--providers all` passes through to `ihav-web-chat run --to`.
+- Default providers: ChatGPT and Gemini (owner). Option `--providers a,b,c` or `--providers all` passes through to `ihav-web-chat run --providers`.
 - `ihav-web-chat run` returns at once; answers arrive by callback (per the ihav-web-chat design contract, section 4, locally inspected; not demonstrated at runtime). S1 waits through `delivery wait/read`. A provider that ends `failed`, `timeout` or `login_required` is reported; the run continues with the others (`partial`). Zero answers stops the run with a clear message.
 - Dependency (unverified): the owner goal asks for automatic install of ihav-web-chat. No verified plugin-to-plugin install mechanism exists in either host yet, so this goal is **open**, not fulfilled (review O5). Until it is resolved, S1 locates ihav-web-chat through an explicit host/plugin locator plus a version and contract check (not an assumed binary on `PATH`). If absent or incompatible, it prints the exact install command and stops.
 - Bound (verified): ihav-web-chat v0 is macOS-only; its first milestone is ChatGPT, Gemini and Perplexity. `--providers all` means "all providers the installed ihav-web-chat supports".

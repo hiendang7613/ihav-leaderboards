@@ -2,7 +2,9 @@
   "$schema": "https://www.schemastore.org/claude-code-marketplace.json",
   "name": "ihav-leaderboards",
   "description": "One quality-first leaderboard from the most-visited public leaderboards of any domain, for Claude Code and Codex.",
-  "owner": {"name": "hiendang7613"},
+  "owner": {
+    "name": "hiendang7613"
+  },
   "plugins": [
     {
       "name": "ihav-leaderboards",
@@ -10,5 +12,8 @@
       "category": "productivity",
       "description": "Merge public leaderboards into one ranked table with confidence, cost dimensions and Pareto charts."
     }
+  ],
+  "allowCrossMarketplaceDependenciesOn": [
+    "ihav"
   ]
 }

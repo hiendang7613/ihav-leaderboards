@@ -23,6 +23,14 @@ class ManifestTests(unittest.TestCase):
         self.assertEqual(claude["license"], codex["license"])
         self.assertEqual(claude["license"], "MIT")
 
+    def test_claude_dependency_comes_from_the_ihav_catalog(self):
+        claude = load(PLUGIN / ".claude-plugin/plugin.json")
+        codex = load(PLUGIN / ".codex-plugin/plugin.json")
+        self.assertEqual(claude["dependencies"], [{"name": "ihav-web-visit-counter", "marketplace": "ihav"}])
+        self.assertNotIn("dependencies", codex)
+        market = load(ROOT / ".claude-plugin/marketplace.json")
+        self.assertEqual(market["allowCrossMarketplaceDependenciesOn"], ["ihav"])
+
     def test_both_marketplaces_point_to_the_plugin_and_skill_paths_exist(self):
         claude_market = load(ROOT / ".claude-plugin/marketplace.json")
         codex_market = load(ROOT / ".agents/plugins/marketplace.json")
