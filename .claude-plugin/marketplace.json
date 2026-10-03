@@ -1,7 +1,7 @@
 {
   "$schema": "https://www.schemastore.org/claude-code-marketplace.json",
   "name": "ihav-leaderboards",
-  "description": "One quality-first leaderboard from the most-visited public leaderboards of any domain, for Claude Code and Codex.",
+  "description": "One quality-first leaderboard from the most-visited public leaderboards of any domain. Needs the ihav catalog for its dependency: run `claude plugin marketplace add hiendang7613/ihav` first, or install ihav-leaderboards@ihav instead.",
   "owner": {
     "name": "hiendang7613"
   },
@@ -10,7 +10,7 @@
       "name": "ihav-leaderboards",
       "source": "./plugins/ihav-leaderboards",
       "category": "productivity",
-      "description": "Merge public leaderboards into one ranked table with confidence, cost dimensions and Pareto charts."
+      "description": "Merge public leaderboards into one ranked table with confidence, cost dimensions and Pareto charts. Needs the ihav catalog for its dependency: run `claude plugin marketplace add hiendang7613/ihav` first, or install ihav-leaderboards@ihav instead."
     }
   ],
   "allowCrossMarketplaceDependenciesOn": [
