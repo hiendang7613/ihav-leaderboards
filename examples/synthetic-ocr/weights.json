@@ -1,0 +1,75 @@
+{
+  "floor": 800000.0,
+  "floor_domains": [
+    "paperbench.example"
+  ],
+  "top_n": 32,
+  "boards": [
+    {
+      "slug": "hub-handwriting",
+      "domain": "bench-hub.example",
+      "monthly_visits": 9000000,
+      "visit_kind": "estimate",
+      "visit_period": null,
+      "visit_analyzed_at": "2026-10-03T00:00:00Z",
+      "visit_source": "synthetic",
+      "split": 2,
+      "mass": 4500000.0,
+      "weight_basis": "domain_split(2)",
+      "selected": true
+    },
+    {
+      "slug": "hub-ocr-accuracy",
+      "domain": "bench-hub.example",
+      "monthly_visits": 9000000,
+      "visit_kind": "estimate",
+      "visit_period": null,
+      "visit_analyzed_at": "2026-10-03T00:00:00Z",
+      "visit_source": "synthetic",
+      "split": 2,
+      "mass": 4500000.0,
+      "weight_basis": "domain_split(2)",
+      "selected": true
+    },
+    {
+      "slug": "doc-arena",
+      "domain": "doc-arena.example",
+      "monthly_visits": 2500000,
+      "visit_kind": "estimate",
+      "visit_period": null,
+      "visit_analyzed_at": "2026-10-03T00:00:00Z",
+      "visit_source": "synthetic",
+      "split": 1,
+      "mass": 2500000.0,
+      "weight_basis": "domain_split(1)",
+      "selected": true
+    },
+    {
+      "slug": "ocr-league-cer",
+      "domain": "ocr-league.example",
+      "monthly_visits": 800000,
+      "visit_kind": "estimate",
+      "visit_period": null,
+      "visit_analyzed_at": "2026-10-03T00:00:00Z",
+      "visit_source": "synthetic",
+      "split": 1,
+      "mass": 800000.0,
+      "weight_basis": "domain_split(1)",
+      "selected": true
+    },
+    {
+      "slug": "paperbench-rank",
+      "domain": "paperbench.example",
+      "monthly_visits": null,
+      "visit_kind": "rank_only",
+      "visit_period": null,
+      "visit_analyzed_at": "2026-10-03T00:00:00Z",
+      "visit_source": "synthetic",
+      "split": 1,
+      "mass": 800000.0,
+      "weight_basis": "floor+domain_split(1)",
+      "selected": true
+    }
+  ],
+  "note": "Weights are allocated domain popularity, not page visits."
+}

@@ -1,0 +1,65 @@
+{
+  "boards": [
+    {
+      "slug": "hub-ocr-accuracy",
+      "url": "https://bench-hub.example/hub-ocr-accuracy",
+      "final_url": "https://bench-hub.example/hub-ocr-accuracy",
+      "domain": "bench-hub.example",
+      "status": "live",
+      "mentioned_by": [
+        "chatgpt",
+        "gemini"
+      ]
+    },
+    {
+      "slug": "hub-handwriting",
+      "url": "https://bench-hub.example/hub-handwriting",
+      "final_url": "https://bench-hub.example/hub-handwriting",
+      "domain": "bench-hub.example",
+      "status": "live",
+      "mentioned_by": [
+        "chatgpt",
+        "gemini"
+      ]
+    },
+    {
+      "slug": "doc-arena",
+      "url": "https://doc-arena.example/doc-arena",
+      "final_url": "https://doc-arena.example/doc-arena",
+      "domain": "doc-arena.example",
+      "status": "live",
+      "mentioned_by": [
+        "chatgpt",
+        "gemini"
+      ]
+    },
+    {
+      "slug": "ocr-league-cer",
+      "url": "https://ocr-league.example/ocr-league-cer",
+      "final_url": "https://ocr-league.example/ocr-league-cer",
+      "domain": "ocr-league.example",
+      "status": "live",
+      "mentioned_by": [
+        "chatgpt",
+        "gemini"
+      ]
+    },
+    {
+      "slug": "paperbench-rank",
+      "url": "https://paperbench.example/paperbench-rank",
+      "final_url": "https://paperbench.example/paperbench-rank",
+      "domain": "paperbench.example",
+      "status": "live",
+      "mentioned_by": [
+        "chatgpt",
+        "gemini"
+      ]
+    },
+    {
+      "slug": "old-ocr-board",
+      "url": "https://gone.example/x",
+      "domain": "gone.example",
+      "status": "dead"
+    }
+  ]
+}

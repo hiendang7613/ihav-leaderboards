@@ -1,0 +1,476 @@
+{
+  "boards": [
+    {
+      "slug": "hub-handwriting",
+      "status": "scored",
+      "reason": "",
+      "mass": 4500000.0,
+      "weight": 0.36585365853658536,
+      "duplicates": [],
+      "unmatched": [],
+      "unusable": []
+    },
+    {
+      "slug": "hub-ocr-accuracy",
+      "status": "scored",
+      "reason": "",
+      "mass": 4500000.0,
+      "weight": 0.36585365853658536,
+      "duplicates": [],
+      "unmatched": [],
+      "unusable": []
+    },
+    {
+      "slug": "doc-arena",
+      "status": "scored",
+      "reason": "",
+      "mass": 2500000.0,
+      "weight": 0.2032520325203252,
+      "duplicates": [],
+      "unmatched": [],
+      "unusable": []
+    },
+    {
+      "slug": "ocr-league-cer",
+      "status": "scored",
+      "reason": "",
+      "mass": 800000.0,
+      "weight": 0.06504065040650407,
+      "duplicates": [],
+      "unmatched": [],
+      "unusable": []
+    },
+    {
+      "slug": "paperbench-rank",
+      "status": "rank_only_unscored",
+      "reason": "Board gives only an order; ranks are not mixed into the metric score.",
+      "mass": 800000.0,
+      "weight": 0.0,
+      "duplicates": [],
+      "unmatched": [],
+      "unusable": []
+    }
+  ],
+  "candidates": [
+    {
+      "id": "cobalt-docs",
+      "name": "Cobalt Docs",
+      "final": 100.0,
+      "confidence": 1.0,
+      "scores": {
+        "hub-handwriting": 100.0,
+        "hub-ocr-accuracy": 100.0,
+        "doc-arena": 100.0,
+        "ocr-league-cer": 100.0
+      },
+      "rank": 1
+    },
+    {
+      "id": "ember-text",
+      "name": "Ember Text",
+      "final": 81.0050330598841,
+      "confidence": 1.0,
+      "scores": {
+        "hub-handwriting": 82.93963254593176,
+        "hub-ocr-accuracy": 69.95708154506438,
+        "doc-arena": 100.0,
+        "ocr-league-cer": 72.90836653386454
+      },
+      "rank": 2
+    },
+    {
+      "id": "harbor-ocr",
+      "name": "Harbor OCR",
+      "final": 71.3899554270173,
+      "confidence": 1.0,
+      "scores": {
+        "hub-handwriting": 48.81889763779528,
+        "hub-ocr-accuracy": 93.56223175965665,
+        "doc-arena": 73.15175097276267,
+        "ocr-league-cer": 68.12749003984064
+      },
+      "rank": 3
+    },
+    {
+      "id": "juniper-lens",
+      "name": "Juniper Lens",
+      "final": 66.93259975074353,
+      "confidence": 0.2682926829268293,
+      "scores": {
+        "doc-arena": 67.3151750972763,
+        "ocr-league-cer": 65.7370517928287
+      },
+      "rank": 4
+    },
+    {
+      "id": "fjord-scan",
+      "name": "Fjord Scan",
+      "final": 47.53442348167534,
+      "confidence": 1.0,
+      "scores": {
+        "hub-handwriting": 41.20734908136482,
+        "hub-ocr-accuracy": 44.206008583691,
+        "doc-arena": 63.42412451361871,
+        "ocr-league-cer": 52.19123505976095
+      },
+      "rank": 5
+    },
+    {
+      "id": "atlas-ocr",
+      "name": "Atlas OCR",
+      "final": 39.733208959674776,
+      "confidence": 0.5691056910569106,
+      "scores": {
+        "hub-ocr-accuracy": 31.759656652360505,
+        "doc-arena": 54.08560311284047
+      },
+      "rank": 6
+    },
+    {
+      "id": "beacon-vision",
+      "name": "Beacon Vision",
+      "final": 20.448747942119887,
+      "confidence": 0.9349593495934959,
+      "scores": {
+        "hub-handwriting": 23.09711286089238,
+        "hub-ocr-accuracy": 3.0042918454935434,
+        "doc-arena": 47.08171206225683
+      },
+      "rank": 7
+    },
+    {
+      "id": "delta-read",
+      "name": "Delta Read",
+      "final": 10.687902128443927,
+      "confidence": 1.0,
+      "scores": {
+        "hub-handwriting": 0.0,
+        "hub-ocr-accuracy": 14.59227467811158,
+        "doc-arena": 25.680933852140086,
+        "ocr-league-cer": 1.9920318725099533
+      },
+      "rank": 8
+    },
+    {
+      "id": "glyph-cloud",
+      "name": "Glyph Cloud",
+      "final": 7.352395130439333,
+      "confidence": 1.0,
+      "scores": {
+        "hub-handwriting": 2.6246719160104988,
+        "hub-ocr-accuracy": 5.150214592274659,
+        "doc-arena": 22.178988326848234,
+        "ocr-league-cer": 0.0
+      },
+      "rank": 9
+    },
+    {
+      "id": "iris-parse",
+      "name": "Iris Parse",
+      "final": 0.531208499335989,
+      "confidence": 0.6341463414634146,
+      "scores": {
+        "hub-ocr-accuracy": 0.0,
+        "doc-arena": 0.0,
+        "ocr-league-cer": 5.179282868525893
+      },
+      "rank": 10
+    }
+  ],
+  "counts": {
+    "selected": 5,
+    "scored": 4,
+    "candidates_ranked": 10,
+    "candidates_unranked": 0
+  },
+  "notes": [
+    "confidence = share of scored source weight with a usable score for this candidate; it is not statistical certainty, extraction accuracy or match confidence.",
+    "Weights are allocated domain popularity, not page visits."
+  ],
+  "query": "OCR API (synthetic example)",
+  "registry": [
+    {
+      "key": "price",
+      "label": "Price",
+      "unit": "USD per 1,000 pages",
+      "type": "number",
+      "direction": "lower_better",
+      "context": "base OCR, pay-as-you-go"
+    },
+    {
+      "key": "latency",
+      "label": "Latency",
+      "unit": "seconds",
+      "type": "number",
+      "direction": "lower_better",
+      "context": "1-page PDF, p50"
+    },
+    {
+      "key": "handwriting",
+      "label": "Handwriting",
+      "unit": null,
+      "type": "bool",
+      "direction": "none",
+      "context": "documented"
+    }
+  ],
+  "dimensions": {
+    "atlas-ocr": {
+      "price": {
+        "value": 1.92,
+        "observation": "p0",
+        "source_type": "official",
+        "url": "https://example/pricing",
+        "date": "2026-10-01"
+      },
+      "latency": {
+        "value": 2.47,
+        "observation": "l0",
+        "source_type": "leaderboard",
+        "url": null,
+        "date": "2026-09-20"
+      },
+      "handwriting": {
+        "value": false,
+        "observation": "h0",
+        "source_type": "official",
+        "url": null,
+        "date": "2026-10-01"
+      }
+    },
+    "beacon-vision": {
+      "price": {
+        "value": 1.64,
+        "observation": "p1",
+        "source_type": "official",
+        "url": "https://example/pricing",
+        "date": "2026-10-01"
+      },
+      "latency": {
+        "value": 3.55,
+        "observation": "l1",
+        "source_type": "leaderboard",
+        "url": null,
+        "date": "2026-09-20"
+      },
+      "handwriting": {
+        "value": true,
+        "observation": "h1",
+        "source_type": "official",
+        "url": null,
+        "date": "2026-10-01"
+      }
+    },
+    "cobalt-docs": {
+      "price": {
+        "value": 4.53,
+        "observation": "p2",
+        "source_type": "official",
+        "url": "https://example/pricing",
+        "date": "2026-10-01"
+      },
+      "latency": {
+        "value": 1.44,
+        "observation": "l2",
+        "source_type": "leaderboard",
+        "url": null,
+        "date": "2026-09-20"
+      },
+      "handwriting": {
+        "value": true,
+        "observation": "h2",
+        "source_type": "official",
+        "url": null,
+        "date": "2026-10-01"
+      }
+    },
+    "delta-read": {
+      "price": {
+        "value": 1.65,
+        "observation": "p3",
+        "source_type": "official",
+        "url": "https://example/pricing",
+        "date": "2026-10-01"
+      },
+      "latency": {
+        "value": 0.83,
+        "observation": "l3",
+        "source_type": "leaderboard",
+        "url": null,
+        "date": "2026-09-20"
+      },
+      "handwriting": {
+        "value": false,
+        "observation": "h3",
+        "source_type": "official",
+        "url": null,
+        "date": "2026-10-01"
+      }
+    },
+    "ember-text": {
+      "price": {
+        "value": 3.09,
+        "observation": "p4",
+        "source_type": "official",
+        "url": "https://example/pricing",
+        "date": "2026-10-01"
+      },
+      "handwriting": {
+        "value": true,
+        "observation": "h4",
+        "source_type": "official",
+        "url": null,
+        "date": "2026-10-01"
+      }
+    },
+    "fjord-scan": {
+      "price": {
+        "value": 3.06,
+        "observation": "p5",
+        "source_type": "official",
+        "url": "https://example/pricing",
+        "date": "2026-10-01"
+      },
+      "latency": {
+        "value": 0.95,
+        "observation": "l5",
+        "source_type": "leaderboard",
+        "url": null,
+        "date": "2026-09-20"
+      },
+      "handwriting": {
+        "value": true,
+        "observation": "h5",
+        "source_type": "official",
+        "url": null,
+        "date": "2026-10-01"
+      }
+    },
+    "glyph-cloud": {
+      "price": {
+        "value": 1.2,
+        "observation": "p6",
+        "source_type": "official",
+        "url": "https://example/pricing",
+        "date": "2026-10-01"
+      },
+      "latency": {
+        "value": 0.54,
+        "observation": "l6",
+        "source_type": "leaderboard",
+        "url": null,
+        "date": "2026-09-20"
+      },
+      "handwriting": {
+        "value": false,
+        "observation": "h6",
+        "source_type": "official",
+        "url": null,
+        "date": "2026-10-01"
+      }
+    },
+    "harbor-ocr": {
+      "price": {
+        "value": 3.61,
+        "observation": "p7",
+        "source_type": "official",
+        "url": "https://example/pricing",
+        "date": "2026-10-01"
+      },
+      "latency": {
+        "value": 3.15,
+        "observation": "l7",
+        "source_type": "leaderboard",
+        "url": null,
+        "date": "2026-09-20"
+      },
+      "handwriting": {
+        "value": true,
+        "observation": "h7",
+        "source_type": "official",
+        "url": null,
+        "date": "2026-10-01"
+      }
+    },
+    "iris-parse": {
+      "price": {
+        "value": 1.16,
+        "observation": "p8",
+        "source_type": "official",
+        "url": "https://example/pricing",
+        "date": "2026-10-01"
+      },
+      "latency": {
+        "value": 3.55,
+        "observation": "l8",
+        "source_type": "leaderboard",
+        "url": null,
+        "date": "2026-09-20"
+      },
+      "handwriting": {
+        "value": true,
+        "observation": "h8",
+        "source_type": "official",
+        "url": null,
+        "date": "2026-10-01"
+      }
+    },
+    "juniper-lens": {
+      "price": {
+        "value": 2.44,
+        "observation": "p9",
+        "source_type": "official",
+        "url": "https://example/pricing",
+        "date": "2026-10-01"
+      },
+      "latency": {
+        "value": 2.9,
+        "observation": "l9",
+        "source_type": "leaderboard",
+        "url": null,
+        "date": "2026-09-20"
+      },
+      "handwriting": {
+        "value": false,
+        "observation": "h9",
+        "source_type": "official",
+        "url": null,
+        "date": "2026-10-01"
+      }
+    }
+  },
+  "dimension_conflicts": [],
+  "dimension_out_of_context": 0,
+  "pareto": {
+    "price": {
+      "unit": "USD per 1,000 pages",
+      "context": "base OCR, pay-as-you-go",
+      "direction": "lower_better",
+      "frontier": [
+        "cobalt-docs",
+        "ember-text",
+        "juniper-lens",
+        "atlas-ocr",
+        "beacon-vision",
+        "glyph-cloud",
+        "iris-parse"
+      ],
+      "plotted": 10,
+      "omitted": 0
+    },
+    "latency": {
+      "unit": "seconds",
+      "context": "1-page PDF, p50",
+      "direction": "lower_better",
+      "frontier": [
+        "cobalt-docs",
+        "fjord-scan",
+        "delta-read",
+        "glyph-cloud"
+      ],
+      "plotted": 9,
+      "omitted": 1
+    }
+  },
+  "generated_at": "2026-10-03"
+}

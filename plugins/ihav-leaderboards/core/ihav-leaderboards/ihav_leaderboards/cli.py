@@ -11,11 +11,13 @@ from __future__ import annotations
 
 import argparse
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import List, Optional
 
 from . import __version__
 from .dimensions import choose, pareto_charts
+from .render import to_html
 from .runs import RunInputError, create_run, gitignore_warning, read_folder, read_json, read_visits, write_json
 from .scoring import NoScoreError, merge
 from .tables import to_csv, to_markdown
@@ -78,12 +80,22 @@ def cmd_score(args: argparse.Namespace) -> int:
     final["dimension_out_of_context"] = chosen["out_of_context"]
     final["pareto"] = pareto_charts(registry, chosen["values"], final["candidates"])
 
+    final["generated_at"] = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     write_json(run / "final.json", final)
     (run / "leaderboard.md").write_text(to_markdown(final), encoding="utf-8")
     (run / "leaderboard.csv").write_text(to_csv(final), encoding="utf-8")
+    (run / "report.html").write_text(to_html(final), encoding="utf-8")
     counts = final["counts"]
-    print("Scored %d of %d leaderboards; ranked %d candidates. Wrote final.json, leaderboard.md, leaderboard.csv."
-          % (counts["scored"], counts["selected"], counts["candidates_ranked"]))
+    print("Scored %d of %d leaderboards; ranked %d candidates. Wrote final.json, leaderboard.md, "
+          "leaderboard.csv, report.html." % (counts["scored"], counts["selected"], counts["candidates_ranked"]))
+    return EXIT_OK
+
+
+def cmd_render(args: argparse.Namespace) -> int:
+    run = Path(args.run)
+    final = read_json(run / "final.json")
+    (run / "report.html").write_text(to_html(final), encoding="utf-8")
+    print(run / "report.html")
     return EXIT_OK
 
 
@@ -116,6 +128,10 @@ def build_parser() -> argparse.ArgumentParser:
     p = sub.add_parser("score", help="leaderboards/, matches.json, weights.json -> final.json, md, csv")
     p.add_argument("run", help="run folder")
     p.set_defaults(func=cmd_score)
+
+    p = sub.add_parser("render", help="final.json -> report.html")
+    p.add_argument("run", help="run folder")
+    p.set_defaults(func=cmd_render)
 
     p = sub.add_parser("doctor", help="check the local setup")
     p.add_argument("--project", default=".")

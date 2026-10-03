@@ -1,0 +1,46 @@
+{
+  "slug": "hub-handwriting",
+  "final_url": "https://example/hub-handwriting",
+  "method": "direct",
+  "complete": true,
+  "quality_column": "Accuracy",
+  "direction": "higher_better",
+  "score_kind": "score",
+  "rows": [
+    {
+      "name": "Beacon Vision",
+      "quality": 59.4,
+      "verified": true
+    },
+    {
+      "name": "Cobalt Docs",
+      "quality": 88.7,
+      "verified": true
+    },
+    {
+      "name": "Delta Read",
+      "quality": 50.6,
+      "verified": true
+    },
+    {
+      "name": "Ember Text",
+      "quality": 82.2,
+      "verified": true
+    },
+    {
+      "name": "Fjord Scan",
+      "quality": 66.3,
+      "verified": true
+    },
+    {
+      "name": "Glyph Cloud",
+      "quality": 51.6,
+      "verified": true
+    },
+    {
+      "name": "Harbor OCR",
+      "quality": 69.2,
+      "verified": true
+    }
+  ]
+}

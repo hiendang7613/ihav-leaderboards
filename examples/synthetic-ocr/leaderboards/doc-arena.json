@@ -1,0 +1,61 @@
+{
+  "slug": "doc-arena",
+  "final_url": "https://example/doc-arena",
+  "method": "direct",
+  "complete": true,
+  "quality_column": "Accuracy",
+  "direction": "higher_better",
+  "score_kind": "score",
+  "rows": [
+    {
+      "name": "Atlas OCR",
+      "quality": 66.0,
+      "verified": true
+    },
+    {
+      "name": "Beacon Vision",
+      "quality": 64.2,
+      "verified": true
+    },
+    {
+      "name": "Cobalt Docs",
+      "quality": 77.8,
+      "verified": true
+    },
+    {
+      "name": "Delta Read",
+      "quality": 58.7,
+      "verified": true
+    },
+    {
+      "name": "Ember Text",
+      "quality": 77.8,
+      "verified": true
+    },
+    {
+      "name": "Fjord Scan",
+      "quality": 68.4,
+      "verified": true
+    },
+    {
+      "name": "Glyph Cloud",
+      "quality": 57.8,
+      "verified": true
+    },
+    {
+      "name": "Harbor OCR",
+      "quality": 70.9,
+      "verified": true
+    },
+    {
+      "name": "Iris Parse",
+      "quality": 52.1,
+      "verified": true
+    },
+    {
+      "name": "Juniper Lens",
+      "quality": 69.4,
+      "verified": true
+    }
+  ]
+}

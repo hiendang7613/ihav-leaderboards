@@ -1,0 +1,311 @@
+{
+  "registry_version": 1,
+  "registry": [
+    {
+      "key": "price",
+      "label": "Price",
+      "unit": "USD per 1,000 pages",
+      "type": "number",
+      "direction": "lower_better",
+      "context": "base OCR, pay-as-you-go"
+    },
+    {
+      "key": "latency",
+      "label": "Latency",
+      "unit": "seconds",
+      "type": "number",
+      "direction": "lower_better",
+      "context": "1-page PDF, p50"
+    },
+    {
+      "key": "handwriting",
+      "label": "Handwriting",
+      "unit": null,
+      "type": "bool",
+      "direction": "none",
+      "context": "documented"
+    }
+  ],
+  "observations": [
+    {
+      "id": "p0",
+      "candidate": "atlas-ocr",
+      "key": "price",
+      "value": 1.92,
+      "context": "base OCR, pay-as-you-go",
+      "source_type": "official",
+      "url": "https://example/pricing",
+      "date": "2026-10-01"
+    },
+    {
+      "id": "l0",
+      "candidate": "atlas-ocr",
+      "key": "latency",
+      "value": 2.47,
+      "context": "1-page PDF, p50",
+      "source_type": "leaderboard",
+      "board": "doc-arena",
+      "date": "2026-09-20"
+    },
+    {
+      "id": "h0",
+      "candidate": "atlas-ocr",
+      "key": "handwriting",
+      "value": false,
+      "context": "documented",
+      "source_type": "official",
+      "date": "2026-10-01"
+    },
+    {
+      "id": "p1",
+      "candidate": "beacon-vision",
+      "key": "price",
+      "value": 1.64,
+      "context": "base OCR, pay-as-you-go",
+      "source_type": "official",
+      "url": "https://example/pricing",
+      "date": "2026-10-01"
+    },
+    {
+      "id": "l1",
+      "candidate": "beacon-vision",
+      "key": "latency",
+      "value": 3.55,
+      "context": "1-page PDF, p50",
+      "source_type": "leaderboard",
+      "board": "doc-arena",
+      "date": "2026-09-20"
+    },
+    {
+      "id": "h1",
+      "candidate": "beacon-vision",
+      "key": "handwriting",
+      "value": true,
+      "context": "documented",
+      "source_type": "official",
+      "date": "2026-10-01"
+    },
+    {
+      "id": "p2",
+      "candidate": "cobalt-docs",
+      "key": "price",
+      "value": 4.53,
+      "context": "base OCR, pay-as-you-go",
+      "source_type": "official",
+      "url": "https://example/pricing",
+      "date": "2026-10-01"
+    },
+    {
+      "id": "l2",
+      "candidate": "cobalt-docs",
+      "key": "latency",
+      "value": 1.44,
+      "context": "1-page PDF, p50",
+      "source_type": "leaderboard",
+      "board": "doc-arena",
+      "date": "2026-09-20"
+    },
+    {
+      "id": "h2",
+      "candidate": "cobalt-docs",
+      "key": "handwriting",
+      "value": true,
+      "context": "documented",
+      "source_type": "official",
+      "date": "2026-10-01"
+    },
+    {
+      "id": "p3",
+      "candidate": "delta-read",
+      "key": "price",
+      "value": 1.65,
+      "context": "base OCR, pay-as-you-go",
+      "source_type": "official",
+      "url": "https://example/pricing",
+      "date": "2026-10-01"
+    },
+    {
+      "id": "l3",
+      "candidate": "delta-read",
+      "key": "latency",
+      "value": 0.83,
+      "context": "1-page PDF, p50",
+      "source_type": "leaderboard",
+      "board": "doc-arena",
+      "date": "2026-09-20"
+    },
+    {
+      "id": "h3",
+      "candidate": "delta-read",
+      "key": "handwriting",
+      "value": false,
+      "context": "documented",
+      "source_type": "official",
+      "date": "2026-10-01"
+    },
+    {
+      "id": "p4",
+      "candidate": "ember-text",
+      "key": "price",
+      "value": 3.09,
+      "context": "base OCR, pay-as-you-go",
+      "source_type": "official",
+      "url": "https://example/pricing",
+      "date": "2026-10-01"
+    },
+    {
+      "id": "h4",
+      "candidate": "ember-text",
+      "key": "handwriting",
+      "value": true,
+      "context": "documented",
+      "source_type": "official",
+      "date": "2026-10-01"
+    },
+    {
+      "id": "p5",
+      "candidate": "fjord-scan",
+      "key": "price",
+      "value": 3.06,
+      "context": "base OCR, pay-as-you-go",
+      "source_type": "official",
+      "url": "https://example/pricing",
+      "date": "2026-10-01"
+    },
+    {
+      "id": "l5",
+      "candidate": "fjord-scan",
+      "key": "latency",
+      "value": 0.95,
+      "context": "1-page PDF, p50",
+      "source_type": "leaderboard",
+      "board": "doc-arena",
+      "date": "2026-09-20"
+    },
+    {
+      "id": "h5",
+      "candidate": "fjord-scan",
+      "key": "handwriting",
+      "value": true,
+      "context": "documented",
+      "source_type": "official",
+      "date": "2026-10-01"
+    },
+    {
+      "id": "p6",
+      "candidate": "glyph-cloud",
+      "key": "price",
+      "value": 1.2,
+      "context": "base OCR, pay-as-you-go",
+      "source_type": "official",
+      "url": "https://example/pricing",
+      "date": "2026-10-01"
+    },
+    {
+      "id": "l6",
+      "candidate": "glyph-cloud",
+      "key": "latency",
+      "value": 0.54,
+      "context": "1-page PDF, p50",
+      "source_type": "leaderboard",
+      "board": "doc-arena",
+      "date": "2026-09-20"
+    },
+    {
+      "id": "h6",
+      "candidate": "glyph-cloud",
+      "key": "handwriting",
+      "value": false,
+      "context": "documented",
+      "source_type": "official",
+      "date": "2026-10-01"
+    },
+    {
+      "id": "p7",
+      "candidate": "harbor-ocr",
+      "key": "price",
+      "value": 3.61,
+      "context": "base OCR, pay-as-you-go",
+      "source_type": "official",
+      "url": "https://example/pricing",
+      "date": "2026-10-01"
+    },
+    {
+      "id": "l7",
+      "candidate": "harbor-ocr",
+      "key": "latency",
+      "value": 3.15,
+      "context": "1-page PDF, p50",
+      "source_type": "leaderboard",
+      "board": "doc-arena",
+      "date": "2026-09-20"
+    },
+    {
+      "id": "h7",
+      "candidate": "harbor-ocr",
+      "key": "handwriting",
+      "value": true,
+      "context": "documented",
+      "source_type": "official",
+      "date": "2026-10-01"
+    },
+    {
+      "id": "p8",
+      "candidate": "iris-parse",
+      "key": "price",
+      "value": 1.16,
+      "context": "base OCR, pay-as-you-go",
+      "source_type": "official",
+      "url": "https://example/pricing",
+      "date": "2026-10-01"
+    },
+    {
+      "id": "l8",
+      "candidate": "iris-parse",
+      "key": "latency",
+      "value": 3.55,
+      "context": "1-page PDF, p50",
+      "source_type": "leaderboard",
+      "board": "doc-arena",
+      "date": "2026-09-20"
+    },
+    {
+      "id": "h8",
+      "candidate": "iris-parse",
+      "key": "handwriting",
+      "value": true,
+      "context": "documented",
+      "source_type": "official",
+      "date": "2026-10-01"
+    },
+    {
+      "id": "p9",
+      "candidate": "juniper-lens",
+      "key": "price",
+      "value": 2.44,
+      "context": "base OCR, pay-as-you-go",
+      "source_type": "official",
+      "url": "https://example/pricing",
+      "date": "2026-10-01"
+    },
+    {
+      "id": "l9",
+      "candidate": "juniper-lens",
+      "key": "latency",
+      "value": 2.9,
+      "context": "1-page PDF, p50",
+      "source_type": "leaderboard",
+      "board": "doc-arena",
+      "date": "2026-09-20"
+    },
+    {
+      "id": "h9",
+      "candidate": "juniper-lens",
+      "key": "handwriting",
+      "value": false,
+      "context": "documented",
+      "source_type": "official",
+      "date": "2026-10-01"
+    }
+  ]
+}

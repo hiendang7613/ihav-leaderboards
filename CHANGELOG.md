@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.0 - 2026-10-03
+
+- `report.html`: one static, shareable page in the style of artificialanalysis.ai, written by `score` (or `render`).
+- Charts: quality ranking with a confidence meter, quality vs each dimension with a Pareto frontier (dimension selector, dot size = confidence, log scale when values span 50x), coverage grid, leaderboard weights, sortable table.
+- Light and dark themes, keyboard-focusable tooltips, data inserted with `textContent` only.
+- `examples/synthetic-ocr/`: a complete, clearly synthetic run with every file.
+
 ## 0.1.0 - 2026-10-03
 
 - Claude Code and Codex plugin with one shared core and two thin skills.

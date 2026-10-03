@@ -4,7 +4,7 @@
 
 <h1 align="center">ihav-leaderboards</h1>
 
-<p align="center">Ask your coding agent "which OCR API is best?" and get one ranked table built from the most-visited public leaderboards, with a confidence for every score and a Pareto chart for every cost.</p>
+<p align="center">Ask your coding agent "which OCR API is best?" and get one ranked table and one shareable chart page, built from the most-visited public leaderboards, with a confidence for every score and a Pareto chart for every cost.</p>
 
 <p align="center">
   <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-4F46E5.svg"></a>
@@ -30,7 +30,7 @@
   7. dimensions price, latency, ... with a Pareto frontier for each
 ```
 
-Steps 1, 2, 4 and 5 are done by your agent, guided by the skill. Steps 3, 6 and 7 are a small, tested Python command with no dependencies and no network access.
+Steps 1, 2, 4 and 5 are done by your agent, guided by the skill. Steps 3, 6 and 7 and the HTML report are a small, tested Python command with no dependencies and no network access.
 
 ## Install
 
@@ -70,6 +70,7 @@ The deterministic steps also run on their own:
 python3 plugins/ihav-leaderboards/core/ihav-leaderboards/scripts/leaderboards.py new "OCR API"
 python3 plugins/ihav-leaderboards/core/ihav-leaderboards/scripts/leaderboards.py weigh <run-folder>
 python3 plugins/ihav-leaderboards/core/ihav-leaderboards/scripts/leaderboards.py score <run-folder>
+python3 plugins/ihav-leaderboards/core/ihav-leaderboards/scripts/leaderboards.py render <run-folder>
 ```
 
 The file formats are in [the workflow reference](plugins/ihav-leaderboards/core/ihav-leaderboards/references/workflow.md).
@@ -96,8 +97,16 @@ Every run lives in `.ihav_space/ihav-leaderboards/runs/<run-id>/` in your projec
 
 ```text
 request.json  boards.json  visits/  weights.json  leaderboards/  matches.json
-dimensions.json  final.json  leaderboard.md  leaderboard.csv
+dimensions.json  final.json  leaderboard.md  leaderboard.csv  report.html
 ```
+
+`report.html` is one static page you can open or share: a ranking with confidence meters, a quality-vs-cost chart with the Pareto frontier for every dimension, a coverage grid, the leaderboard weights and a sortable table. Light and dark themes.
+
+<p align="center">
+  <img src="assets/report-preview.png" alt="Synthetic report: quality ranking with confidence meters and a quality versus price chart with a Pareto frontier" width="100%">
+</p>
+
+A complete synthetic run, with every file, is in [`examples/synthetic-ocr/`](examples/synthetic-ocr/). Open its [`report.html`](examples/synthetic-ocr/report.html) locally.
 
 Synthetic example of `leaderboard.md`:
 
@@ -118,7 +127,7 @@ Add `.ihav_space/` to your `.gitignore`. The plugin warns you and never edits th
 - **Chatbots can be wrong.** They only propose leaderboards. Every URL is checked, and a table read by a chatbot is scored only after it is checked against the page.
 - **No bypass.** On 401, 403, 429, a captcha or a bot wall, that source is skipped.
 - **Unofficial automation.** ihav-web-chat drives consumer chatbot websites with your own accounts. That can break a provider's terms. The choice is yours.
-- **Alpha.** The interactive HTML report with artificialanalysis.ai-style charts is next; this release writes Markdown, CSV and JSON.
+- **Alpha.** The skill workflow has not yet been run end to end against live leaderboards; the scoring and report code is covered by offline tests.
 
 ## Development
 

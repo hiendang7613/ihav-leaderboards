@@ -10,9 +10,18 @@ from typing import Any, Dict, List
 def _fmt(value: Any, digits: int = 1) -> str:
     if value is None:
         return ""
+    if isinstance(value, bool):
+        return "yes" if value else "no"
     if isinstance(value, float):
         return "%.*f" % (digits, value)
     return str(value)
+
+
+def _dim(value: Any) -> str:
+    """Dimension values keep their own precision, without trailing zeros."""
+    if isinstance(value, float):
+        return "%g" % value
+    return _fmt(value)
 
 
 def dimension_keys(final: Dict[str, Any]) -> List[str]:
@@ -27,7 +36,7 @@ def to_csv(final: Dict[str, Any]) -> str:
     for c in final["candidates"]:
         dims = final.get("dimensions", {}).get(c["id"], {})
         writer.writerow([_fmt(c["rank"]), c["name"], _fmt(c["final"], 2), _fmt(c["confidence"], 4)]
-                        + [_fmt((dims.get(k) or {}).get("value"), 4) for k in keys])
+                        + [_dim((dims.get(k) or {}).get("value")) for k in keys])
     return buffer.getvalue()
 
 
@@ -49,7 +58,7 @@ def to_markdown(final: Dict[str, Any]) -> str:
         dims = final.get("dimensions", {}).get(c["id"], {})
         confidence = "" if c["confidence"] is None else "%d%%" % round(100 * c["confidence"])
         row = [_fmt(c["rank"]) or "-", _cell(c["name"]), _fmt(c["final"]) or "-", confidence]
-        row += [_fmt((dims.get(k) or {}).get("value"), 4) or "-" for k in keys]
+        row += [_dim((dims.get(k) or {}).get("value")) or "-" for k in keys]
         lines.append("| " + " | ".join(row) + " |")
     lines += ["", "## Sources", "", "| Leaderboard | Status | Weight | Note |", "|---|---|---|---|"]
     for b in final["boards"]:

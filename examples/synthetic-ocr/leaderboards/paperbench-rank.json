@@ -1,0 +1,38 @@
+{
+  "slug": "paperbench-rank",
+  "method": "direct",
+  "score_kind": "rank_only",
+  "direction": "higher_better",
+  "rows": [
+    {
+      "name": "Atlas OCR",
+      "quality": 1,
+      "verified": true
+    },
+    {
+      "name": "Beacon Vision",
+      "quality": 2,
+      "verified": true
+    },
+    {
+      "name": "Cobalt Docs",
+      "quality": 3,
+      "verified": true
+    },
+    {
+      "name": "Delta Read",
+      "quality": 4,
+      "verified": true
+    },
+    {
+      "name": "Ember Text",
+      "quality": 5,
+      "verified": true
+    },
+    {
+      "name": "Fjord Scan",
+      "quality": 6,
+      "verified": true
+    }
+  ]
+}

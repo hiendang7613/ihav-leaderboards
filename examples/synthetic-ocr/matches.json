@@ -1,0 +1,284 @@
+{
+  "candidates": [
+    {
+      "id": "atlas-ocr",
+      "name": "Atlas OCR",
+      "aliases": [
+        {
+          "board": "hub-ocr-accuracy",
+          "name": "Atlas OCR"
+        },
+        {
+          "board": "hub-handwriting",
+          "name": "Atlas OCR"
+        },
+        {
+          "board": "doc-arena",
+          "name": "Atlas OCR"
+        },
+        {
+          "board": "ocr-league-cer",
+          "name": "Atlas OCR"
+        },
+        {
+          "board": "paperbench-rank",
+          "name": "Atlas OCR"
+        }
+      ],
+      "evidence": "Synthetic: identical names.",
+      "confidence": "high"
+    },
+    {
+      "id": "beacon-vision",
+      "name": "Beacon Vision",
+      "aliases": [
+        {
+          "board": "hub-ocr-accuracy",
+          "name": "Beacon Vision"
+        },
+        {
+          "board": "hub-handwriting",
+          "name": "Beacon Vision"
+        },
+        {
+          "board": "doc-arena",
+          "name": "Beacon Vision"
+        },
+        {
+          "board": "ocr-league-cer",
+          "name": "Beacon Vision"
+        },
+        {
+          "board": "paperbench-rank",
+          "name": "Beacon Vision"
+        }
+      ],
+      "evidence": "Synthetic: identical names.",
+      "confidence": "high"
+    },
+    {
+      "id": "cobalt-docs",
+      "name": "Cobalt Docs",
+      "aliases": [
+        {
+          "board": "hub-ocr-accuracy",
+          "name": "Cobalt Docs"
+        },
+        {
+          "board": "hub-handwriting",
+          "name": "Cobalt Docs"
+        },
+        {
+          "board": "doc-arena",
+          "name": "Cobalt Docs"
+        },
+        {
+          "board": "ocr-league-cer",
+          "name": "Cobalt Docs"
+        },
+        {
+          "board": "paperbench-rank",
+          "name": "Cobalt Docs"
+        }
+      ],
+      "evidence": "Synthetic: identical names.",
+      "confidence": "high"
+    },
+    {
+      "id": "delta-read",
+      "name": "Delta Read",
+      "aliases": [
+        {
+          "board": "hub-ocr-accuracy",
+          "name": "Delta Read"
+        },
+        {
+          "board": "hub-handwriting",
+          "name": "Delta Read"
+        },
+        {
+          "board": "doc-arena",
+          "name": "Delta Read"
+        },
+        {
+          "board": "ocr-league-cer",
+          "name": "Delta Read"
+        },
+        {
+          "board": "paperbench-rank",
+          "name": "Delta Read"
+        }
+      ],
+      "evidence": "Synthetic: identical names.",
+      "confidence": "high"
+    },
+    {
+      "id": "ember-text",
+      "name": "Ember Text",
+      "aliases": [
+        {
+          "board": "hub-ocr-accuracy",
+          "name": "Ember Text"
+        },
+        {
+          "board": "hub-handwriting",
+          "name": "Ember Text"
+        },
+        {
+          "board": "doc-arena",
+          "name": "Ember Text"
+        },
+        {
+          "board": "ocr-league-cer",
+          "name": "Ember Text"
+        },
+        {
+          "board": "paperbench-rank",
+          "name": "Ember Text"
+        }
+      ],
+      "evidence": "Synthetic: identical names.",
+      "confidence": "high"
+    },
+    {
+      "id": "fjord-scan",
+      "name": "Fjord Scan",
+      "aliases": [
+        {
+          "board": "hub-ocr-accuracy",
+          "name": "Fjord Scan"
+        },
+        {
+          "board": "hub-handwriting",
+          "name": "Fjord Scan"
+        },
+        {
+          "board": "doc-arena",
+          "name": "Fjord Scan"
+        },
+        {
+          "board": "ocr-league-cer",
+          "name": "Fjord Scan"
+        },
+        {
+          "board": "paperbench-rank",
+          "name": "Fjord Scan"
+        }
+      ],
+      "evidence": "Synthetic: identical names.",
+      "confidence": "high"
+    },
+    {
+      "id": "glyph-cloud",
+      "name": "Glyph Cloud",
+      "aliases": [
+        {
+          "board": "hub-ocr-accuracy",
+          "name": "Glyph Cloud"
+        },
+        {
+          "board": "hub-handwriting",
+          "name": "Glyph Cloud"
+        },
+        {
+          "board": "doc-arena",
+          "name": "Glyph Cloud"
+        },
+        {
+          "board": "ocr-league-cer",
+          "name": "Glyph Cloud"
+        },
+        {
+          "board": "paperbench-rank",
+          "name": "Glyph Cloud"
+        }
+      ],
+      "evidence": "Synthetic: identical names.",
+      "confidence": "high"
+    },
+    {
+      "id": "harbor-ocr",
+      "name": "Harbor OCR",
+      "aliases": [
+        {
+          "board": "hub-ocr-accuracy",
+          "name": "Harbor OCR"
+        },
+        {
+          "board": "hub-handwriting",
+          "name": "Harbor OCR"
+        },
+        {
+          "board": "doc-arena",
+          "name": "Harbor OCR"
+        },
+        {
+          "board": "ocr-league-cer",
+          "name": "Harbor OCR"
+        },
+        {
+          "board": "paperbench-rank",
+          "name": "Harbor OCR"
+        }
+      ],
+      "evidence": "Synthetic: identical names.",
+      "confidence": "high"
+    },
+    {
+      "id": "iris-parse",
+      "name": "Iris Parse",
+      "aliases": [
+        {
+          "board": "hub-ocr-accuracy",
+          "name": "Iris Parse"
+        },
+        {
+          "board": "hub-handwriting",
+          "name": "Iris Parse"
+        },
+        {
+          "board": "doc-arena",
+          "name": "Iris Parse"
+        },
+        {
+          "board": "ocr-league-cer",
+          "name": "Iris Parse"
+        },
+        {
+          "board": "paperbench-rank",
+          "name": "Iris Parse"
+        }
+      ],
+      "evidence": "Synthetic: identical names.",
+      "confidence": "high"
+    },
+    {
+      "id": "juniper-lens",
+      "name": "Juniper Lens",
+      "aliases": [
+        {
+          "board": "hub-ocr-accuracy",
+          "name": "Juniper Lens"
+        },
+        {
+          "board": "hub-handwriting",
+          "name": "Juniper Lens"
+        },
+        {
+          "board": "doc-arena",
+          "name": "Juniper Lens"
+        },
+        {
+          "board": "ocr-league-cer",
+          "name": "Juniper Lens"
+        },
+        {
+          "board": "paperbench-rank",
+          "name": "Juniper Lens"
+        }
+      ],
+      "evidence": "Synthetic: identical names.",
+      "confidence": "high"
+    }
+  ]
+}

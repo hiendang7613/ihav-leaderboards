@@ -103,8 +103,8 @@ Only observations in the registry's declared `context` compete. `source_type` is
 <cli> score RUN
 ```
 
-Writes `RUN/final.json`, `RUN/leaderboard.md` and `RUN/leaderboard.csv`.
+Writes `RUN/final.json`, `RUN/leaderboard.md`, `RUN/leaderboard.csv` and `RUN/report.html` (interactive charts). `<cli> render RUN` rebuilds only the HTML report from `final.json`.
 
 ## Report to the user
 
-Show the top of `leaderboard.md`. Say how many boards were selected and scored. Name each dropped board with its reason. Explain once that `confidence` is the share of scored source weight behind a score, not statistical certainty. Say that weights are allocated domain popularity, not page visits.
+Show the top of `leaderboard.md` and give the path of `report.html`. Say how many boards were selected and scored. Name each dropped board with its reason. Explain once that `confidence` is the share of scored source weight behind a score, not statistical certainty. Say that weights are allocated domain popularity, not page visits.

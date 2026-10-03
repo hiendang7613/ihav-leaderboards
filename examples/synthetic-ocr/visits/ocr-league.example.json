@@ -1,0 +1,28 @@
+{
+  "input": "ocr-league.example",
+  "domain": "ocr-league.example",
+  "kind": "estimate",
+  "monthly_visits": 800000,
+  "period": null,
+  "analyzed_at": "2026-10-03T00:00:00Z",
+  "range": null,
+  "confidence": null,
+  "rank": {
+    "value": 5000,
+    "list": "synthetic",
+    "date": "2026-10-03"
+  },
+  "history": null,
+  "history_source": null,
+  "countries": null,
+  "countries_source": null,
+  "source": {
+    "name": "synthetic"
+  },
+  "calibration": null,
+  "fetched_at": "2026-10-03T00:00:00Z",
+  "cached": false,
+  "notes": [
+    "Synthetic example data."
+  ]
+}

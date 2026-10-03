@@ -1,0 +1,11 @@
+rank,candidate,final_score,confidence,price,latency,handwriting
+1,Cobalt Docs,100.00,1.0000,4.53,1.44,yes
+2,Ember Text,81.01,1.0000,3.09,,yes
+3,Harbor OCR,71.39,1.0000,3.61,3.15,yes
+4,Juniper Lens,66.93,0.2683,2.44,2.9,no
+5,Fjord Scan,47.53,1.0000,3.06,0.95,yes
+6,Atlas OCR,39.73,0.5691,1.92,2.47,no
+7,Beacon Vision,20.45,0.9350,1.64,3.55,yes
+8,Delta Read,10.69,1.0000,1.65,0.83,no
+9,Glyph Cloud,7.35,1.0000,1.2,0.54,no
+10,Iris Parse,0.53,0.6341,1.16,3.55,yes

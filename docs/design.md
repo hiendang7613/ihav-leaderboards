@@ -1,6 +1,6 @@
 # ihav-leaderboards: design spec v1 (draft)
 
-Status: v1, 2026-10-03. v0 plus a peer design review (findings F1-F7, applied here). Release 0.1.0 implements S3, S6, S6a and S6b in the `weigh` and `score` commands; S1, S2, S4 and S5 are agent-driven steps in the skill workflow; the HTML report (section 3) is not built yet.
+Status: v1, 2026-10-03. v0 plus a peer design review (findings F1-F7, applied here). Release 0.1.0 implemented S3, S6, S6a and S6b in the `weigh` and `score` commands; S1, S2, S4 and S5 are agent-driven steps in the skill workflow; release 0.2.0 adds the HTML report (section 3).
 Owner decisions of 2026-10-03 are listed in section 1.
 Evidence labels: **owner** = owner decision; **verified** = read in a local file on 2026-10-03; **proposed** = design choice made here, open to review; **unverified** = needs a live check.
 

@@ -97,7 +97,7 @@ class CliTests(unittest.TestCase):
     def test_doctor(self):
         result = run_cli("doctor", "--project", str(self.project))
         self.assertEqual(result.returncode, 0)
-        self.assertIn("ihav-leaderboards 0.1.0", result.stdout)
+        self.assertIn("ihav-leaderboards 0.2.0", result.stdout)
 
 
 if __name__ == "__main__":
