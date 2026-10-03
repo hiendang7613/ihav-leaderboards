@@ -48,6 +48,7 @@ class SkillTests(unittest.TestCase):
             "not statistical certainty",
             ".ihav_space/ihav-leaderboards/",
             "py -3",
+            "workflow stage 0",
         ):
             with self.subTest(phrase=phrase):
                 self.assertIn(phrase, claude)

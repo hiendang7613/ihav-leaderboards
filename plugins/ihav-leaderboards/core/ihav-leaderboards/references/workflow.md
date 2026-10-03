@@ -14,6 +14,24 @@ Shared by the Claude Code and Codex skills. `<cli>` means the bundled command:
 
 ## Stages
 
+### 0. Check dependencies
+
+ihav-leaderboards needs two other plugins: **ihav-web-chat** (before stage 2) and **ihav-web-visit-counter** (before stage 3). Check the host's installed plugins, for example `claude plugin list` or `codex plugin list`. Do not assume a binary on `PATH`, and do not pick a cache folder by date.
+
+If one is missing, stop before the stage that needs it. Save what the run already has, and print the install commands from the ihav catalog:
+
+```bash
+claude plugin marketplace add hiendang7613/ihav
+claude plugin install <plugin>@ihav
+```
+
+```bash
+codex plugin marketplace add hiendang7613/ihav
+codex plugin add <plugin>@ihav
+```
+
+Installing a plugin needs the user's permission in the host; this check does not grant it. After an install, check the list again and resume the run from its saved files. Never resend a chatbot request that already has a saved answer.
+
 ### 1. New run
 
 ```bash
@@ -28,7 +46,7 @@ Write one deep-research prompt that asks for up to 32 public leaderboards or ben
 
 Send it with the **ihav-web-chat** skill. The default providers are ChatGPT and Gemini. The user may name more providers, or `all`. Wait for the answers. If one provider fails, continue with the others. If none answers, stop and report it.
 
-If ihav-web-chat is not installed, stop and point the user to its install steps at https://github.com/hiendang7613/ihav-web-chat. Automatic install is not available yet.
+If ihav-web-chat is not installed, follow stage 0.
 
 Save each answer as `RUN/discovery/<provider>.json` (the parsed list) and keep the ihav-web-chat run id in it.
 
@@ -36,7 +54,7 @@ Save each answer as `RUN/discovery/<provider>.json` (the parsed list) and keep t
 
 Merge the lists. Normalize URLs (scheme, `www`, trailing slash, tracking parameters). Check each URL once with an ordinary GET and classify it in this order: `blocked` (401/403, captcha, bot wall), `rate_limited` (429), `transient` (5xx or timeout, one later retry), `dead` (404/410, other 4xx, DNS), else `live`. Follow redirects, then dedupe again by final URL.
 
-Run **ihav-web-visit-counter** on each URL with `--json`. Its `domain` field is the registrable domain. Save each result as `RUN/visits/<domain>.json`, unchanged.
+Run **ihav-web-visit-counter** on each URL with `--json`. Its `domain` field is the host (no path, no leading `www`, subdomains kept). Visits are per host, never per page. Look up each host once per run, at most one lookup per second, and pass `--cache-dir .ihav_space/ihav-web-visit-counter` so the whole run shares one 24-hour cache. The visit sources allow only reasonable, low-volume use. Never re-run a lookup for a host that ended with exit code 4 (blocked). Save each result as `RUN/visits/<domain>.json`, unchanged.
 
 Write `RUN/boards.json`:
 

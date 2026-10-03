@@ -55,7 +55,7 @@ Every stage writes its output to `./.ihav_space/ihav-leaderboards/runs/<run-id>/
 
 ### S3 weigh (proposed against the visit-counter contract)
 
-The visit counter (verified against its shipped `models.py` and two live `--json` outputs on 2026-10-03) returns per **registrable domain**: `kind` in `estimate | rank_only`; `estimate` carries `monthly_visits`, `rank_only` carries `null`. Other fields: `period` (may be `null`), `analyzed_at`, `range`, `confidence`, `rank`, `source`, `history`, `countries`.
+The visit counter (verified against its shipped `models.py` and two live `--json` outputs on 2026-10-03) returns per **host** (scheme, path and a leading `www` removed; subdomains kept; never per page): `kind` in `estimate | rank_only`. `estimate` carries `monthly_visits`, or `null` plus a rounded label `monthly_visits_text` such as `631.0M`, which is parsed; `rank_only` carries `null`. Other fields: `period` (may be `null`), `analyzed_at`, `range`, `confidence`, `rank`, `source`, `history`, `countries`.
 Two gaps follow, each with a proposed default:
 
 1. **Domain collision (owner O1).** Many leaderboards are pages on one domain (Hugging Face Spaces, GitHub, Papers with Code). Domain visits do not measure one page. Rule: split a domain's monthly visits **equally** across the live leaderboards of that domain. Report `weight_basis: domain_split(n)`. The final ranking is therefore weighted by **allocated domain popularity**, not page visits; the report says so. The split depends on how many pages discovery found; this is a known limit of the proxy.

@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.1 - 2026-10-03
+
+- Weights accept visit-counter estimates that carry only a rounded label such as `631.0M` (`monthly_visits_text`).
+- Docs: visit-counter `domain` is the host, not the registrable domain.
+- Visit lookups: one per host per run, at most one per second, shared 24-hour cache, no re-run after a block.
+- Skill checks that ihav-web-chat and ihav-web-visit-counter are installed before the stages that need them, and prints install commands from the ihav catalog.
+
 ## 0.2.0 - 2026-10-03
 
 - `report.html`: one static, shareable page in the style of artificialanalysis.ai, written by `score` (or `render`).

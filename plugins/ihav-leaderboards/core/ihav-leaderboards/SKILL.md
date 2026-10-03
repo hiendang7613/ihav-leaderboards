@@ -21,6 +21,7 @@ py -3 <skill-directory>/scripts/leaderboards.py score <run-folder>
 
 Rules that always apply:
 
+- Before discovery and weighting, check that ihav-web-chat and ihav-web-visit-counter are installed (workflow stage 0). If one is missing, print its install command and stop.
 - Never fill a gap from memory. A missing value stays `null` with a reason.
 - On HTTP 401, 403, 429, a captcha or a bot wall, stop using that source. Do not try another browser, proxy or route to get past it.
 - If `weigh` or `score` exits with code 2, report the diagnostic. Do not fall back to equal weights.

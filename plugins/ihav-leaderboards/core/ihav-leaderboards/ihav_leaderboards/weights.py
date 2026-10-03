@@ -1,7 +1,8 @@
 """S3: turn ihav-web-visit-counter results into leaderboard weights.
 
 Rules (design S3, admin O1/O2):
-- Visits are per registrable domain. A domain's visits are split equally across
+- Visits are per host (the visit counter's ``domain``: scheme, path and a leading
+  ``www`` removed; subdomains kept). A domain's visits are split equally across
   its live leaderboards ("allocated domain popularity", not page visits).
 - A domain without a finite positive visit count gets one floor weight before the
   split: the smallest finite positive domain visit count in the set. The floor is a
@@ -13,6 +14,7 @@ Rules (design S3, admin O1/O2):
 from __future__ import annotations
 
 import math
+import re
 from typing import Any, Dict, List, Optional
 
 TOP_N = 32
@@ -22,13 +24,28 @@ class NoWeightError(Exception):
     """No finite positive visit count exists, so visit weighting is unavailable."""
 
 
+_SUFFIX = {"": 1.0, "K": 1e3, "M": 1e6, "B": 1e9}
+_TEXT = re.compile(r"^\s*([0-9]+(?:\.[0-9]+)?)\s*([KMB]?)\s*$", re.I)
+
+
+def parse_visits_text(text: Any) -> Optional[float]:
+    """Parse a rounded provider label such as "631.0M" or "12K"; anything else is None."""
+    if not isinstance(text, str):
+        return None
+    match = _TEXT.match(text.replace(",", ""))
+    if not match:
+        return None
+    return float(match.group(1)) * _SUFFIX[match.group(2).upper()]
+
+
 def _positive_visits(result: Optional[Dict[str, Any]]) -> Optional[float]:
+    """Visits from an ``estimate`` result: the number, else its rounded text label."""
     if not result or result.get("kind") != "estimate":
         return None
     value = result.get("monthly_visits")
     if isinstance(value, bool) or not isinstance(value, (int, float)):
-        return None
-    if not math.isfinite(value) or value <= 0:
+        value = parse_visits_text(result.get("monthly_visits_text"))
+    if value is None or not math.isfinite(value) or value <= 0:
         return None
     return float(value)
 
@@ -67,7 +84,8 @@ def allocate(boards: List[Dict[str, Any]], visits: Dict[str, Dict[str, Any]], to
             entries.append({
                 "slug": board["slug"],
                 "domain": domain,
-                "monthly_visits": int(raw) if raw is not None else None,
+                "monthly_visits": result.get("monthly_visits") if raw is not None else None,
+                "monthly_visits_text": result.get("monthly_visits_text"),
                 "visit_kind": result.get("kind"),
                 "visit_period": result.get("period"),
                 "visit_analyzed_at": result.get("analyzed_at"),

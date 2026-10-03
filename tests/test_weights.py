@@ -4,7 +4,7 @@ import unittest
 
 from helpers import estimate, rank_only, visit
 
-from ihav_leaderboards.weights import NoWeightError, allocate
+from ihav_leaderboards.weights import NoWeightError, allocate, parse_visits_text
 
 
 def live(slug, domain):
@@ -60,6 +60,29 @@ class WeightTests(unittest.TestCase):
         visits = {"d%d.com" % i: estimate("d%d.com" % i, (i + 1) * 10) for i in range(5)}
         doc = allocate(boards, visits, top_n=2)
         self.assertEqual([e["slug"] for e in doc["boards"] if e["selected"]], ["b4", "b3"])
+
+    def test_estimate_with_text_label_only(self):
+        # Visit counter: kind=estimate may carry monthly_visits=null and a rounded text label.
+        text_only = {"domain": "t.com", "kind": "estimate", "monthly_visits": None, "monthly_visits_text": "631.0M"}
+        doc = allocate([live("t", "t.com"), live("s", "s.com")], {"t.com": text_only, "s.com": estimate("s.com", 10)})
+        out = {e["slug"]: e for e in doc["boards"]}
+        self.assertEqual(out["t"]["mass"], 631e6)
+        self.assertIsNone(out["t"]["monthly_visits"])
+        self.assertEqual(out["t"]["monthly_visits_text"], "631.0M")
+        self.assertEqual(out["t"]["weight_basis"], "domain_split(1)")
+
+    def test_estimate_without_number_or_label_uses_floor(self):
+        empty = {"domain": "e.com", "kind": "estimate", "monthly_visits": None, "monthly_visits_text": None}
+        doc = allocate([live("e", "e.com"), live("s", "s.com")], {"e.com": empty, "s.com": estimate("s.com", 10)})
+        self.assertEqual(doc["floor_domains"], ["e.com"])
+
+    def test_parse_visits_text(self):
+        self.assertEqual(parse_visits_text("631.0M"), 631e6)
+        self.assertEqual(parse_visits_text("12k"), 12e3)
+        self.assertEqual(parse_visits_text("1,234"), 1234.0)
+        self.assertEqual(parse_visits_text("2.5B"), 2.5e9)
+        for bad in (None, "", "about 5M", "5T", 7):
+            self.assertIsNone(parse_visits_text(bad))
 
     def test_real_visit_counter_fixtures(self):
         visits = {d: visit(d) for d in ("huggingface.co", "paperswithcode.com", "example-bench.org")}

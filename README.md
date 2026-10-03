@@ -133,6 +133,7 @@ Add `.ihav_space/` to your `.gitignore`. The plugin warns you and never edits th
 ## Honest limits
 
 - **Visits are estimates.** They come from a public traffic model, not the sites' own analytics. Weights are allocated site popularity, not page visits.
+- **Discovery needs ihav-web-chat, which is not released yet.** Until it is, the agent cannot run step 1 automatically.
 - **Chatbots can be wrong.** They only propose leaderboards. Every URL is checked, and a table read by a chatbot is scored only after it is checked against the page.
 - **No bypass.** On 401, 403, 429, a captcha or a bot wall, that source is skipped.
 - **Unofficial automation.** ihav-web-chat drives consumer chatbot websites with your own accounts. That can break a provider's terms. The choice is yours.

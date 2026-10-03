@@ -1,6 +1,6 @@
 [project]
 name = "ihav-leaderboards"
-version = "0.2.0"
+version = "0.2.1"
 description = "Merge the most-visited public leaderboards of a domain into one quality-first leaderboard"
 requires-python = ">=3.9"
 license = {text = "MIT"}
