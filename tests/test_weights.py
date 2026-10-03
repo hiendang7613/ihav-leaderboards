@@ -76,6 +76,12 @@ class WeightTests(unittest.TestCase):
         doc = allocate([live("e", "e.com"), live("s", "s.com")], {"e.com": empty, "s.com": estimate("s.com", 10)})
         self.assertEqual(doc["floor_domains"], ["e.com"])
 
+    def test_error_object_counts_as_no_data(self):
+        # Visit counter exit 2/4/5 prints an error object, not a result.
+        error = {"domain": "x.com", "error": {"code": "no_data", "notes": ["TrafficLens failed: HTTP 503; no retry was made."]}}
+        doc = allocate([live("x", "x.com"), live("s", "s.com")], {"x.com": error, "s.com": estimate("s.com", 10)})
+        self.assertEqual(doc["floor_domains"], ["x.com"])
+
     def test_parse_visits_text(self):
         self.assertEqual(parse_visits_text("631.0M"), 631e6)
         self.assertEqual(parse_visits_text("12k"), 12e3)

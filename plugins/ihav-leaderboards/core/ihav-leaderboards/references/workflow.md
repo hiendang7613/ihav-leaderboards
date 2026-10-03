@@ -54,7 +54,7 @@ Save each answer as `RUN/discovery/<provider>.json` (the parsed list) and keep t
 
 Merge the lists. Normalize URLs (scheme, `www`, trailing slash, tracking parameters). Check each URL once with an ordinary GET and classify it in this order: `blocked` (401/403, captcha, bot wall), `rate_limited` (429), `transient` (5xx or timeout, one later retry), `dead` (404/410, other 4xx, DNS), else `live`. Follow redirects, then dedupe again by final URL.
 
-Run **ihav-web-visit-counter** on each URL with `--json`. Its `domain` field is the host (no path, no leading `www`, subdomains kept). Visits are per host, never per page. Look up each host once per run, at most one lookup per second, and pass `--cache-dir .ihav_space/ihav-web-visit-counter` so the whole run shares one 24-hour cache. The visit sources allow only reasonable, low-volume use. Never re-run a lookup for a host that ended with exit code 4 (blocked). Save each result as `RUN/visits/<domain>.json`, unchanged.
+Run **ihav-web-visit-counter** on each URL with `--json`. Its `domain` field is the host (no path, no leading `www`, subdomains kept). Visits are per host, never per page. Look up each host once per run, at most one lookup per second, and pass `--cache-dir .ihav_space/ihav-web-visit-counter` so the whole run shares one 24-hour cache. The visit sources allow only reasonable, low-volume use. Never re-run a lookup for a host that ended with exit code 4 (blocked). A lookup that exits 2, 4 or 5 prints an error object instead of a result; save it too. `weigh` treats it as no data (floor weight) and keeps its `error.notes` out of the visit numbers. Save each result as `RUN/visits/<domain>.json`, unchanged.
 
 Write `RUN/boards.json`:
 
