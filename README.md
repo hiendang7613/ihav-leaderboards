@@ -50,6 +50,15 @@ codex plugin marketplace add hiendang7613/ihav-leaderboards
 codex plugin add ihav-leaderboards@ihav-leaderboards
 ```
 
+Or install from the [ihav catalog](https://github.com/hiendang7613/ihav), which lists every public ihav plugin:
+
+```bash
+claude plugin marketplace add hiendang7613/ihav && claude plugin install ihav-leaderboards@ihav
+codex plugin marketplace add hiendang7613/ihav && codex plugin add ihav-leaderboards@ihav
+```
+
+Both install paths were tested on 2026-10-03 with an empty Claude Code and Codex configuration.
+
 Discovery uses [ihav-web-chat](https://github.com/hiendang7613/ihav-web-chat) and weighting uses [ihav-web-visit-counter](https://github.com/hiendang7613/ihav-web-visit-counter). Install them the same way. Automatic dependency install is not available yet.
 
 ## Usage
