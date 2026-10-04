@@ -174,7 +174,7 @@ Same layout as the visit-counter plan (verified, its repo-plan section 3.1, the 
 
 The first live run, "OCR API", is the main acceptance test for the agent-driven stages, which offline tests cannot cover. It passes only when every check below holds, with evidence saved in the run folder:
 
-1. **Discover:** at least two chatbots answered, and every listed leaderboard has a real URL. No URL comes from model memory.
+1. **Discover:** every listed leaderboard has a real URL, and no URL comes from model memory. The first run may use ChatGPT alone (owner decision, 2026-10-04); the report then says one chatbot answered. Gemini joins when its adapter works.
 2. **Collect:** every URL has a liveness class. Redirect duplicates take one slot.
 3. **Weigh:** every selected board has a saved visit-counter result or error object; `weights.json` shows the weight basis.
 4. **Extract:** every scored value traces to a saved snapshot cell. Chatbot-read rows are verified against the page or left unscored.
