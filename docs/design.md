@@ -169,3 +169,16 @@ Same layout as the visit-counter plan (verified, its repo-plan section 3.1, the 
 | O4 | Too-few threshold | Owner kept: fewer than 3 distinct verified scores, or `max == min` |
 | O5 | Auto-install of ihav-web-chat | **Open owner goal**, not fulfilled. v0 prints install command; mechanism to be researched |
 | O6 | Rank-only leaderboards | Changed after review: reported, not mixed into the metric score |
+
+## 6. First live run acceptance (owner decision)
+
+The first live run, "OCR API", is the main acceptance test for the agent-driven stages, which offline tests cannot cover. It passes only when every check below holds, with evidence saved in the run folder:
+
+1. **Discover:** at least two chatbots answered, and every listed leaderboard has a real URL. No URL comes from model memory.
+2. **Collect:** every URL has a liveness class. Redirect duplicates take one slot.
+3. **Weigh:** every selected board has a saved visit-counter result or error object; `weights.json` shows the weight basis.
+4. **Extract:** every scored value traces to a saved snapshot cell. Chatbot-read rows are verified against the page or left unscored.
+5. **Match:** every merge in `matches.json` has evidence. A manual spot check of 10 merges finds no wrong merge.
+6. **Score and report:** `final.json`, `leaderboard.md`, `leaderboard.csv` and `report.html` exist. A manual spot check of 5 candidates reproduces their scores from the saved board values.
+
+Any failed check becomes a bug with a regression test before the demo page is published.
