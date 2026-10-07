@@ -1,10 +1,12 @@
 # Changelog
 
-## Unreleased
+## 0.3.0 - 2026-10-08
 
 - Visit estimates accept trillion (`T`) display labels while preserving the saved counter's raw integer or null. Single-domain and mixed-domain regressions cover the weighting policy.
 - Reject unknown extraction score kinds, require source snapshots for rank-only boards, and refuse a receipt that changes during read-only verification. The synthetic example carries current runtime receipts; long tooltip text wraps within its panel.
-- Deterministic CLI candidate 0.3.0: validated stage identities and SHA-256 receipts, read-only `verify`, stale-input refusal, and recoverable output archives. Archives verify backups before removal, journal partial failures and reject history symlinks. Failed HTML rebuilds retain the prior receipt for retry. This does not establish live/provider or clean-host acceptance.
+- Deterministic CLI: validated stage identities and SHA-256 receipts, read-only `verify`, stale-input refusal, and recoverable output archives. Archives verify backups before removal, journal partial failures and reject history symlinks. Failed HTML rebuilds retain the prior receipt for retry. This does not establish live/provider or clean-host acceptance.
+- The runtime identity reads code with CRLF line endings as LF, so a Windows checkout verifies the same receipts. `.gitattributes` keeps the bundled example LF, because run data is hashed byte for byte.
+- Run files, including `report.html`, get ordinary permissions (0666 less the umask) instead of owner-only 0600.
 - Scores require literal verification and saved source/cell references. Conflicting duplicate rows require one explicit preferred row; no duplicate group can contain multiple preferred rows. Numeric conversion and normalization remain finite at float extremes.
 - Reports retain traffic and identity evidence, typed dimension choices and conflicts. Traffic binds to the collected URL host; error and result payloads cannot mix. Comparable dimensions need saved source hashes and cell locators; leaderboard dimensions bind to the referenced board snapshot. Numeric dimension cards and explicit chart omissions are visible. CSV text is formula-safe and carries a synthetic-data column; Markdown escapes dynamic cells.
 - Skills: ihav-web-chat is not in the ihav catalog yet, so the skill no longer prints an `ihav-web-chat@ihav` install command.

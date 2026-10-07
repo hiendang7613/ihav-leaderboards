@@ -1,6 +1,6 @@
 # ihav-leaderboards: design spec v1 (draft)
 
-Status: design v1, 2026-10-03; deterministic 0.3.0 changes are an unreleased candidate (2026-10-06). v0 plus a peer design review (findings F1-F7, applied here). Release 0.1.0 implemented S3, S6, S6a and S6b in the `weigh` and `score` commands; S1, S2, S4 and S5 are agent-driven steps in the skill workflow; release 0.2.0 adds the HTML report (section 3).
+Status: design v1, 2026-10-03; release 0.3.0 (2026-10-08) adds the deterministic stage receipts in section 3. v0 plus a peer design review (findings F1-F7, applied here). Release 0.1.0 implemented S3, S6, S6a and S6b in the `weigh` and `score` commands; S1, S2, S4 and S5 are agent-driven steps in the skill workflow; release 0.2.0 adds the HTML report (section 3).
 Owner decisions of 2026-10-03 are listed in section 1.
 Evidence labels: **owner** = owner decision; **verified** = read in a local file on 2026-10-03; **proposed** = design choice made here, open to review; **unverified** = needs a live check.
 
@@ -144,7 +144,7 @@ Run folder: `request.json`, `discovery/`, `leaderboards/`, `matches.json`, `weig
 
 Resume (review): each stage saves dependency versions, source digests, configuration and its schema version. Changed inputs invalidate downstream stages. Confirmed child runs of ihav-web-chat are reused, never re-sent.
 
-Deterministic 0.3.0 candidate contract: `weigh` and `score` use schema-2 `run_state.json` receipts with validated generation IDs, runtime, configuration, recorded dependency metadata, input hashes and output hashes. `verify RUN --json` is read-only (0 current, 2 busy/stale/incomplete/no result, 64 malformed input; local I/O errors 1). Failed attempts archive prior generated outputs through verified copies before removal. An archive journal records actual progress; storage failures can leave old root files with a failed receipt. Four output files have no shared filesystem transaction: the complete receipt is written last, and consumers must verify it. Input/code drift invalidates publication. Live-board URLs bind traffic to the normalized collected host. Comparable dimensions require saved snapshot hashes and cell locators. This implements saved-stage integrity only; live discovery, clean-host dependency adoption and the human acceptance checks below remain separate gates.
+Deterministic 0.3.0 contract: `weigh` and `score` use schema-2 `run_state.json` receipts with validated generation IDs, runtime, configuration, recorded dependency metadata, input hashes and output hashes. `verify RUN --json` is read-only (0 current, 2 busy/stale/incomplete/no result, 64 malformed input; local I/O errors 1). Failed attempts archive prior generated outputs through verified copies before removal. An archive journal records actual progress; storage failures can leave old root files with a failed receipt. Four output files have no shared filesystem transaction: the complete receipt is written last, and consumers must verify it. Input/code drift invalidates publication. Live-board URLs bind traffic to the normalized collected host. Comparable dimensions require saved snapshot hashes and cell locators. This implements saved-stage integrity only; live discovery, clean-host dependency adoption and the human acceptance checks below remain separate gates.
 
 `report.html` is one static file with inline data and charts, styled like artificialanalysis.ai (dark-first, clean cards, labelled points). Charts:
 
@@ -159,7 +159,7 @@ Each chart notes how many candidates or leaderboards it omits and why. Chart imp
 
 ## 4. Repo shape (owner Q7)
 
-Same layout as the visit-counter plan (verified, its repo-plan section 3.1, the gpt-web-imagen split layout): root `.claude-plugin/marketplace.json` and `.agents/plugins/marketplace.json`; `plugins/ihav-leaderboards/` with `.claude-plugin/plugin.json`, `.codex-plugin/plugin.json`, `claude/skills/ihav-leaderboards/SKILL.md`, `core/ihav-leaderboards/` (Codex skill, scripts, Python package). No root `bin/` or `skills/`. Owner `hiendang7613`, MIT. Tests run offline on recorded fixtures. Only difference: `core/` adds `scoring.py`, `matching.py`, `extract/`, `render/` and an HTML template.
+Same layout as the visit-counter plan (verified, its repo-plan section 3.1, the gpt-web-imagen split layout): root `.claude-plugin/marketplace.json` and `.agents/plugins/marketplace.json`; `plugins/ihav-leaderboards/` with `.claude-plugin/plugin.json`, `.codex-plugin/plugin.json`, `claude/skills/ihav-leaderboards/SKILL.md`, `core/ihav-leaderboards/` (Codex skill, scripts, Python package). No root `bin/` or `skills/`. Owner `hiendang7613`, MIT. Tests run offline on recorded fixtures. Only difference: the `core/` package adds scoring, dimension, Pareto, table, render, receipt and validation modules and an HTML template. Extraction and matching are agent steps in `references/workflow.md`.
 
 ## 5. Open items
 
