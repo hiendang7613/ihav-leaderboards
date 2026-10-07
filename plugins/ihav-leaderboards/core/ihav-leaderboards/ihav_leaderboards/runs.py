@@ -7,7 +7,6 @@ import hashlib
 import json
 import os
 import secrets
-import tempfile
 from contextlib import contextmanager
 from datetime import datetime, timezone
 from pathlib import Path
@@ -97,9 +96,15 @@ def json_text(value: Any) -> str:
 
 
 def write_text(path: Path, text: str) -> None:
-    """Replace one complete file; remove our temporary file on every failure."""
+    """Replace one complete file; remove our temporary file on every failure.
+
+    The temporary file is created like an ordinary new file (0666 less the
+    umask). mkstemp would make every output, including the shareable report,
+    readable by its owner only. O_BINARY keeps Windows from rewriting newlines.
+    """
     path.parent.mkdir(parents=True, exist_ok=True)
-    fd, temporary = tempfile.mkstemp(dir=str(path.parent), prefix=".tmp-")
+    temporary = str(path.parent / (".tmp-" + secrets.token_hex(8)))
+    fd = os.open(temporary, os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, "O_BINARY", 0), 0o666)
     try:
         with os.fdopen(fd, "w", encoding="utf-8", newline="") as handle:
             handle.write(text)

@@ -21,6 +21,12 @@ def walk(node):
         yield from walk(child)
 
 
+def read_csv(text):
+    """Parse CSV that may hold NUL; csv.reader rejects NUL before Python 3.11."""
+    rows = csv.reader(io.StringIO(text.replace("\x00", "\ue000")))
+    return [[cell.replace("\ue000", "\x00") for cell in row] for row in rows]
+
+
 def dimension(key, kind="number", direction="lower_better"):
     return {"key": key, "label": key.title(), "type": kind, "direction": direction,
             "unit": "test units", "context": "same workload"}
@@ -42,7 +48,7 @@ class ExportRegressionTests(unittest.TestCase):
                                       dimensions={"a": {"numeric": chosen(-2.5)}})
                 final["candidates"].append({"id": "none", "name": "No score", "rank": None,
                                             "final": None, "confidence": None, "scores": {}})
-                rows = list(csv.reader(io.StringIO(to_csv(final))))
+                rows = read_csv(to_csv(final))
                 self.assertEqual(rows[0], ["rank", "candidate", "final_score", "confidence", "numeric", "synthetic"])
                 self.assertEqual([row[-1] for row in rows[1:]], [expected, expected])
                 self.assertEqual(rows[1][4], "-2.5")
@@ -63,7 +69,7 @@ class ExportRegressionTests(unittest.TestCase):
                 final = minimal_final(registry=[dimension(text, "category"), dimension("numeric")])
                 final["candidates"][0]["name"] = text
                 final["dimensions"] = {"a": {text: chosen(text), "numeric": chosen(-2.5)}}
-                rows = list(csv.reader(io.StringIO(to_csv(final))))
+                rows = read_csv(to_csv(final))
                 self.assertEqual(rows[0][4], "'" + text)
                 self.assertEqual(rows[1][1], "'" + text)
                 self.assertEqual(rows[1][4], "'" + text)

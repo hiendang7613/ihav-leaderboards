@@ -1508,10 +1508,10 @@
   "generated_at": "2026-10-07",
   "publication": {
     "schema_version": 2,
-    "generation": "9110802f9132aa7978713080cb855528",
+    "generation": "54e78dd896d5aeb4b809e8471540d774",
     "runtime": {
       "version": "0.3.0",
-      "code_sha256": "c49fcaa6d1d73c5ed256e602e655f2cff47eabed212a890b5ce9a820c6a299f8"
+      "code_sha256": "9d30a680f649b6d27bf0343f574534e3bb7585a0dffcb583bc49d28a1ac82b64"
     },
     "input_sha256": {
       "request.json": "063b637b694dbc7f483ca8c71a9cca2a6164969172817e79e1493ace0a9000e9",
@@ -1543,6 +1543,6 @@
       "snapshots/paperbench-rank.json": "a9fd7a56bc611d7749ad7b908331d74ae6eff93245e0660dbae34ef90b0076c9",
       "snapshots/dimensions.json": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a"
     },
-    "weigh_generation": "40542f878c7065cf7ac87c3af525a587"
+    "weigh_generation": "f40880671cab6baae699050cdcf03f32"
   }
 }

@@ -27,12 +27,21 @@ class StaleRunError(Exception):
     """Saved stage cannot be used against the current files/runtime."""
 
 
-def runtime_identity() -> Dict[str, str]:
-    package = Path(__file__).resolve().parent
+def code_digest(package: Path) -> str:
+    """Hash the package code independent of checkout line endings.
+
+    A Git checkout with core.autocrlf rewrites LF as CRLF, which would make the
+    same release look like different code on Windows and mark every shared
+    receipt stale. Run data stays byte-exact; only code is normalized.
+    """
     digest = hashlib.sha256()
     for path in sorted(list(package.glob("*.py")) + list(package.glob("*.html"))):
-        digest.update(path.name.encode("utf-8") + b"\0" + path.read_bytes())
-    return {"version": __version__, "code_sha256": digest.hexdigest()}
+        digest.update(path.name.encode("utf-8") + b"\0" + path.read_bytes().replace(b"\r\n", b"\n"))
+    return digest.hexdigest()
+
+
+def runtime_identity() -> Dict[str, str]:
+    return {"version": __version__, "code_sha256": code_digest(Path(__file__).resolve().parent)}
 
 
 def _add_file(run: Path, files: Dict[str, str], path: Path) -> None:

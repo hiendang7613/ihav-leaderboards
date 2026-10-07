@@ -6,6 +6,7 @@ import io
 import json
 import os
 import shutil
+import stat
 import tempfile
 import threading
 import unittest
@@ -204,6 +205,17 @@ class RunIntegrityTests(unittest.TestCase):
         with patch("ihav_leaderboards.receipts.runtime_identity", return_value={"version": "new", "code_sha256": "changed"}):
             self.assertEqual(self.run_main("verify", str(run)), 2)
 
+    def test_runtime_identity_ignores_checkout_line_endings(self):
+        package = Path(receipts.__file__).resolve().parent
+        crlf = self.project / "crlf"
+        crlf.mkdir()
+        for path in list(package.glob("*.py")) + list(package.glob("*.html")):
+            lf = path.read_bytes().replace(b"\r\n", b"\n")
+            (crlf / path.name).write_bytes(lf.replace(b"\n", b"\r\n"))
+        self.assertEqual(receipts.code_digest(crlf), receipts.code_digest(package))
+        (crlf / "cli.py").write_bytes(b"# changed\r\n" + (crlf / "cli.py").read_bytes())
+        self.assertNotEqual(receipts.code_digest(crlf), receipts.code_digest(package))
+
     def test_changed_source_bytes_are_unverified(self):
         run = self.ready()
         (run / "snapshots/b.json").write_text("Changed fixture source")
@@ -388,6 +400,16 @@ class RunIntegrityTests(unittest.TestCase):
                 runs.write_json(target, {"new": True})
         self.assertEqual(runs.read_json(target), {"old": True})
         self.assertFalse(list(self.project.glob(".tmp-*")))
+
+    @unittest.skipIf(os.name == "nt", "POSIX file modes")
+    def test_outputs_get_ordinary_permissions_from_the_umask(self):
+        previous = os.umask(0o022)
+        try:
+            run = self.ready()
+        finally:
+            os.umask(previous)
+        for name in ("weights.json", "run_state.json") + OUTPUTS:
+            self.assertEqual(stat.S_IMODE((run / name).stat().st_mode), 0o644, name)
 
     def test_positive_top_is_required_and_usage_errors_are_64(self):
         run = self.prepare()

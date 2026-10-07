@@ -1,0 +1,3 @@
+# Run receipts hash example files byte for byte. Keep LF on every checkout,
+# including Windows with core.autocrlf, so the bundled example stays current.
+examples/** text eol=lf
