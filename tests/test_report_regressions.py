@@ -104,7 +104,7 @@ class ExportRegressionTests(unittest.TestCase):
 class ReportDomRegressionTests(unittest.TestCase):
     def dom(self, final):
         result = subprocess.run([shutil.which("node"), str(ROOT / "tests/report_dom_harness.js")],
-                                input=to_html(final), text=True, capture_output=True, timeout=10)
+                                input=to_html(final), text=True, encoding="utf-8", capture_output=True, timeout=10)
         self.assertEqual(result.returncode, 0, result.stderr)
         return json.loads(result.stdout)
 
