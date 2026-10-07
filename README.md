@@ -21,7 +21,7 @@
 
 ```text
 "OCR API"
-  1. discover   ChatGPT + Gemini (via ihav-web-chat) list public leaderboards
+  1. discover   web chatbots (via ihav-web-chat) list public leaderboards
   2. collect    merge, dedupe, check every URL is live
   3. weigh      monthly visits per site (via ihav-web-visit-counter) -> keep the top 32
   4. extract    read each table: direct data -> real browser -> chatbot (verified)
@@ -74,9 +74,14 @@ python3 plugins/ihav-leaderboards/core/ihav-leaderboards/scripts/leaderboards.py
 python3 plugins/ihav-leaderboards/core/ihav-leaderboards/scripts/leaderboards.py weigh <run-folder>
 python3 plugins/ihav-leaderboards/core/ihav-leaderboards/scripts/leaderboards.py score <run-folder>
 python3 plugins/ihav-leaderboards/core/ihav-leaderboards/scripts/leaderboards.py render <run-folder>
+python3 plugins/ihav-leaderboards/core/ihav-leaderboards/scripts/leaderboards.py verify <run-folder> --json
 ```
 
 The file formats are in [the workflow reference](plugins/ihav-leaderboards/core/ihav-leaderboards/references/workflow.md).
+
+`weigh` and `score` save input/output hashes and runtime receipts in `run_state.json`. `verify` reads them without changing the run. Exit 0 means the saved files are current; it does not establish provider delivery or human acceptance. Exit 2 means a busy run, no result or stale/incomplete state; wait for a busy writer without editing inputs, otherwise inspect the diagnostic; exit 64 means malformed input; exit 1 means local I/O failed. Re-run local `weigh`/`score` after input or runtime changes. Reuse saved discovery and child run IDs; never resend a chatbot request to repair a local result.
+
+Before another attempt, generated outputs are copied and hash-checked in `.history/<timestamp-id>/` before originals are removed. The manifest records verified copies and removal progress. A storage failure can leave old files at the run root with a failed receipt; they are not current reports. Inspect `diagnostic.json` and the archive manifest before recovery. Four report files are valid as a group only after the final receipt is committed and `verify` succeeds. Older runs without receipts need local `weigh`/`score` once. `render` can rebuild a missing HTML file when the score inputs and other outputs remain current.
 
 ## The math
 
@@ -100,10 +105,12 @@ Every run lives in `.ihav_space/ihav-leaderboards/runs/<run-id>/` in your projec
 
 ```text
 request.json  boards.json  visits/  weights.json  leaderboards/  matches.json
-dimensions.json  final.json  leaderboard.md  leaderboard.csv  report.html
+dimensions.json  run_state.json  final.json  leaderboard.md  leaderboard.csv  report.html
 ```
 
-`report.html` is one static page you can open or share: a ranking with confidence meters, a quality-vs-cost chart with the Pareto frontier for every dimension, a coverage grid, the leaderboard weights and a sortable table. Light and dark themes.
+`report.html` is one static page you can open or share: a ranking with confidence meters, quality-vs-dimension Pareto charts, numeric dimension bars, a coverage grid, leaderboard weights and a sortable table. It shows traffic periods, floor/split policy, matching evidence, comparable dimension sources/conflicts and chart omissions. Light and dark themes.
+
+Extraction needs a saved source snapshot with its SHA-256 and a cell reference for each explicitly verified row. Conflicting duplicate values need one agent-selected `preferred: true` row with identity evidence. Hashes identify saved bytes; they do not prove that the extraction was accepted by a person. CSV keeps numeric columns and appends `synthetic`; fabricated fixtures carry a visible label in every report format.
 
 <p align="center">
   <img src="assets/report-preview.png" alt="Synthetic report: quality ranking with confidence meters and a quality versus price chart with a Pareto frontier" width="100%">
@@ -127,7 +134,7 @@ Add `.ihav_space/` to your `.gitignore`. The plugin warns you and never edits th
 ## Honest limits
 
 - **Visits are estimates.** They come from a public traffic model, not the sites' own analytics. Weights are allocated site popularity, not page visits.
-- **Discovery needs ihav-web-chat, which is not released yet.** Until it is, the agent cannot run step 1 automatically.
+- **Discovery needs ihav-web-chat, which is not released yet.** Until it is, the agent cannot run step 1 automatically. Its current local build can preview and queue a request, but it has no command that sends one, and it lists ChatGPT only. Every send needs your approval of the exact prompt.
 - **Chatbots can be wrong.** They only propose leaderboards. Every URL is checked, and a table read by a chatbot is scored only after it is checked against the page.
 - **No bypass.** On 401, 403, 429, a captcha or a bot wall, that source is skipped.
 - **Unofficial automation.** ihav-web-chat drives consumer chatbot websites with your own accounts. That can break a provider's terms. The choice is yours.

@@ -57,12 +57,21 @@ class SkillTests(unittest.TestCase):
             ".ihav_space/ihav-leaderboards/",
             "py -3",
             "workflow stage 0",
+            "Never print an `ihav-web-chat@ihav` command",
+            "`--dry-run` first",
+            "Never resend a chatbot request",
         ):
             with self.subTest(phrase=phrase):
                 self.assertIn(phrase, claude)
                 self.assertIn(phrase, codex)
         self.assertIn("exit code 4) is never retried", workflow)
         self.assertIn("Rank-only boards are reported but not scored", workflow)
+        self.assertNotIn("<plugin>@ihav", workflow)
+        self.assertNotIn("ihav-web-chat@ihav`", workflow.replace("Do not print an `ihav-web-chat@ihav` command", ""))
+        for phrase in ("--dry-run --json", "run lookup --request-key", "delivery read", "--include-text",
+                       "sent_unknown", "Exit code 4 means the wait timed out", "has no command that sends it"):
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase, workflow)
 
     def test_skill_links_resolve(self):
         claude_link = PLUGIN / "claude/skills/ihav-leaderboards/../../../core/ihav-leaderboards/references/workflow.md"

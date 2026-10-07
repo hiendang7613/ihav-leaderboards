@@ -1,6 +1,6 @@
 {
   "slug": "hub-ocr-accuracy",
-  "final_url": "https://example/hub-ocr-accuracy",
+  "final_url": "https://bench-hub.example/hub-ocr-accuracy",
   "method": "direct",
   "complete": true,
   "quality_column": "Accuracy",
@@ -10,47 +10,58 @@
     {
       "name": "Atlas OCR",
       "quality": 64.5,
-      "verified": true
+      "verified": true,
+      "cell": "/rows/0/quality"
     },
     {
       "name": "Beacon Vision",
       "quality": 57.8,
-      "verified": true
+      "verified": true,
+      "cell": "/rows/1/quality"
     },
     {
       "name": "Cobalt Docs",
       "quality": 80.4,
-      "verified": true
+      "verified": true,
+      "cell": "/rows/2/quality"
     },
     {
       "name": "Delta Read",
       "quality": 60.5,
-      "verified": true
+      "verified": true,
+      "cell": "/rows/3/quality"
     },
     {
       "name": "Ember Text",
       "quality": 73.4,
-      "verified": true
+      "verified": true,
+      "cell": "/rows/4/quality"
     },
     {
       "name": "Fjord Scan",
       "quality": 67.4,
-      "verified": true
+      "verified": true,
+      "cell": "/rows/5/quality"
     },
     {
       "name": "Glyph Cloud",
       "quality": 58.3,
-      "verified": true
+      "verified": true,
+      "cell": "/rows/6/quality"
     },
     {
       "name": "Harbor OCR",
       "quality": 78.9,
-      "verified": true
+      "verified": true,
+      "cell": "/rows/7/quality"
     },
     {
       "name": "Iris Parse",
       "quality": 57.1,
-      "verified": true
+      "verified": true,
+      "cell": "/rows/8/quality"
     }
-  ]
+  ],
+  "snapshot": "snapshots/hub-ocr-accuracy.json",
+  "snapshot_sha256": "62a4fae958f09069bbcc7fc6d39535e2fcc19c08850d4d421d24c68731819cdd"
 }

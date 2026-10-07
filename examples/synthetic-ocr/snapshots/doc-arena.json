@@ -1,0 +1,148 @@
+{
+  "synthetic": true,
+  "note": "Fabricated offline fixture; not a provider response.",
+  "rows": [
+    {
+      "name": "Atlas OCR",
+      "quality": 66.0,
+      "verified": true
+    },
+    {
+      "name": "Beacon Vision",
+      "quality": 64.2,
+      "verified": true
+    },
+    {
+      "name": "Cobalt Docs",
+      "quality": 77.8,
+      "verified": true
+    },
+    {
+      "name": "Delta Read",
+      "quality": 58.7,
+      "verified": true
+    },
+    {
+      "name": "Ember Text",
+      "quality": 77.8,
+      "verified": true
+    },
+    {
+      "name": "Fjord Scan",
+      "quality": 68.4,
+      "verified": true
+    },
+    {
+      "name": "Glyph Cloud",
+      "quality": 57.8,
+      "verified": true
+    },
+    {
+      "name": "Harbor OCR",
+      "quality": 70.9,
+      "verified": true
+    },
+    {
+      "name": "Iris Parse",
+      "quality": 52.1,
+      "verified": true
+    },
+    {
+      "name": "Juniper Lens",
+      "quality": 69.4,
+      "verified": true
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "l0",
+      "candidate": "atlas-ocr",
+      "key": "latency",
+      "value": 2.47,
+      "context": "1-page PDF, p50",
+      "source_type": "leaderboard",
+      "board": "doc-arena",
+      "date": "2026-09-20"
+    },
+    {
+      "id": "l1",
+      "candidate": "beacon-vision",
+      "key": "latency",
+      "value": 3.55,
+      "context": "1-page PDF, p50",
+      "source_type": "leaderboard",
+      "board": "doc-arena",
+      "date": "2026-09-20"
+    },
+    {
+      "id": "l2",
+      "candidate": "cobalt-docs",
+      "key": "latency",
+      "value": 1.44,
+      "context": "1-page PDF, p50",
+      "source_type": "leaderboard",
+      "board": "doc-arena",
+      "date": "2026-09-20"
+    },
+    {
+      "id": "l3",
+      "candidate": "delta-read",
+      "key": "latency",
+      "value": 0.83,
+      "context": "1-page PDF, p50",
+      "source_type": "leaderboard",
+      "board": "doc-arena",
+      "date": "2026-09-20"
+    },
+    {
+      "id": "l5",
+      "candidate": "fjord-scan",
+      "key": "latency",
+      "value": 0.95,
+      "context": "1-page PDF, p50",
+      "source_type": "leaderboard",
+      "board": "doc-arena",
+      "date": "2026-09-20"
+    },
+    {
+      "id": "l6",
+      "candidate": "glyph-cloud",
+      "key": "latency",
+      "value": 0.54,
+      "context": "1-page PDF, p50",
+      "source_type": "leaderboard",
+      "board": "doc-arena",
+      "date": "2026-09-20"
+    },
+    {
+      "id": "l7",
+      "candidate": "harbor-ocr",
+      "key": "latency",
+      "value": 3.15,
+      "context": "1-page PDF, p50",
+      "source_type": "leaderboard",
+      "board": "doc-arena",
+      "date": "2026-09-20"
+    },
+    {
+      "id": "l8",
+      "candidate": "iris-parse",
+      "key": "latency",
+      "value": 3.55,
+      "context": "1-page PDF, p50",
+      "source_type": "leaderboard",
+      "board": "doc-arena",
+      "date": "2026-09-20"
+    },
+    {
+      "id": "l9",
+      "candidate": "juniper-lens",
+      "key": "latency",
+      "value": 2.9,
+      "context": "1-page PDF, p50",
+      "source_type": "leaderboard",
+      "board": "doc-arena",
+      "date": "2026-09-20"
+    }
+  ]
+}

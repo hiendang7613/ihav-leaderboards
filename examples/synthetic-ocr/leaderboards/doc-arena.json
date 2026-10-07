@@ -1,6 +1,6 @@
 {
   "slug": "doc-arena",
-  "final_url": "https://example/doc-arena",
+  "final_url": "https://doc-arena.example/doc-arena",
   "method": "direct",
   "complete": true,
   "quality_column": "Accuracy",
@@ -10,52 +10,64 @@
     {
       "name": "Atlas OCR",
       "quality": 66.0,
-      "verified": true
+      "verified": true,
+      "cell": "/rows/0/quality"
     },
     {
       "name": "Beacon Vision",
       "quality": 64.2,
-      "verified": true
+      "verified": true,
+      "cell": "/rows/1/quality"
     },
     {
       "name": "Cobalt Docs",
       "quality": 77.8,
-      "verified": true
+      "verified": true,
+      "cell": "/rows/2/quality"
     },
     {
       "name": "Delta Read",
       "quality": 58.7,
-      "verified": true
+      "verified": true,
+      "cell": "/rows/3/quality"
     },
     {
       "name": "Ember Text",
       "quality": 77.8,
-      "verified": true
+      "verified": true,
+      "cell": "/rows/4/quality"
     },
     {
       "name": "Fjord Scan",
       "quality": 68.4,
-      "verified": true
+      "verified": true,
+      "cell": "/rows/5/quality"
     },
     {
       "name": "Glyph Cloud",
       "quality": 57.8,
-      "verified": true
+      "verified": true,
+      "cell": "/rows/6/quality"
     },
     {
       "name": "Harbor OCR",
       "quality": 70.9,
-      "verified": true
+      "verified": true,
+      "cell": "/rows/7/quality"
     },
     {
       "name": "Iris Parse",
       "quality": 52.1,
-      "verified": true
+      "verified": true,
+      "cell": "/rows/8/quality"
     },
     {
       "name": "Juniper Lens",
       "quality": 69.4,
-      "verified": true
+      "verified": true,
+      "cell": "/rows/9/quality"
     }
-  ]
+  ],
+  "snapshot": "snapshots/doc-arena.json",
+  "snapshot_sha256": "f7659ecc844fe14b194a1d17bb461a289bb62ad752c0bf0ece5d6855133337a6"
 }

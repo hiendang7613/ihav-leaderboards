@@ -1,7 +1,7 @@
 {
   "name": "ihav-leaderboards",
   "displayName": "ihav-leaderboards",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "Find the most-visited public leaderboards for any domain and merge them into one quality-first leaderboard with confidence, cost dimensions and Pareto charts.",
   "author": {
     "name": "hiendang7613"

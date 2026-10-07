@@ -7,32 +7,42 @@
     {
       "name": "Atlas OCR",
       "quality": 1,
-      "verified": true
+      "verified": true,
+      "cell": "/rows/0/quality"
     },
     {
       "name": "Beacon Vision",
       "quality": 2,
-      "verified": true
+      "verified": true,
+      "cell": "/rows/1/quality"
     },
     {
       "name": "Cobalt Docs",
       "quality": 3,
-      "verified": true
+      "verified": true,
+      "cell": "/rows/2/quality"
     },
     {
       "name": "Delta Read",
       "quality": 4,
-      "verified": true
+      "verified": true,
+      "cell": "/rows/3/quality"
     },
     {
       "name": "Ember Text",
       "quality": 5,
-      "verified": true
+      "verified": true,
+      "cell": "/rows/4/quality"
     },
     {
       "name": "Fjord Scan",
       "quality": 6,
-      "verified": true
+      "verified": true,
+      "cell": "/rows/5/quality"
     }
-  ]
+  ],
+  "snapshot": "snapshots/paperbench-rank.json",
+  "snapshot_sha256": "a9fd7a56bc611d7749ad7b908331d74ae6eff93245e0660dbae34ef90b0076c9",
+  "complete": true,
+  "final_url": "https://paperbench.example/paperbench-rank"
 }

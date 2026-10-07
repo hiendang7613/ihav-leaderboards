@@ -85,7 +85,7 @@ th { color: var(--text-secondary); font-weight: 600; cursor: pointer; user-selec
 td.num, th.num { text-align: right; }
 .tip { position: fixed; pointer-events: none; z-index: 10; background: var(--surface-1);
   border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-  display: none; max-width: 280px; }
+  display: none; max-width: 280px; overflow-wrap: anywhere; }
 .tip strong { display: block; font-size: 15px; }
 .tip span { color: var(--text-secondary); display: block; }
 .hit { fill: transparent; cursor: default; }
@@ -94,6 +94,10 @@ td.num, th.num { text-align: right; }
 .legend { display: flex; gap: 16px; flex-wrap: wrap; color: var(--text-secondary); font-size: 12px; margin-bottom: 6px; }
 .key { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; }
 .empty { color: var(--text-muted); padding: 24px 0; }
+.badge { display: inline-block; padding: 2px 7px; border-radius: 6px; background: var(--track); color: var(--text-primary); }
+.warning { padding: 12px 16px; margin: 16px 0; border: 1px solid var(--axis); border-radius: 8px; }
+details summary { cursor: pointer; font-weight: 600; }
+.fingerprint { overflow-wrap: anywhere; white-space: normal; font-family: ui-monospace, monospace; font-size: 12px; }
 </style>
 </head>
 <body>
@@ -102,6 +106,8 @@ td.num, th.num { text-align: right; }
     <h1 id="title"></h1>
     <p id="subtitle"></p>
   </header>
+  <p class="warning" id="synthetic" style="display:none"></p>
+  <div class="warning" id="warnings" style="display:none" role="note"></div>
   <div class="toolbar">
     <label for="theme">Theme</label>
     <select id="theme"><option value="">System</option><option value="light">Light</option><option value="dark">Dark</option></select>
@@ -112,6 +118,7 @@ td.num, th.num { text-align: right; }
     <h2>Quality score</h2>
     <p class="sub">Merged 0-100 score. The meter shows confidence: the share of source weight behind the score.</p>
     <div class="scroll"><svg id="rank" role="img" aria-label="Quality score ranking"></svg></div>
+    <p class="note" id="rank-note"></p>
   </section>
 
   <section class="card" id="pareto-card">
@@ -123,27 +130,35 @@ td.num, th.num { text-align: right; }
     <p class="note" id="pareto-note"></p>
   </section>
 
+  <section id="dimensions" aria-label="Numeric dimensions"></section>
+
   <section class="card">
     <h2>Coverage</h2>
     <p class="sub">Normalized score per leaderboard. Empty cells: the leaderboard has no usable score for that candidate.</p>
     <div class="scroll"><svg id="grid" role="img" aria-label="Candidate by leaderboard coverage grid"></svg></div>
+    <p class="note" id="grid-note"></p>
   </section>
 
   <section class="card">
     <h2>Leaderboard weights</h2>
     <p class="sub">Allocated site popularity (monthly visits split across a site's leaderboards). Not page visits.</p>
     <div class="scroll"><svg id="weights" role="img" aria-label="Leaderboard weights"></svg></div>
+    <p class="note" id="weights-note"></p>
   </section>
 
   <section class="card">
     <h2>All candidates</h2>
     <p class="sub">Click a column to sort.</p>
     <div class="scroll"><table id="table"></table></div>
+    <p class="note" id="table-note"></p>
     <p class="note" id="notes"></p>
+  </section>
+  <section class="card">
+    <details><summary>Source evidence and conflicts</summary><div id="evidence"></div></details>
   </section>
 </main>
 <div class="tip" id="tip" role="status"></div>
-<script id="data" type="application/json">{"boards": [{"slug": "hub-handwriting", "status": "scored", "reason": "", "mass": 4500000.0, "weight": 0.36585365853658536, "duplicates": [], "unmatched": [], "unusable": []}, {"slug": "hub-ocr-accuracy", "status": "scored", "reason": "", "mass": 4500000.0, "weight": 0.36585365853658536, "duplicates": [], "unmatched": [], "unusable": []}, {"slug": "doc-arena", "status": "scored", "reason": "", "mass": 2500000.0, "weight": 0.2032520325203252, "duplicates": [], "unmatched": [], "unusable": []}, {"slug": "ocr-league-cer", "status": "scored", "reason": "", "mass": 800000.0, "weight": 0.06504065040650407, "duplicates": [], "unmatched": [], "unusable": []}, {"slug": "paperbench-rank", "status": "rank_only_unscored", "reason": "Board gives only an order; ranks are not mixed into the metric score.", "mass": 800000.0, "weight": 0.0, "duplicates": [], "unmatched": [], "unusable": []}], "candidates": [{"id": "cobalt-docs", "name": "Cobalt Docs", "final": 100.0, "confidence": 1.0, "scores": {"hub-handwriting": 100.0, "hub-ocr-accuracy": 100.0, "doc-arena": 100.0, "ocr-league-cer": 100.0}, "rank": 1}, {"id": "ember-text", "name": "Ember Text", "final": 81.0050330598841, "confidence": 1.0, "scores": {"hub-handwriting": 82.93963254593176, "hub-ocr-accuracy": 69.95708154506438, "doc-arena": 100.0, "ocr-league-cer": 72.90836653386454}, "rank": 2}, {"id": "harbor-ocr", "name": "Harbor OCR", "final": 71.3899554270173, "confidence": 1.0, "scores": {"hub-handwriting": 48.81889763779528, "hub-ocr-accuracy": 93.56223175965665, "doc-arena": 73.15175097276267, "ocr-league-cer": 68.12749003984064}, "rank": 3}, {"id": "juniper-lens", "name": "Juniper Lens", "final": 66.93259975074353, "confidence": 0.2682926829268293, "scores": {"doc-arena": 67.3151750972763, "ocr-league-cer": 65.7370517928287}, "rank": 4}, {"id": "fjord-scan", "name": "Fjord Scan", "final": 47.53442348167534, "confidence": 1.0, "scores": {"hub-handwriting": 41.20734908136482, "hub-ocr-accuracy": 44.206008583691, "doc-arena": 63.42412451361871, "ocr-league-cer": 52.19123505976095}, "rank": 5}, {"id": "atlas-ocr", "name": "Atlas OCR", "final": 39.733208959674776, "confidence": 0.5691056910569106, "scores": {"hub-ocr-accuracy": 31.759656652360505, "doc-arena": 54.08560311284047}, "rank": 6}, {"id": "beacon-vision", "name": "Beacon Vision", "final": 20.448747942119887, "confidence": 0.9349593495934959, "scores": {"hub-handwriting": 23.09711286089238, "hub-ocr-accuracy": 3.0042918454935434, "doc-arena": 47.08171206225683}, "rank": 7}, {"id": "delta-read", "name": "Delta Read", "final": 10.687902128443927, "confidence": 1.0, "scores": {"hub-handwriting": 0.0, "hub-ocr-accuracy": 14.59227467811158, "doc-arena": 25.680933852140086, "ocr-league-cer": 1.9920318725099533}, "rank": 8}, {"id": "glyph-cloud", "name": "Glyph Cloud", "final": 7.352395130439333, "confidence": 1.0, "scores": {"hub-handwriting": 2.6246719160104988, "hub-ocr-accuracy": 5.150214592274659, "doc-arena": 22.178988326848234, "ocr-league-cer": 0.0}, "rank": 9}, {"id": "iris-parse", "name": "Iris Parse", "final": 0.531208499335989, "confidence": 0.6341463414634146, "scores": {"hub-ocr-accuracy": 0.0, "doc-arena": 0.0, "ocr-league-cer": 5.179282868525893}, "rank": 10}], "counts": {"selected": 5, "scored": 4, "candidates_ranked": 10, "candidates_unranked": 0}, "notes": ["confidence = share of scored source weight with a usable score for this candidate; it is not statistical certainty, extraction accuracy or match confidence.", "Weights are allocated domain popularity, not page visits."], "query": "OCR API (synthetic example)", "registry": [{"key": "price", "label": "Price", "unit": "USD per 1,000 pages", "type": "number", "direction": "lower_better", "context": "base OCR, pay-as-you-go"}, {"key": "latency", "label": "Latency", "unit": "seconds", "type": "number", "direction": "lower_better", "context": "1-page PDF, p50"}, {"key": "handwriting", "label": "Handwriting", "unit": null, "type": "bool", "direction": "none", "context": "documented"}], "dimensions": {"atlas-ocr": {"price": {"value": 1.92, "observation": "p0", "source_type": "official", "url": "https://example/pricing", "date": "2026-10-01"}, "latency": {"value": 2.47, "observation": "l0", "source_type": "leaderboard", "url": null, "date": "2026-09-20"}, "handwriting": {"value": false, "observation": "h0", "source_type": "official", "url": null, "date": "2026-10-01"}}, "beacon-vision": {"price": {"value": 1.64, "observation": "p1", "source_type": "official", "url": "https://example/pricing", "date": "2026-10-01"}, "latency": {"value": 3.55, "observation": "l1", "source_type": "leaderboard", "url": null, "date": "2026-09-20"}, "handwriting": {"value": true, "observation": "h1", "source_type": "official", "url": null, "date": "2026-10-01"}}, "cobalt-docs": {"price": {"value": 4.53, "observation": "p2", "source_type": "official", "url": "https://example/pricing", "date": "2026-10-01"}, "latency": {"value": 1.44, "observation": "l2", "source_type": "leaderboard", "url": null, "date": "2026-09-20"}, "handwriting": {"value": true, "observation": "h2", "source_type": "official", "url": null, "date": "2026-10-01"}}, "delta-read": {"price": {"value": 1.65, "observation": "p3", "source_type": "official", "url": "https://example/pricing", "date": "2026-10-01"}, "latency": {"value": 0.83, "observation": "l3", "source_type": "leaderboard", "url": null, "date": "2026-09-20"}, "handwriting": {"value": false, "observation": "h3", "source_type": "official", "url": null, "date": "2026-10-01"}}, "ember-text": {"price": {"value": 3.09, "observation": "p4", "source_type": "official", "url": "https://example/pricing", "date": "2026-10-01"}, "handwriting": {"value": true, "observation": "h4", "source_type": "official", "url": null, "date": "2026-10-01"}}, "fjord-scan": {"price": {"value": 3.06, "observation": "p5", "source_type": "official", "url": "https://example/pricing", "date": "2026-10-01"}, "latency": {"value": 0.95, "observation": "l5", "source_type": "leaderboard", "url": null, "date": "2026-09-20"}, "handwriting": {"value": true, "observation": "h5", "source_type": "official", "url": null, "date": "2026-10-01"}}, "glyph-cloud": {"price": {"value": 1.2, "observation": "p6", "source_type": "official", "url": "https://example/pricing", "date": "2026-10-01"}, "latency": {"value": 0.54, "observation": "l6", "source_type": "leaderboard", "url": null, "date": "2026-09-20"}, "handwriting": {"value": false, "observation": "h6", "source_type": "official", "url": null, "date": "2026-10-01"}}, "harbor-ocr": {"price": {"value": 3.61, "observation": "p7", "source_type": "official", "url": "https://example/pricing", "date": "2026-10-01"}, "latency": {"value": 3.15, "observation": "l7", "source_type": "leaderboard", "url": null, "date": "2026-09-20"}, "handwriting": {"value": true, "observation": "h7", "source_type": "official", "url": null, "date": "2026-10-01"}}, "iris-parse": {"price": {"value": 1.16, "observation": "p8", "source_type": "official", "url": "https://example/pricing", "date": "2026-10-01"}, "latency": {"value": 3.55, "observation": "l8", "source_type": "leaderboard", "url": null, "date": "2026-09-20"}, "handwriting": {"value": true, "observation": "h8", "source_type": "official", "url": null, "date": "2026-10-01"}}, "juniper-lens": {"price": {"value": 2.44, "observation": "p9", "source_type": "official", "url": "https://example/pricing", "date": "2026-10-01"}, "latency": {"value": 2.9, "observation": "l9", "source_type": "leaderboard", "url": null, "date": "2026-09-20"}, "handwriting": {"value": false, "observation": "h9", "source_type": "official", "url": null, "date": "2026-10-01"}}}, "dimension_conflicts": [], "dimension_out_of_context": 0, "pareto": {"price": {"unit": "USD per 1,000 pages", "context": "base OCR, pay-as-you-go", "direction": "lower_better", "frontier": ["cobalt-docs", "ember-text", "juniper-lens", "atlas-ocr", "beacon-vision", "glyph-cloud", "iris-parse"], "plotted": 10, "omitted": 0}, "latency": {"unit": "seconds", "context": "1-page PDF, p50", "direction": "lower_better", "frontier": ["cobalt-docs", "fjord-scan", "delta-read", "glyph-cloud"], "plotted": 9, "omitted": 1}}, "generated_at": "2026-10-03"}</script>
+<script id="data" type="application/json">{"boards": [{"slug": "hub-handwriting", "duplicates": [], "duplicate_conflicts": [], "unmatched": [], "unusable": [], "quality_values": {"beacon-vision": 59.4, "cobalt-docs": 88.7, "delta-read": 50.6, "ember-text": 82.2, "fjord-scan": 66.3, "glyph-cloud": 51.6, "harbor-ocr": 69.2}, "score_evidence": {"beacon-vision": {"name": "Beacon Vision", "quality": 59.4, "verified": true, "cell": "/rows/0/quality", "row_index": 0}, "cobalt-docs": {"name": "Cobalt Docs", "quality": 88.7, "verified": true, "cell": "/rows/1/quality", "row_index": 1}, "delta-read": {"name": "Delta Read", "quality": 50.6, "verified": true, "cell": "/rows/2/quality", "row_index": 2}, "ember-text": {"name": "Ember Text", "quality": 82.2, "verified": true, "cell": "/rows/3/quality", "row_index": 3}, "fjord-scan": {"name": "Fjord Scan", "quality": 66.3, "verified": true, "cell": "/rows/4/quality", "row_index": 4}, "glyph-cloud": {"name": "Glyph Cloud", "quality": 51.6, "verified": true, "cell": "/rows/5/quality", "row_index": 5}, "harbor-ocr": {"name": "Harbor OCR", "quality": 69.2, "verified": true, "cell": "/rows/6/quality", "row_index": 6}}, "final_url": "https://bench-hub.example/hub-handwriting", "method": "direct", "snapshot": "snapshots/hub-handwriting.json", "snapshot_sha256": "cbafd66b2aff6b498e7bcf4f40355845c0b7c36f5a7a45eff4b3fb9892a72c2a", "complete": true, "quality_column": "Accuracy", "direction": "higher_better", "score_kind": "score", "quality_min": 50.6, "quality_max": 88.7, "status": "scored", "reason": "", "mass": 4500000.0, "weight": 0.36585365853658536, "domain": "bench-hub.example", "url": "https://bench-hub.example/hub-handwriting", "monthly_visits": 9000000.0, "monthly_visits_text": null, "visit_kind": "estimate", "visit_period": null, "visit_analyzed_at": "2026-10-03T00:00:00Z", "visit_source": "synthetic", "visit_source_details": {"name": "synthetic"}, "visit_range": null, "visit_confidence": null, "visit_rank": {"value": 5000, "list": "synthetic", "date": "2026-10-03"}, "visit_error": null, "visit_contract_version": null, "split": 2, "weight_basis": "domain_split(2)"}, {"slug": "hub-ocr-accuracy", "duplicates": [], "duplicate_conflicts": [], "unmatched": [], "unusable": [], "quality_values": {"atlas-ocr": 64.5, "beacon-vision": 57.8, "cobalt-docs": 80.4, "delta-read": 60.5, "ember-text": 73.4, "fjord-scan": 67.4, "glyph-cloud": 58.3, "harbor-ocr": 78.9, "iris-parse": 57.1}, "score_evidence": {"atlas-ocr": {"name": "Atlas OCR", "quality": 64.5, "verified": true, "cell": "/rows/0/quality", "row_index": 0}, "beacon-vision": {"name": "Beacon Vision", "quality": 57.8, "verified": true, "cell": "/rows/1/quality", "row_index": 1}, "cobalt-docs": {"name": "Cobalt Docs", "quality": 80.4, "verified": true, "cell": "/rows/2/quality", "row_index": 2}, "delta-read": {"name": "Delta Read", "quality": 60.5, "verified": true, "cell": "/rows/3/quality", "row_index": 3}, "ember-text": {"name": "Ember Text", "quality": 73.4, "verified": true, "cell": "/rows/4/quality", "row_index": 4}, "fjord-scan": {"name": "Fjord Scan", "quality": 67.4, "verified": true, "cell": "/rows/5/quality", "row_index": 5}, "glyph-cloud": {"name": "Glyph Cloud", "quality": 58.3, "verified": true, "cell": "/rows/6/quality", "row_index": 6}, "harbor-ocr": {"name": "Harbor OCR", "quality": 78.9, "verified": true, "cell": "/rows/7/quality", "row_index": 7}, "iris-parse": {"name": "Iris Parse", "quality": 57.1, "verified": true, "cell": "/rows/8/quality", "row_index": 8}}, "final_url": "https://bench-hub.example/hub-ocr-accuracy", "method": "direct", "snapshot": "snapshots/hub-ocr-accuracy.json", "snapshot_sha256": "62a4fae958f09069bbcc7fc6d39535e2fcc19c08850d4d421d24c68731819cdd", "complete": true, "quality_column": "Accuracy", "direction": "higher_better", "score_kind": "score", "quality_min": 57.1, "quality_max": 80.4, "status": "scored", "reason": "", "mass": 4500000.0, "weight": 0.36585365853658536, "domain": "bench-hub.example", "url": "https://bench-hub.example/hub-ocr-accuracy", "monthly_visits": 9000000.0, "monthly_visits_text": null, "visit_kind": "estimate", "visit_period": null, "visit_analyzed_at": "2026-10-03T00:00:00Z", "visit_source": "synthetic", "visit_source_details": {"name": "synthetic"}, "visit_range": null, "visit_confidence": null, "visit_rank": {"value": 5000, "list": "synthetic", "date": "2026-10-03"}, "visit_error": null, "visit_contract_version": null, "split": 2, "weight_basis": "domain_split(2)"}, {"slug": "doc-arena", "duplicates": [], "duplicate_conflicts": [], "unmatched": [], "unusable": [], "quality_values": {"atlas-ocr": 66.0, "beacon-vision": 64.2, "cobalt-docs": 77.8, "delta-read": 58.7, "ember-text": 77.8, "fjord-scan": 68.4, "glyph-cloud": 57.8, "harbor-ocr": 70.9, "iris-parse": 52.1, "juniper-lens": 69.4}, "score_evidence": {"atlas-ocr": {"name": "Atlas OCR", "quality": 66.0, "verified": true, "cell": "/rows/0/quality", "row_index": 0}, "beacon-vision": {"name": "Beacon Vision", "quality": 64.2, "verified": true, "cell": "/rows/1/quality", "row_index": 1}, "cobalt-docs": {"name": "Cobalt Docs", "quality": 77.8, "verified": true, "cell": "/rows/2/quality", "row_index": 2}, "delta-read": {"name": "Delta Read", "quality": 58.7, "verified": true, "cell": "/rows/3/quality", "row_index": 3}, "ember-text": {"name": "Ember Text", "quality": 77.8, "verified": true, "cell": "/rows/4/quality", "row_index": 4}, "fjord-scan": {"name": "Fjord Scan", "quality": 68.4, "verified": true, "cell": "/rows/5/quality", "row_index": 5}, "glyph-cloud": {"name": "Glyph Cloud", "quality": 57.8, "verified": true, "cell": "/rows/6/quality", "row_index": 6}, "harbor-ocr": {"name": "Harbor OCR", "quality": 70.9, "verified": true, "cell": "/rows/7/quality", "row_index": 7}, "iris-parse": {"name": "Iris Parse", "quality": 52.1, "verified": true, "cell": "/rows/8/quality", "row_index": 8}, "juniper-lens": {"name": "Juniper Lens", "quality": 69.4, "verified": true, "cell": "/rows/9/quality", "row_index": 9}}, "final_url": "https://doc-arena.example/doc-arena", "method": "direct", "snapshot": "snapshots/doc-arena.json", "snapshot_sha256": "f7659ecc844fe14b194a1d17bb461a289bb62ad752c0bf0ece5d6855133337a6", "complete": true, "quality_column": "Accuracy", "direction": "higher_better", "score_kind": "score", "quality_min": 52.1, "quality_max": 77.8, "status": "scored", "reason": "", "mass": 2500000.0, "weight": 0.2032520325203252, "domain": "doc-arena.example", "url": "https://doc-arena.example/doc-arena", "monthly_visits": 2500000.0, "monthly_visits_text": null, "visit_kind": "estimate", "visit_period": null, "visit_analyzed_at": "2026-10-03T00:00:00Z", "visit_source": "synthetic", "visit_source_details": {"name": "synthetic"}, "visit_range": null, "visit_confidence": null, "visit_rank": {"value": 5000, "list": "synthetic", "date": "2026-10-03"}, "visit_error": null, "visit_contract_version": null, "split": 1, "weight_basis": "domain_split(1)"}, {"slug": "ocr-league-cer", "duplicates": [], "duplicate_conflicts": [], "unmatched": [], "unusable": [], "quality_values": {"cobalt-docs": 1.79, "delta-read": 4.25, "ember-text": 2.47, "fjord-scan": 2.99, "glyph-cloud": 4.3, "harbor-ocr": 2.59, "iris-parse": 4.17, "juniper-lens": 2.65}, "score_evidence": {"cobalt-docs": {"name": "Cobalt Docs", "quality": 1.79, "verified": true, "cell": "/rows/0/quality", "row_index": 0}, "delta-read": {"name": "Delta Read", "quality": 4.25, "verified": true, "cell": "/rows/1/quality", "row_index": 1}, "ember-text": {"name": "Ember Text", "quality": 2.47, "verified": true, "cell": "/rows/2/quality", "row_index": 2}, "fjord-scan": {"name": "Fjord Scan", "quality": 2.99, "verified": true, "cell": "/rows/3/quality", "row_index": 3}, "glyph-cloud": {"name": "Glyph Cloud", "quality": 4.3, "verified": true, "cell": "/rows/4/quality", "row_index": 4}, "harbor-ocr": {"name": "Harbor OCR", "quality": 2.59, "verified": true, "cell": "/rows/5/quality", "row_index": 5}, "iris-parse": {"name": "Iris Parse", "quality": 4.17, "verified": true, "cell": "/rows/6/quality", "row_index": 6}, "juniper-lens": {"name": "Juniper Lens", "quality": 2.65, "verified": true, "cell": "/rows/7/quality", "row_index": 7}}, "final_url": "https://ocr-league.example/ocr-league-cer", "method": "direct", "snapshot": "snapshots/ocr-league-cer.json", "snapshot_sha256": "1e88e468ec95ce02d9994ab6487d8930bfb4d8e8e881167dc9d954552fe240d3", "complete": true, "quality_column": "CER", "direction": "lower_better", "score_kind": "score", "quality_min": 1.79, "quality_max": 4.3, "status": "scored", "reason": "", "mass": 800000.0, "weight": 0.06504065040650407, "domain": "ocr-league.example", "url": "https://ocr-league.example/ocr-league-cer", "monthly_visits": 800000.0, "monthly_visits_text": null, "visit_kind": "estimate", "visit_period": null, "visit_analyzed_at": "2026-10-03T00:00:00Z", "visit_source": "synthetic", "visit_source_details": {"name": "synthetic"}, "visit_range": null, "visit_confidence": null, "visit_rank": {"value": 5000, "list": "synthetic", "date": "2026-10-03"}, "visit_error": null, "visit_contract_version": null, "split": 1, "weight_basis": "domain_split(1)"}, {"slug": "paperbench-rank", "duplicates": [], "duplicate_conflicts": [], "unmatched": [], "unusable": [], "quality_values": {}, "score_evidence": {}, "final_url": "https://paperbench.example/paperbench-rank", "method": "direct", "snapshot": "snapshots/paperbench-rank.json", "snapshot_sha256": "a9fd7a56bc611d7749ad7b908331d74ae6eff93245e0660dbae34ef90b0076c9", "complete": true, "direction": "higher_better", "score_kind": "rank_only", "status": "rank_only_unscored", "reason": "Board gives only an order; ranks are not mixed into the metric score.", "mass": 800000.0, "weight": 0.0, "domain": "paperbench.example", "url": "https://paperbench.example/paperbench-rank", "monthly_visits": null, "monthly_visits_text": null, "visit_kind": "rank_only", "visit_period": null, "visit_analyzed_at": "2026-10-03T00:00:00Z", "visit_source": "synthetic", "visit_source_details": {"name": "synthetic"}, "visit_range": null, "visit_confidence": null, "visit_rank": {"value": 5000, "list": "synthetic", "date": "2026-10-03"}, "visit_error": null, "visit_contract_version": null, "split": 1, "weight_basis": "floor+domain_split(1)"}], "candidates": [{"id": "cobalt-docs", "name": "Cobalt Docs", "final": 100.0, "confidence": 1.0, "scores": {"hub-handwriting": 100.0, "hub-ocr-accuracy": 100.0, "doc-arena": 100.0, "ocr-league-cer": 100.0}, "match_method": null, "match_evidence": "Synthetic: identical names.", "match_confidence": "high", "aliases": [{"board": "hub-ocr-accuracy", "name": "Cobalt Docs"}, {"board": "hub-handwriting", "name": "Cobalt Docs"}, {"board": "doc-arena", "name": "Cobalt Docs"}, {"board": "ocr-league-cer", "name": "Cobalt Docs"}, {"board": "paperbench-rank", "name": "Cobalt Docs"}], "rank": 1}, {"id": "ember-text", "name": "Ember Text", "final": 81.00503305988408, "confidence": 1.0, "scores": {"hub-handwriting": 82.93963254593176, "hub-ocr-accuracy": 69.95708154506438, "doc-arena": 100.0, "ocr-league-cer": 72.90836653386454}, "match_method": null, "match_evidence": "Synthetic: identical names.", "match_confidence": "high", "aliases": [{"board": "hub-ocr-accuracy", "name": "Ember Text"}, {"board": "hub-handwriting", "name": "Ember Text"}, {"board": "doc-arena", "name": "Ember Text"}, {"board": "ocr-league-cer", "name": "Ember Text"}, {"board": "paperbench-rank", "name": "Ember Text"}], "rank": 2}, {"id": "harbor-ocr", "name": "Harbor OCR", "final": 71.38995542701731, "confidence": 1.0, "scores": {"hub-handwriting": 48.818897637795274, "hub-ocr-accuracy": 93.56223175965665, "doc-arena": 73.15175097276267, "ocr-league-cer": 68.12749003984064}, "match_method": null, "match_evidence": "Synthetic: identical names.", "match_confidence": "high", "aliases": [{"board": "hub-ocr-accuracy", "name": "Harbor OCR"}, {"board": "hub-handwriting", "name": "Harbor OCR"}, {"board": "doc-arena", "name": "Harbor OCR"}, {"board": "ocr-league-cer", "name": "Harbor OCR"}, {"board": "paperbench-rank", "name": "Harbor OCR"}], "rank": 3}, {"id": "juniper-lens", "name": "Juniper Lens", "final": 66.93259975074353, "confidence": 0.2682926829268293, "scores": {"doc-arena": 67.3151750972763, "ocr-league-cer": 65.73705179282868}, "match_method": null, "match_evidence": "Synthetic: identical names.", "match_confidence": "high", "aliases": [{"board": "hub-ocr-accuracy", "name": "Juniper Lens"}, {"board": "hub-handwriting", "name": "Juniper Lens"}, {"board": "doc-arena", "name": "Juniper Lens"}, {"board": "ocr-league-cer", "name": "Juniper Lens"}, {"board": "paperbench-rank", "name": "Juniper Lens"}], "rank": 4}, {"id": "fjord-scan", "name": "Fjord Scan", "final": 47.53442348167534, "confidence": 1.0, "scores": {"hub-handwriting": 41.20734908136482, "hub-ocr-accuracy": 44.206008583690995, "doc-arena": 63.42412451361871, "ocr-league-cer": 52.19123505976094}, "match_method": null, "match_evidence": "Synthetic: identical names.", "match_confidence": "high", "aliases": [{"board": "hub-ocr-accuracy", "name": "Fjord Scan"}, {"board": "hub-handwriting", "name": "Fjord Scan"}, {"board": "doc-arena", "name": "Fjord Scan"}, {"board": "ocr-league-cer", "name": "Fjord Scan"}, {"board": "paperbench-rank", "name": "Fjord Scan"}], "rank": 5}, {"id": "atlas-ocr", "name": "Atlas OCR", "final": 39.73320895967478, "confidence": 0.5691056910569106, "scores": {"hub-ocr-accuracy": 31.7596566523605, "doc-arena": 54.085603112840474}, "match_method": null, "match_evidence": "Synthetic: identical names.", "match_confidence": "high", "aliases": [{"board": "hub-ocr-accuracy", "name": "Atlas OCR"}, {"board": "hub-handwriting", "name": "Atlas OCR"}, {"board": "doc-arena", "name": "Atlas OCR"}, {"board": "ocr-league-cer", "name": "Atlas OCR"}, {"board": "paperbench-rank", "name": "Atlas OCR"}], "rank": 6}, {"id": "beacon-vision", "name": "Beacon Vision", "final": 20.44874794211989, "confidence": 0.9349593495934959, "scores": {"hub-handwriting": 23.09711286089238, "hub-ocr-accuracy": 3.0042918454935434, "doc-arena": 47.08171206225683}, "match_method": null, "match_evidence": "Synthetic: identical names.", "match_confidence": "high", "aliases": [{"board": "hub-ocr-accuracy", "name": "Beacon Vision"}, {"board": "hub-handwriting", "name": "Beacon Vision"}, {"board": "doc-arena", "name": "Beacon Vision"}, {"board": "ocr-league-cer", "name": "Beacon Vision"}, {"board": "paperbench-rank", "name": "Beacon Vision"}], "rank": 7}, {"id": "delta-read", "name": "Delta Read", "final": 10.687902128443927, "confidence": 1.0, "scores": {"hub-handwriting": 0.0, "hub-ocr-accuracy": 14.59227467811158, "doc-arena": 25.680933852140086, "ocr-league-cer": 1.9920318725099533}, "match_method": null, "match_evidence": "Synthetic: identical names.", "match_confidence": "high", "aliases": [{"board": "hub-ocr-accuracy", "name": "Delta Read"}, {"board": "hub-handwriting", "name": "Delta Read"}, {"board": "doc-arena", "name": "Delta Read"}, {"board": "ocr-league-cer", "name": "Delta Read"}, {"board": "paperbench-rank", "name": "Delta Read"}], "rank": 8}, {"id": "glyph-cloud", "name": "Glyph Cloud", "final": 7.352395130439334, "confidence": 1.0, "scores": {"hub-handwriting": 2.6246719160104988, "hub-ocr-accuracy": 5.150214592274659, "doc-arena": 22.178988326848238, "ocr-league-cer": 0.0}, "match_method": null, "match_evidence": "Synthetic: identical names.", "match_confidence": "high", "aliases": [{"board": "hub-ocr-accuracy", "name": "Glyph Cloud"}, {"board": "hub-handwriting", "name": "Glyph Cloud"}, {"board": "doc-arena", "name": "Glyph Cloud"}, {"board": "ocr-league-cer", "name": "Glyph Cloud"}, {"board": "paperbench-rank", "name": "Glyph Cloud"}], "rank": 9}, {"id": "iris-parse", "name": "Iris Parse", "final": 0.531208499335989, "confidence": 0.6341463414634146, "scores": {"hub-ocr-accuracy": 0.0, "doc-arena": 0.0, "ocr-league-cer": 5.179282868525893}, "match_method": null, "match_evidence": "Synthetic: identical names.", "match_confidence": "high", "aliases": [{"board": "hub-ocr-accuracy", "name": "Iris Parse"}, {"board": "hub-handwriting", "name": "Iris Parse"}, {"board": "doc-arena", "name": "Iris Parse"}, {"board": "ocr-league-cer", "name": "Iris Parse"}, {"board": "paperbench-rank", "name": "Iris Parse"}], "rank": 10}], "counts": {"selected": 5, "scored": 4, "candidates_ranked": 10, "candidates_unranked": 0}, "notes": ["confidence = share of scored source weight with a usable score for this candidate; it is not statistical certainty, extraction accuracy or match confidence.", "Weights are allocated domain popularity, not page visits."], "query": "OCR API (synthetic example)", "synthetic": true, "registry": [{"key": "price", "label": "Price", "unit": "USD per 1,000 pages", "type": "number", "direction": "lower_better", "context": "base OCR, pay-as-you-go"}, {"key": "latency", "label": "Latency", "unit": "seconds", "type": "number", "direction": "lower_better", "context": "1-page PDF, p50"}, {"key": "handwriting", "label": "Handwriting", "unit": null, "type": "bool", "direction": "none", "context": "documented"}], "dimensions": {"atlas-ocr": {"price": {"value": 1.92, "observation": "p0", "source_type": "official", "url": "https://example/pricing", "date": "2026-10-01", "context": "base OCR, pay-as-you-go", "board": null, "method": null, "snapshot": "snapshots/dimensions.json", "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a", "cell": "/observations/0/value", "reason": "Comparable official observation; no usable comparable leaderboard observation; newer date, then observation ID.", "source_reason": null}, "latency": {"value": 2.47, "observation": "l0", "source_type": "leaderboard", "url": null, "date": "2026-09-20", "context": "1-page PDF, p50", "board": "doc-arena", "method": null, "snapshot": "snapshots/doc-arena.json", "snapshot_sha256": "f7659ecc844fe14b194a1d17bb461a289bb62ad752c0bf0ece5d6855133337a6", "cell": "/dimensions/0/value", "reason": "Comparable leaderboard observation; higher scored board weight, then newer date, then observation ID.", "source_reason": null}, "handwriting": {"value": false, "observation": "h0", "source_type": "official", "url": null, "date": "2026-10-01", "context": "documented", "board": null, "method": null, "snapshot": "snapshots/dimensions.json", "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a", "cell": "/observations/2/value", "reason": "Comparable official observation; no usable comparable leaderboard observation; newer date, then observation ID.", "source_reason": null}}, "beacon-vision": {"price": {"value": 1.64, "observation": "p1", "source_type": "official", "url": "https://example/pricing", "date": "2026-10-01", "context": "base OCR, pay-as-you-go", "board": null, "method": null, "snapshot": "snapshots/dimensions.json", "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a", "cell": "/observations/3/value", "reason": "Comparable official observation; no usable comparable leaderboard observation; newer date, then observation ID.", "source_reason": null}, "latency": {"value": 3.55, "observation": "l1", "source_type": "leaderboard", "url": null, "date": "2026-09-20", "context": "1-page PDF, p50", "board": "doc-arena", "method": null, "snapshot": "snapshots/doc-arena.json", "snapshot_sha256": "f7659ecc844fe14b194a1d17bb461a289bb62ad752c0bf0ece5d6855133337a6", "cell": "/dimensions/1/value", "reason": "Comparable leaderboard observation; higher scored board weight, then newer date, then observation ID.", "source_reason": null}, "handwriting": {"value": true, "observation": "h1", "source_type": "official", "url": null, "date": "2026-10-01", "context": "documented", "board": null, "method": null, "snapshot": "snapshots/dimensions.json", "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a", "cell": "/observations/5/value", "reason": "Comparable official observation; no usable comparable leaderboard observation; newer date, then observation ID.", "source_reason": null}}, "cobalt-docs": {"price": {"value": 4.53, "observation": "p2", "source_type": "official", "url": "https://example/pricing", "date": "2026-10-01", "context": "base OCR, pay-as-you-go", "board": null, "method": null, "snapshot": "snapshots/dimensions.json", "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a", "cell": "/observations/6/value", "reason": "Comparable official observation; no usable comparable leaderboard observation; newer date, then observation ID.", "source_reason": null}, "latency": {"value": 1.44, "observation": "l2", "source_type": "leaderboard", "url": null, "date": "2026-09-20", "context": "1-page PDF, p50", "board": "doc-arena", "method": null, "snapshot": "snapshots/doc-arena.json", "snapshot_sha256": "f7659ecc844fe14b194a1d17bb461a289bb62ad752c0bf0ece5d6855133337a6", "cell": "/dimensions/2/value", "reason": "Comparable leaderboard observation; higher scored board weight, then newer date, then observation ID.", "source_reason": null}, "handwriting": {"value": true, "observation": "h2", "source_type": "official", "url": null, "date": "2026-10-01", "context": "documented", "board": null, "method": null, "snapshot": "snapshots/dimensions.json", "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a", "cell": "/observations/8/value", "reason": "Comparable official observation; no usable comparable leaderboard observation; newer date, then observation ID.", "source_reason": null}}, "delta-read": {"price": {"value": 1.65, "observation": "p3", "source_type": "official", "url": "https://example/pricing", "date": "2026-10-01", "context": "base OCR, pay-as-you-go", "board": null, "method": null, "snapshot": "snapshots/dimensions.json", "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a", "cell": "/observations/9/value", "reason": "Comparable official observation; no usable comparable leaderboard observation; newer date, then observation ID.", "source_reason": null}, "latency": {"value": 0.83, "observation": "l3", "source_type": "leaderboard", "url": null, "date": "2026-09-20", "context": "1-page PDF, p50", "board": "doc-arena", "method": null, "snapshot": "snapshots/doc-arena.json", "snapshot_sha256": "f7659ecc844fe14b194a1d17bb461a289bb62ad752c0bf0ece5d6855133337a6", "cell": "/dimensions/3/value", "reason": "Comparable leaderboard observation; higher scored board weight, then newer date, then observation ID.", "source_reason": null}, "handwriting": {"value": false, "observation": "h3", "source_type": "official", "url": null, "date": "2026-10-01", "context": "documented", "board": null, "method": null, "snapshot": "snapshots/dimensions.json", "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a", "cell": "/observations/11/value", "reason": "Comparable official observation; no usable comparable leaderboard observation; newer date, then observation ID.", "source_reason": null}}, "ember-text": {"price": {"value": 3.09, "observation": "p4", "source_type": "official", "url": "https://example/pricing", "date": "2026-10-01", "context": "base OCR, pay-as-you-go", "board": null, "method": null, "snapshot": "snapshots/dimensions.json", "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a", "cell": "/observations/12/value", "reason": "Comparable official observation; no usable comparable leaderboard observation; newer date, then observation ID.", "source_reason": null}, "handwriting": {"value": true, "observation": "h4", "source_type": "official", "url": null, "date": "2026-10-01", "context": "documented", "board": null, "method": null, "snapshot": "snapshots/dimensions.json", "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a", "cell": "/observations/13/value", "reason": "Comparable official observation; no usable comparable leaderboard observation; newer date, then observation ID.", "source_reason": null}}, "fjord-scan": {"price": {"value": 3.06, "observation": "p5", "source_type": "official", "url": "https://example/pricing", "date": "2026-10-01", "context": "base OCR, pay-as-you-go", "board": null, "method": null, "snapshot": "snapshots/dimensions.json", "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a", "cell": "/observations/14/value", "reason": "Comparable official observation; no usable comparable leaderboard observation; newer date, then observation ID.", "source_reason": null}, "latency": {"value": 0.95, "observation": "l5", "source_type": "leaderboard", "url": null, "date": "2026-09-20", "context": "1-page PDF, p50", "board": "doc-arena", "method": null, "snapshot": "snapshots/doc-arena.json", "snapshot_sha256": "f7659ecc844fe14b194a1d17bb461a289bb62ad752c0bf0ece5d6855133337a6", "cell": "/dimensions/4/value", "reason": "Comparable leaderboard observation; higher scored board weight, then newer date, then observation ID.", "source_reason": null}, "handwriting": {"value": true, "observation": "h5", "source_type": "official", "url": null, "date": "2026-10-01", "context": "documented", "board": null, "method": null, "snapshot": "snapshots/dimensions.json", "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a", "cell": "/observations/16/value", "reason": "Comparable official observation; no usable comparable leaderboard observation; newer date, then observation ID.", "source_reason": null}}, "glyph-cloud": {"price": {"value": 1.2, "observation": "p6", "source_type": "official", "url": "https://example/pricing", "date": "2026-10-01", "context": "base OCR, pay-as-you-go", "board": null, "method": null, "snapshot": "snapshots/dimensions.json", "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a", "cell": "/observations/17/value", "reason": "Comparable official observation; no usable comparable leaderboard observation; newer date, then observation ID.", "source_reason": null}, "latency": {"value": 0.54, "observation": "l6", "source_type": "leaderboard", "url": null, "date": "2026-09-20", "context": "1-page PDF, p50", "board": "doc-arena", "method": null, "snapshot": "snapshots/doc-arena.json", "snapshot_sha256": "f7659ecc844fe14b194a1d17bb461a289bb62ad752c0bf0ece5d6855133337a6", "cell": "/dimensions/5/value", "reason": "Comparable leaderboard observation; higher scored board weight, then newer date, then observation ID.", "source_reason": null}, "handwriting": {"value": false, "observation": "h6", "source_type": "official", "url": null, "date": "2026-10-01", "context": "documented", "board": null, "method": null, "snapshot": "snapshots/dimensions.json", "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a", "cell": "/observations/19/value", "reason": "Comparable official observation; no usable comparable leaderboard observation; newer date, then observation ID.", "source_reason": null}}, "harbor-ocr": {"price": {"value": 3.61, "observation": "p7", "source_type": "official", "url": "https://example/pricing", "date": "2026-10-01", "context": "base OCR, pay-as-you-go", "board": null, "method": null, "snapshot": "snapshots/dimensions.json", "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a", "cell": "/observations/20/value", "reason": "Comparable official observation; no usable comparable leaderboard observation; newer date, then observation ID.", "source_reason": null}, "latency": {"value": 3.15, "observation": "l7", "source_type": "leaderboard", "url": null, "date": "2026-09-20", "context": "1-page PDF, p50", "board": "doc-arena", "method": null, "snapshot": "snapshots/doc-arena.json", "snapshot_sha256": "f7659ecc844fe14b194a1d17bb461a289bb62ad752c0bf0ece5d6855133337a6", "cell": "/dimensions/6/value", "reason": "Comparable leaderboard observation; higher scored board weight, then newer date, then observation ID.", "source_reason": null}, "handwriting": {"value": true, "observation": "h7", "source_type": "official", "url": null, "date": "2026-10-01", "context": "documented", "board": null, "method": null, "snapshot": "snapshots/dimensions.json", "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a", "cell": "/observations/22/value", "reason": "Comparable official observation; no usable comparable leaderboard observation; newer date, then observation ID.", "source_reason": null}}, "iris-parse": {"price": {"value": 1.16, "observation": "p8", "source_type": "official", "url": "https://example/pricing", "date": "2026-10-01", "context": "base OCR, pay-as-you-go", "board": null, "method": null, "snapshot": "snapshots/dimensions.json", "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a", "cell": "/observations/23/value", "reason": "Comparable official observation; no usable comparable leaderboard observation; newer date, then observation ID.", "source_reason": null}, "latency": {"value": 3.55, "observation": "l8", "source_type": "leaderboard", "url": null, "date": "2026-09-20", "context": "1-page PDF, p50", "board": "doc-arena", "method": null, "snapshot": "snapshots/doc-arena.json", "snapshot_sha256": "f7659ecc844fe14b194a1d17bb461a289bb62ad752c0bf0ece5d6855133337a6", "cell": "/dimensions/7/value", "reason": "Comparable leaderboard observation; higher scored board weight, then newer date, then observation ID.", "source_reason": null}, "handwriting": {"value": true, "observation": "h8", "source_type": "official", "url": null, "date": "2026-10-01", "context": "documented", "board": null, "method": null, "snapshot": "snapshots/dimensions.json", "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a", "cell": "/observations/25/value", "reason": "Comparable official observation; no usable comparable leaderboard observation; newer date, then observation ID.", "source_reason": null}}, "juniper-lens": {"price": {"value": 2.44, "observation": "p9", "source_type": "official", "url": "https://example/pricing", "date": "2026-10-01", "context": "base OCR, pay-as-you-go", "board": null, "method": null, "snapshot": "snapshots/dimensions.json", "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a", "cell": "/observations/26/value", "reason": "Comparable official observation; no usable comparable leaderboard observation; newer date, then observation ID.", "source_reason": null}, "latency": {"value": 2.9, "observation": "l9", "source_type": "leaderboard", "url": null, "date": "2026-09-20", "context": "1-page PDF, p50", "board": "doc-arena", "method": null, "snapshot": "snapshots/doc-arena.json", "snapshot_sha256": "f7659ecc844fe14b194a1d17bb461a289bb62ad752c0bf0ece5d6855133337a6", "cell": "/dimensions/8/value", "reason": "Comparable leaderboard observation; higher scored board weight, then newer date, then observation ID.", "source_reason": null}, "handwriting": {"value": false, "observation": "h9", "source_type": "official", "url": null, "date": "2026-10-01", "context": "documented", "board": null, "method": null, "snapshot": "snapshots/dimensions.json", "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a", "cell": "/observations/28/value", "reason": "Comparable official observation; no usable comparable leaderboard observation; newer date, then observation ID.", "source_reason": null}}}, "dimension_conflicts": [], "dimension_out_of_context": 0, "pareto": {"price": {"unit": "USD per 1,000 pages", "context": "base OCR, pay-as-you-go", "direction": "lower_better", "frontier": ["cobalt-docs", "ember-text", "juniper-lens", "atlas-ocr", "beacon-vision", "glyph-cloud", "iris-parse"], "plotted": 10, "omitted": 0, "omitted_reasons": {"unusable_quality": 0, "unusable_dimension": 0}}, "latency": {"unit": "seconds", "context": "1-page PDF, p50", "direction": "lower_better", "frontier": ["cobalt-docs", "fjord-scan", "delta-read", "glyph-cloud"], "plotted": 9, "omitted": 1, "omitted_reasons": {"unusable_quality": 0, "unusable_dimension": 1}}}, "collection": [{"slug": "hub-ocr-accuracy", "url": "https://bench-hub.example/hub-ocr-accuracy", "final_url": "https://bench-hub.example/hub-ocr-accuracy", "domain": "bench-hub.example", "status": "live", "mentioned_by": ["chatgpt", "gemini"]}, {"slug": "hub-handwriting", "url": "https://bench-hub.example/hub-handwriting", "final_url": "https://bench-hub.example/hub-handwriting", "domain": "bench-hub.example", "status": "live", "mentioned_by": ["chatgpt", "gemini"]}, {"slug": "doc-arena", "url": "https://doc-arena.example/doc-arena", "final_url": "https://doc-arena.example/doc-arena", "domain": "doc-arena.example", "status": "live", "mentioned_by": ["chatgpt", "gemini"]}, {"slug": "ocr-league-cer", "url": "https://ocr-league.example/ocr-league-cer", "final_url": "https://ocr-league.example/ocr-league-cer", "domain": "ocr-league.example", "status": "live", "mentioned_by": ["chatgpt", "gemini"]}, {"slug": "paperbench-rank", "url": "https://paperbench.example/paperbench-rank", "final_url": "https://paperbench.example/paperbench-rank", "domain": "paperbench.example", "status": "live", "mentioned_by": ["chatgpt", "gemini"]}, {"slug": "old-ocr-board", "url": "https://gone.example/x", "domain": "gone.example", "status": "dead"}], "dependencies": {"packages": {}, "visit_contracts": {"bench-hub.example": {"contract_version": null, "compatibility": "legacy_unversioned"}, "doc-arena.example": {"contract_version": null, "compatibility": "legacy_unversioned"}, "ocr-league.example": {"contract_version": null, "compatibility": "legacy_unversioned"}, "paperbench.example": {"contract_version": null, "compatibility": "legacy_unversioned"}}}, "unselected_boards": [], "warnings": ["Synthetic fixture data; this report is not a live leaderboard evaluation.", "Dependency package versions were not recorded by the host.", "Legacy saved visit contracts retained without migration: bench-hub.example, doc-arena.example, ocr-league.example, paperbench.example."], "generated_at": "2026-10-07", "publication": {"schema_version": 2, "generation": "9110802f9132aa7978713080cb855528", "runtime": {"version": "0.3.0", "code_sha256": "c49fcaa6d1d73c5ed256e602e655f2cff47eabed212a890b5ce9a820c6a299f8"}, "input_sha256": {"request.json": "063b637b694dbc7f483ca8c71a9cca2a6164969172817e79e1493ace0a9000e9", "boards.json": "00b12c4c273f8cf920d6c1bc478ee3d1844c2d6ff3fae5dea52da8c90cd69450", "visits/bench-hub.example.json": "db84a855c4d7899b2317593712a7d4f12b6d1711d40e1990b703849e128779e6", "visits/doc-arena.example.json": "8795920deb85a64634e8815b9b5b90a99d20bf16d19af558dd2b579725ee1396", "visits/ocr-league.example.json": "fb8120a953f40eeb20fafa5f187904727a4aeec4b62d01bcf8d337001614b9a5", "visits/paperbench.example.json": "253bb45f796deac7708709ff5948a8baa9a226d24ec1c3778b8f5a30cd808251", "weights.json": "f68108df8e371cb39f645a9cf8f2628483d11ecd0a83b4c828e592445be8c444", "matches.json": "005db88e6ec57688a1a241344b7bab8db758803ae3f3a81ee2d89ea78a7cf87f", "dimensions.json": "a251a13322cfbdc2aeadd00881182549cacae0e8aa8ba72079c6f3db5e852d03", "leaderboards/doc-arena.json": "547cdc8ffd18be2ec11295dc0a84b2ea664770ca9fd4556581a06398d50ea033", "snapshots/doc-arena.json": "f7659ecc844fe14b194a1d17bb461a289bb62ad752c0bf0ece5d6855133337a6", "leaderboards/hub-handwriting.json": "869c9a17eabf7d0b08f852cf9eeae02c635e2551f51f02d7e738c98d23cb7b59", "snapshots/hub-handwriting.json": "cbafd66b2aff6b498e7bcf4f40355845c0b7c36f5a7a45eff4b3fb9892a72c2a", "leaderboards/hub-ocr-accuracy.json": "5068c02579384b2755345508a622e348a79f4bf76304a90c543512b205c03bea", "snapshots/hub-ocr-accuracy.json": "62a4fae958f09069bbcc7fc6d39535e2fcc19c08850d4d421d24c68731819cdd", "leaderboards/ocr-league-cer.json": "6ddaea135ea50d01ec7a1c9650f0f4346c799409fff8406b2fe822e7fc55f7a7", "snapshots/ocr-league-cer.json": "1e88e468ec95ce02d9994ab6487d8930bfb4d8e8e881167dc9d954552fe240d3", "leaderboards/paperbench-rank.json": "7b66d1d84753ac43ac92f93cedfd6de1420bfcc919516172dc44a717e8dc9fed", "snapshots/paperbench-rank.json": "a9fd7a56bc611d7749ad7b908331d74ae6eff93245e0660dbae34ef90b0076c9", "snapshots/dimensions.json": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a"}, "source_sha256": {"snapshots/doc-arena.json": "f7659ecc844fe14b194a1d17bb461a289bb62ad752c0bf0ece5d6855133337a6", "snapshots/hub-handwriting.json": "cbafd66b2aff6b498e7bcf4f40355845c0b7c36f5a7a45eff4b3fb9892a72c2a", "snapshots/hub-ocr-accuracy.json": "62a4fae958f09069bbcc7fc6d39535e2fcc19c08850d4d421d24c68731819cdd", "snapshots/ocr-league-cer.json": "1e88e468ec95ce02d9994ab6487d8930bfb4d8e8e881167dc9d954552fe240d3", "snapshots/paperbench-rank.json": "a9fd7a56bc611d7749ad7b908331d74ae6eff93245e0660dbae34ef90b0076c9", "snapshots/dimensions.json": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a"}, "weigh_generation": "40542f878c7065cf7ac87c3af525a587"}}</script>
 <script>
 (function () {
   "use strict";
@@ -185,6 +200,34 @@ td.num, th.num { text-align: right; }
     return v.toFixed(d === undefined ? 1 : d).replace(/\.0+$/, "");
   }
   function pct(v) { return v === null || v === undefined ? "-" : Math.round(v * 100) + "%"; }
+  function finite(v) { return typeof v === "number" && isFinite(v); }
+  function own(obj, key) { return obj && Object.prototype.hasOwnProperty.call(obj, key) ? obj[key] : undefined; }
+  function observation(cid, key) { return own(own(D.dimensions || {}, cid), key) || {}; }
+  function period(value) { return value && typeof value === "object" ? JSON.stringify(value) : String(value || "unrecorded"); }
+  function provenance(obs) {
+    return [obs.source_type || "unrecorded source", obs.observation ? "observation " + obs.observation : "",
+      obs.url || obs.final_url || "", obs.date || "", obs.context ? "context: " + obs.context : "", obs.method ? "method: " + obs.method : "",
+      obs.reason || obs.selection_reason || "selection reason unrecorded"].filter(Boolean);
+  }
+  function addNote(id, value) { document.getElementById(id).textContent = value; }
+  function rowOmissions(shown, total) {
+    var unranked = D.candidates.length - ranked.length, truncated = ranked.length - shown;
+    return shown + " of " + total + " shown. " + unranked + " candidate(s) omitted: no usable quality score; " +
+      truncated + " omitted by the display limit (25). All candidates remain in the table.";
+  }
+  function omittedBoards(boards) {
+    return boards.map(function (b) { return (b.slug || b.url || b.final_url || "unnamed source") + " (" + (b.status || "status unrecorded") + (b.reason ? ": " + b.reason : "") + ")"; }).join("; ");
+  }
+  function collectionOmissions() {
+    var parts = [];
+    if (Array.isArray(D.unselected_boards)) parts.push(D.unselected_boards.length + " live board(s) outside the selected group: " +
+      (D.unselected_boards.map(function (b) { return (b.slug || "unnamed board") + ": " + (b.reason || "not selected for scoring"); }).join("; ") || "none") + ".");
+    if (Array.isArray(D.collection)) {
+      var nonLive = D.collection.filter(function (b) { return b.status !== "live"; });
+      parts.push(D.collection.length + " discovered board(s) recorded; " + nonLive.length + " not classed live: " + (omittedBoards(nonLive) || "none") + ".");
+    }
+    return parts.join(" ");
+  }
 
   function showTip(evt, value, lines) {
     while (tip.firstChild) tip.removeChild(tip.firstChild);
@@ -201,6 +244,7 @@ td.num, th.num { text-align: right; }
   function hideTip() { tip.style.display = "none"; }
   function hover(node, value, lines) {
     node.setAttribute("tabindex", "0");
+    node.setAttribute("aria-label", value + ". " + lines.filter(Boolean).join(". "));
     node.addEventListener("pointermove", function (e) { showTip(e, value, lines); });
     node.addEventListener("pointerleave", hideTip);
     node.addEventListener("focus", function (e) { showTip(e, value, lines); });
@@ -213,18 +257,29 @@ td.num, th.num { text-align: right; }
     return el("path", { d: d, fill: fill, class: "mark" }, parent);
   }
 
-  var ranked = D.candidates.filter(function (c) { return c.final !== null; });
-  var names = {}; D.candidates.forEach(function (c) { names[c.id] = c.name; });
+  var ranked = D.candidates.filter(function (c) { return finite(c.final); });
 
   function header() {
     document.getElementById("title").textContent = D.query ? "Best " + D.query : "Leaderboard";
     document.getElementById("subtitle").textContent = "Merged from " + D.counts.scored + " of " + D.counts.selected +
       " selected public leaderboards. Generated " + (D.generated_at || "") + ".";
+    if (D.synthetic === true) {
+      var banner = document.getElementById("synthetic");
+      banner.textContent = "Synthetic example: these values demonstrate the report; they are not live benchmark evidence.";
+      banner.style.display = "block";
+    }
+    if (D.warnings && D.warnings.length) {
+      var warningBox = document.getElementById("warnings"), warningTitle = document.createElement("strong");
+      warningTitle.textContent = "Warnings"; warningBox.appendChild(warningTitle);
+      var warningList = document.createElement("ul");
+      D.warnings.forEach(function (warning) { var item = document.createElement("li"); item.textContent = warning; warningList.appendChild(item); });
+      warningBox.appendChild(warningList); warningBox.style.display = "block";
+    }
     var tiles = document.getElementById("tiles");
     var top = ranked[0];
     [["Top candidate", top ? top.name : "-"],
      ["Top score (confidence)", top ? fmt(top.final) + " (" + pct(top.confidence) + ")" : "-"],
-     ["Candidates ranked", String(D.counts.candidates_ranked)],
+     ["Candidates ranked", String(ranked.length)],
      ["Leaderboards scored", D.counts.scored + " of " + D.counts.selected]].forEach(function (t) {
       var d = document.createElement("div"); d.className = "tile";
       var a = document.createElement("div"); a.className = "label"; a.textContent = t[0];
@@ -239,6 +294,7 @@ td.num, th.num { text-align: right; }
     var labelW = Math.min(240, W * 0.3), meterW = 90, valueW = 44;
     var plotW = W - labelW - meterW - valueW - 60;
     var H = top + rows.length * rowH + 8;
+    addNote("rank-note", rowOmissions(rows.length, D.candidates.length));
     svg.setAttribute("width", W); svg.setAttribute("height", H); svg.setAttribute("viewBox", "0 0 " + W + " " + H);
     rows.forEach(function (c, i) {
       var y = top + i * rowH, barH = 16, by = y + (rowH - barH) / 2;
@@ -256,11 +312,13 @@ td.num, th.num { text-align: right; }
       text(svg, mx + meterW + 6, y + rowH / 2 + 4, pct(c.confidence), { class: "ink2" });
       var hit = el("rect", { x: 0, y: y, width: W, height: rowH, class: "hit" }, svg);
       hover(hit, fmt(c.final) + " score", [c.name, pct(c.confidence) + " confidence",
-        Object.keys(c.scores).length + " leaderboard(s) with a usable score"]);
+        Object.keys(c.scores || {}).length + " leaderboard(s) with a usable score"]);
     });
   }
 
   var dimKeys = Object.keys(D.pareto || {});
+  var priceKey = dimKeys.indexOf("price") >= 0 ? "price" : dimKeys.filter(function (k) { return /price|cost/i.test(k); })[0];
+  if (priceKey) dimKeys = [priceKey].concat(dimKeys.filter(function (k) { return k !== priceKey; }));
   var dimSel = document.getElementById("dim");
   dimKeys.forEach(function (k) {
     var o = document.createElement("option"); o.value = k;
@@ -268,6 +326,7 @@ td.num, th.num { text-align: right; }
     o.textContent = (reg.label || k) + (reg.unit ? " (" + reg.unit + ")" : "");
     dimSel.appendChild(o);
   });
+  if (dimKeys.length) dimSel.value = dimKeys[0];
   if (!dimKeys.length) document.getElementById("pareto-card").style.display = "none";
   dimSel.addEventListener("change", drawPareto);
 
@@ -282,22 +341,28 @@ td.num, th.num { text-align: right; }
     var svg = document.getElementById("pareto"); clear(svg);
     var W = width(svg), H = 380, m = { l: 48, r: 24, t: 16, b: 40 };
     svg.setAttribute("width", W); svg.setAttribute("height", H); svg.setAttribute("viewBox", "0 0 " + W + " " + H);
-    var front = {}; chart.frontier.forEach(function (id) { front[id] = true; });
+    var front = new Set(chart.frontier || []);
     var pts = [];
-    ranked.forEach(function (c) {
-      var v = ((D.dimensions[c.id] || {})[key] || {}).value;
-      if (typeof v === "number" && isFinite(v)) pts.push({ c: c, x: v, y: c.final });
+    var noQuality = 0, noDimension = 0;
+    D.candidates.forEach(function (c) {
+      var v = observation(c.id, key).value;
+      if (!finite(c.final)) noQuality++;
+      else if (!finite(v)) noDimension++;
+      else pts.push({ c: c, x: v, y: c.final });
     });
     var note = document.getElementById("pareto-note");
-    note.textContent = chart.plotted + " plotted. " + chart.omitted + " candidate(s) omitted: no value in this context or no score.";
+    note.textContent = pts.length + " plotted. " + (noQuality + noDimension) + " candidate(s) omitted: " + noQuality +
+      " have no usable quality score; " + noDimension + " have no finite value in this context. " +
+      "Frontier computed over comparable observations only. No display limit.";
     if (!pts.length) { text(svg, m.l, H / 2, "No comparable values for this dimension."); return; }
     var xs = pts.map(function (p) { return p.x; });
     var lo = Math.min.apply(null, xs), hi = Math.max.apply(null, xs);
     var log = lo > 0 && hi / lo > 50;
-    function tx(v) { return log ? Math.log10(v) : v; }
+    var scale = Math.max(Math.abs(lo), Math.abs(hi)) || 1;
+    function tx(v) { return log ? Math.log10(v) : v / scale; }
     var a = tx(lo), b = tx(hi); if (a === b) { a -= 1; b += 1; }
-    var pad = (b - a) * 0.06; a -= pad; b += pad;
-    var X = function (v) { return m.l + (tx(v) - a) / (b - a) * (W - m.l - m.r); };
+    var plotWidth = W - m.l - m.r, pad = plotWidth * 0.06;
+    var X = function (v) { return m.l + pad + (tx(v) - a) / (b - a) * (plotWidth - 2 * pad); };
     var Y = function (v) { return m.t + (1 - v / 100) * (H - m.t - m.b); };
     [0, 25, 50, 75, 100].forEach(function (g) {
       el("line", { x1: m.l, x2: W - m.r, y1: Y(g), y2: Y(g), stroke: "var(--grid)", "stroke-width": 1 }, svg);
@@ -305,21 +370,21 @@ td.num, th.num { text-align: right; }
     });
     el("line", { x1: m.l, x2: W - m.r, y1: Y(0), y2: Y(0), stroke: "var(--axis)", "stroke-width": 1 }, svg);
     for (var i = 0; i <= 4; i++) {
-      var tv = a + (b - a) * i / 4, raw = log ? Math.pow(10, tv) : tv;
-      text(svg, X(raw), H - m.b + 18, fmt(raw, 2), { "text-anchor": "middle" });
+      var tv = tx(lo) + (tx(hi) - tx(lo)) * i / 4, raw = log ? Math.pow(10, tv) : tv * scale;
+      text(svg, m.l + pad + (tv - a) / (b - a) * (plotWidth - 2 * pad), H - m.b + 18, fmt(raw, 2), { "text-anchor": "middle" });
     }
     text(svg, (m.l + W - m.r) / 2, H - 6, (reg.label || key) + (reg.unit ? " (" + reg.unit + ")" : "") + (log ? " · log scale" : ""), { "text-anchor": "middle" });
-    var fp = pts.filter(function (p) { return front[p.c.id]; }).sort(function (p, q) { return p.x - q.x; });
+    var fp = pts.filter(function (p) { return front.has(p.c.id); }).sort(function (p, q) { return p.x < q.x ? -1 : p.x > q.x ? 1 : 0; });
     if (fp.length > 1) el("polyline", { points: fp.map(function (p) { return X(p.x) + "," + Y(p.y); }).join(" "),
       fill: "none", stroke: "var(--series-1)", "stroke-width": 2, "stroke-linejoin": "round", "stroke-linecap": "round" }, svg);
     var surface = css("--surface-1"), placed = [];
-    pts.sort(function (p, q) { return (front[p.c.id] ? 1 : 0) - (front[q.c.id] ? 1 : 0); }).forEach(function (p) {
+    pts.sort(function (p, q) { return (front.has(p.c.id) ? 1 : 0) - (front.has(q.c.id) ? 1 : 0); }).forEach(function (p) {
       var r = 4 + 6 * Math.sqrt(p.c.confidence || 0);
       var g = el("g", {}, svg);
       var hit = el("circle", { cx: X(p.x), cy: Y(p.y), r: Math.max(12, r + 4), class: "hit" }, g);
-      el("circle", { cx: X(p.x), cy: Y(p.y), r: r, fill: front[p.c.id] ? "var(--series-1)" : "var(--other)",
+      el("circle", { cx: X(p.x), cy: Y(p.y), r: r, fill: front.has(p.c.id) ? "var(--series-1)" : "var(--other)",
         stroke: surface, "stroke-width": 2, class: "mark" }, g);
-      if (front[p.c.id]) {
+      if (front.has(p.c.id)) {
         var lx = X(p.x) + r + 4, ly = Y(p.y) - r - 2, anchor = "start";
         if (lx > W - m.r - 120) { lx = X(p.x) - r - 4; anchor = "end"; }
         if (ly < m.t + 10) ly = Y(p.y) + r + 12;
@@ -327,7 +392,7 @@ td.num, th.num { text-align: right; }
         if (!clash) { placed.push([lx, ly]); text(g, lx, ly, p.c.name, { class: "ink", "text-anchor": anchor }); }
       }
       hover(hit, fmt(p.y) + " score · " + fmt(p.x, 2) + (reg.unit ? " " + reg.unit : ""),
-        [p.c.name, pct(p.c.confidence) + " confidence", front[p.c.id] ? "On the Pareto frontier" : "Dominated"]);
+        [p.c.name, pct(p.c.confidence) + " confidence", front.has(p.c.id) ? "On the Pareto frontier" : "Dominated"].concat(provenance(observation(p.c.id, key))));
     });
   }
 
@@ -337,6 +402,52 @@ td.num, th.num { text-align: right; }
     return "rgb(" + lo.map(function (v, i) { return Math.round(v + (hi[i] - v) * t); }).join(",") + ")";
   }
 
+  function drawDimensions() {
+    var container = document.getElementById("dimensions"); clear(container);
+    (D.registry || []).filter(function (r) { return (r.type || "number") === "number"; }).forEach(function (reg) {
+      var card = document.createElement("section"); card.className = "card";
+      var heading = document.createElement("h2"); heading.textContent = reg.label || reg.key; card.appendChild(heading);
+      var sub = document.createElement("p"); sub.className = "sub";
+      var direction = reg.direction === "lower_better" ? "lower is better" : reg.direction === "higher_better" ? "higher is better" : "no preferred direction; alphabetical order";
+      sub.textContent = (reg.unit ? reg.unit + " · " : "") + direction + (reg.context ? " · context: " + reg.context : ""); card.appendChild(sub);
+      var scroll = document.createElement("div"); scroll.className = "scroll"; card.appendChild(scroll);
+      var svg = el("svg", {role: "img", "aria-label": (reg.label || reg.key) + " values"}, scroll);
+      container.appendChild(card);
+      var all = D.candidates.map(function (c) { return {candidate: c, value: observation(c.id, reg.key).value}; }).filter(function (r) { return finite(r.value); });
+      all.sort(function (a, b) {
+        if (reg.direction === "none" || !reg.direction) return a.candidate.name.localeCompare(b.candidate.name);
+        var result = a.value < b.value ? -1 : a.value > b.value ? 1 : a.candidate.name.localeCompare(b.candidate.name);
+        return reg.direction === "higher_better" && a.value !== b.value ? -result : result;
+      });
+      var rows = all.slice(0, 25), note = document.createElement("p"); note.className = "note";
+      var missing = D.candidates.length - all.length, truncated = all.length - rows.length;
+      note.textContent = rows.length + " plotted. " + missing + " candidate(s) omitted: no finite value in this context; " +
+        truncated + " omitted by the display limit (25). Candidates without quality scores are included when their dimension is comparable.";
+      card.appendChild(note);
+      var W = width(svg), rowH = 30, top = 8, labelW = Math.min(240, W * 0.3), plotW = W - labelW - 100;
+      var H = top + rows.length * rowH + 8;
+      svg.setAttribute("width", W); svg.setAttribute("height", Math.max(H, 42)); svg.setAttribute("viewBox", "0 0 " + W + " " + Math.max(H, 42));
+      if (!rows.length) { text(svg, 0, 24, "No comparable numeric values."); return; }
+      var vals = rows.map(function (r) { return r.value; }), magnitude = Math.max.apply(null, vals.map(Math.abs).concat([1]));
+      var low = Math.min.apply(null, vals.concat([0])) / magnitude, high = Math.max.apply(null, vals.concat([0])) / magnitude;
+      if (low === high) high = low + 1;
+      var X = function (value) { return labelW + (value / magnitude - low) / (high - low) * plotW; };
+      var zero = X(0);
+      rows.forEach(function (row, i) {
+        var y = top + i * rowH, end = X(row.value);
+        var label = text(svg, 0, y + rowH / 2 + 4, row.candidate.name, {class: "ink"});
+        if (label.getComputedTextLength && label.getComputedTextLength() > labelW - 8) {
+          var name = row.candidate.name;
+          while (name.length > 3 && label.getComputedTextLength() > labelW - 8) { name = name.slice(0, -1); label.textContent = name + "…"; }
+        }
+        roundedBar(svg, Math.min(zero, end), y + 7, Math.max(2, Math.abs(end - zero)), 16, "var(--series-1)");
+        text(svg, labelW + plotW + 8, y + rowH / 2 + 4, fmt(row.value, 2), {class: "ink"});
+        var hit = el("rect", {x: 0, y: y, width: W, height: rowH, class: "hit"}, svg);
+        hover(hit, fmt(row.value, 2) + (reg.unit ? " " + reg.unit : ""), [row.candidate.name].concat(provenance(observation(row.candidate.id, reg.key))));
+      });
+    });
+  }
+
   function drawGrid() {
     var svg = document.getElementById("grid"); clear(svg);
     var boards = D.boards.filter(function (bd) { return bd.status === "scored"; });
@@ -344,6 +455,9 @@ td.num, th.num { text-align: right; }
     var labelW = Math.min(220, W * 0.28), top = 96, cell = 22;
     var cw = Math.max(18, Math.min(44, (W - labelW - 8) / Math.max(1, boards.length)));
     var H = top + rows.length * cell + 8;
+    var excluded = D.boards.filter(function (b) { return b.status !== "scored"; });
+    addNote("grid-note", rowOmissions(rows.length, D.candidates.length) + " " + excluded.length +
+      " selected leaderboard(s) omitted: " + (omittedBoards(excluded) || "none") + ". " + collectionOmissions());
     svg.setAttribute("width", Math.max(W, labelW + boards.length * cw + 8)); svg.setAttribute("height", H);
     boards.forEach(function (bd, j) {
       var x = labelW + j * cw + cw / 2;
@@ -354,8 +468,8 @@ td.num, th.num { text-align: right; }
       var y = top + i * cell;
       text(svg, 0, y + cell / 2 + 4, c.name.length > 30 ? c.name.slice(0, 29) + "…" : c.name, { class: "ink" });
       boards.forEach(function (bd, j) {
-        var x = labelW + j * cw, s = c.scores[bd.slug];
-        if (s === undefined) {
+        var x = labelW + j * cw, s = own(c.scores || {}, bd.slug);
+        if (!finite(s)) {
           el("rect", { x: x + 1, y: y + 1, width: cw - 2, height: cell - 2, rx: 3, fill: "none", stroke: "var(--grid)" }, svg);
           return;
         }
@@ -368,45 +482,52 @@ td.num, th.num { text-align: right; }
 
   function drawWeights() {
     var svg = document.getElementById("weights"); clear(svg);
-    var rows = D.boards, W = width(svg), rowH = 26, labelW = Math.min(240, W * 0.32);
-    var plotW = W - labelW - 220, H = rows.length * rowH + 8;
-    var max = Math.max.apply(null, rows.map(function (r) { return r.weight; }).concat([0.0001]));
+    var rows = D.boards, W = width(svg), rowH = 52, labelW = Math.min(240, W * 0.32);
+    var plotW = Math.max(30, W - labelW - 220), H = rows.length * rowH + 8;
+    var max = Math.max.apply(null, rows.map(function (r) { return finite(r.weight) ? r.weight : 0; }).concat([0.0001]));
+    addNote("weights-note", rows.length + " selected leaderboards shown. 0 leaderboards omitted from the saved selected group. Dropped boards have zero scoring weight; their status and reason remain visible. " + collectionOmissions());
     svg.setAttribute("width", W); svg.setAttribute("height", H); svg.setAttribute("viewBox", "0 0 " + W + " " + H);
     rows.forEach(function (r, i) {
       var y = i * rowH;
-      text(svg, 0, y + rowH / 2 + 4, r.slug.length > 32 ? r.slug.slice(0, 31) + "…" : r.slug, { class: r.status === "scored" ? "ink" : "" });
+      text(svg, 0, y + 16, r.slug.length > 32 ? r.slug.slice(0, 31) + "…" : r.slug, { class: r.status === "scored" ? "ink" : "" });
       if (r.status === "scored") {
         var bw = Math.max(2, plotW * r.weight / max);
-        roundedBar(svg, labelW, y + 5, bw, rowH - 10, "var(--series-1)");
-        text(svg, labelW + bw + 6, y + rowH / 2 + 4, pct(r.weight), { class: "ink" });
+        roundedBar(svg, labelW, y + 5, bw, 16, "var(--series-1)");
+        text(svg, labelW + bw + 6, y + 16, pct(r.weight), { class: "ink" });
       } else {
-        text(svg, labelW, y + rowH / 2 + 4, r.status.replace(/_/g, " ") + (r.reason ? ": " + r.reason : ""));
+        text(svg, labelW, y + 16, r.status.replace(/_/g, " ") + (r.reason ? ": " + r.reason : ""));
       }
+      var basis = r.weight_basis || "weight basis unrecorded";
+      var source = [r.domain || "domain unrecorded", basis, "split " + (r.split || 1), "period " + period(r.visit_period), r.visit_source || "visit source unrecorded"].join(" · ");
+      text(svg, 0, y + 36, source);
       var hit = el("rect", { x: 0, y: y, width: W, height: rowH, class: "hit" }, svg);
-      hover(hit, pct(r.weight) + " weight", [r.slug, r.status.replace(/_/g, " "), r.reason || ""]);
+      hover(hit, pct(r.weight) + " weight", [r.slug, r.status.replace(/_/g, " "), source, r.reason || ""]);
     });
   }
 
-  var sortKey = "rank", sortDir = 1;
+  var sortColumn = 0, sortDir = 1;
   function drawTable() {
     var t = document.getElementById("table"); while (t.firstChild) t.removeChild(t.firstChild);
-    var dims = (D.registry || []).map(function (r) { return r.key; });
-    var cols = [["rank", "#", true], ["name", "Candidate", false], ["final", "Score", true], ["confidence", "Confidence", true]]
-      .concat(dims.map(function (k) { return [k, k, true]; }));
+    var cols = [{key: "rank", label: "#", number: true}, {key: "name", label: "Candidate"},
+      {key: "final", label: "Score", number: true}, {key: "confidence", label: "Confidence", number: true}]
+      .concat((D.registry || []).map(function (reg) {
+        return {key: reg.key, label: (reg.label || reg.key) + (reg.unit ? " (" + reg.unit + ")" : ""),
+          dimension: true, type: reg.type || "number", number: (reg.type || "number") === "number"};
+      }));
     var thead = document.createElement("thead"), tr = document.createElement("tr");
-    cols.forEach(function (c) {
-      var th = document.createElement("th"); th.textContent = c[1] + (sortKey === c[0] ? (sortDir > 0 ? " ▲" : " ▼") : "");
-      if (c[2]) th.className = "num";
-      th.addEventListener("click", function () { sortDir = sortKey === c[0] ? -sortDir : 1; sortKey = c[0]; drawTable(); });
+    cols.forEach(function (c, index) {
+      var th = document.createElement("th"); th.textContent = c.label + (sortColumn === index ? (sortDir > 0 ? " ▲" : " ▼") : "");
+      if (c.number) th.className = "num";
+      th.addEventListener("click", function () { sortDir = sortColumn === index ? -sortDir : 1; sortColumn = index; drawTable(); });
       tr.appendChild(th);
     });
     thead.appendChild(tr); t.appendChild(thead);
-    function val(c, k) {
-      if (k === "rank" || k === "name" || k === "final" || k === "confidence") return c[k];
-      return ((D.dimensions[c.id] || {})[k] || {}).value;
+    function val(c, col) {
+      return col.dimension ? observation(c.id, col.key).value : c[col.key];
     }
     var rows = D.candidates.slice().sort(function (p, q) {
-      var a = val(p, sortKey), b = val(q, sortKey);
+      var a = val(p, cols[sortColumn]), b = val(q, cols[sortColumn]);
+      if ((a === null || a === undefined) && (b === null || b === undefined)) return 0;
       if (a === null || a === undefined) return 1;
       if (b === null || b === undefined) return -1;
       return (a < b ? -1 : a > b ? 1 : 0) * sortDir;
@@ -415,20 +536,83 @@ td.num, th.num { text-align: right; }
     rows.forEach(function (c) {
       var r = document.createElement("tr");
       cols.forEach(function (col) {
-        var td = document.createElement("td"), v = val(c, col[0]);
-        td.textContent = col[0] === "confidence" ? pct(v) : col[0] === "name" ? v : col[0] === "rank" ? (v || "-") :
-          typeof v === "boolean" ? (v ? "yes" : "no") : fmt(v, 2);
-        if (col[2]) td.className = "num";
+        var td = document.createElement("td"), v = val(c, col);
+        if (col.dimension && (col.type === "bool" || col.type === "category") && v !== null && v !== undefined) {
+          var badge = document.createElement("span"); badge.className = "badge";
+          badge.textContent = typeof v === "boolean" ? (v ? "yes" : "no") : String(v); td.appendChild(badge);
+        } else td.textContent = !col.dimension && col.key === "confidence" ? pct(v) : !col.dimension && col.key === "name" ? v :
+          !col.dimension && col.key === "rank" ? (v || "-") : fmt(v, 2);
+        if (col.dimension && v !== undefined && v !== null) td.setAttribute("title", provenance(observation(c.id, col.key)).join(" · "));
+        if (col.number) td.className = "num";
         r.appendChild(td);
       });
       tbody.appendChild(r);
     });
     t.appendChild(tbody);
+    addNote("table-note", D.candidates.length + " candidates shown. 0 candidates omitted. Missing values are shown as '-'. Confidence measures source coverage, not match certainty.");
     document.getElementById("notes").textContent = (D.notes || []).join(" ");
   }
 
-  function drawAll() { drawRank(); drawPareto(); drawGrid(); drawWeights(); }
-  header(); drawAll(); drawTable();
+  function drawEvidence() {
+    var box = document.getElementById("evidence"); clear(box);
+    function section(title, headers, rows) {
+      var h = document.createElement("h3"); h.textContent = title; box.appendChild(h);
+      if (!rows.length) { var empty = document.createElement("p"); empty.textContent = "No records."; box.appendChild(empty); return; }
+      var scroll = document.createElement("div"); scroll.className = "scroll";
+      var table = document.createElement("table"), head = document.createElement("thead"), hr = document.createElement("tr");
+      headers.forEach(function (header) { var th = document.createElement("th"); th.textContent = header; hr.appendChild(th); });
+      head.appendChild(hr); table.appendChild(head);
+      var body = document.createElement("tbody");
+      rows.forEach(function (row) {
+        var tr = document.createElement("tr");
+        row.forEach(function (value) { var td = document.createElement("td"); td.textContent = value === undefined || value === null ? "unrecorded" : String(value); td.className = "fingerprint"; tr.appendChild(td); });
+        body.appendChild(tr);
+      });
+      table.appendChild(body); scroll.appendChild(table); box.appendChild(scroll);
+    }
+    section("Traffic and weighting", ["Leaderboard", "Status", "Basis", "Domain", "Split", "Visit period", "Visit source", "Reason"],
+      D.boards.map(function (b) { return [b.slug, b.status, b.weight_basis, b.domain, b.split, period(b.visit_period), b.visit_source, b.reason]; }));
+    if (Array.isArray(D.collection)) section("Discovery collection", ["Leaderboard", "URL", "Liveness", "Reason"],
+      D.collection.map(function (b) { return [b.slug, b.url || b.final_url, b.status, b.reason]; }));
+    if (Array.isArray(D.unselected_boards)) section("Live boards outside the selected group", ["Leaderboard", "Domain", "Weight basis", "Reason"],
+      D.unselected_boards.map(function (b) { return [b.slug, b.domain, b.weight_basis, b.reason || "not selected for scoring"]; }));
+    var dimensionRows = [];
+    D.candidates.forEach(function (c) {
+      (D.registry || []).forEach(function (reg) {
+        var obs = observation(c.id, reg.key);
+        if (obs.value !== undefined && obs.value !== null) dimensionRows.push([c.name, reg.key, fmt(obs.value, 2), obs.context,
+          obs.observation, obs.source_type, obs.url || obs.final_url, obs.date, obs.method, obs.reason || obs.selection_reason,
+          obs.source_reason]);
+      });
+    });
+    section("Chosen dimension sources", ["Candidate", "Dimension", "Value", "Context", "Observation", "Source", "URL", "Date", "Method", "Selection reason", "Source reason"], dimensionRows);
+    var conflicts = D.dimension_conflicts || [];
+    var conflictRule = document.createElement("p");
+    conflictRule.textContent = conflicts.length + " comparable dimension conflict(s). Bool/category differences, or numeric differences above 20%, are reported; confidence is not a conflict penalty.";
+    box.appendChild(conflictRule);
+    section("Dimension conflicts", ["Candidate", "Dimension", "Chosen observation", "Conflicting observation"],
+      conflicts.map(function (c) { return [c.candidate, c.key, c.chosen, c.other]; }));
+    var matchRows = [];
+    D.candidates.forEach(function (c) {
+      var match = c.match || c;
+      if (match.match_confidence !== undefined || match.method || match.evidence || match.match_method || match.match_evidence || match.aliases) {
+        var confidence = match.match_confidence !== undefined ? match.match_confidence : match.confidence;
+        var evidence = match.match_evidence !== undefined ? match.match_evidence : match.evidence;
+        matchRows.push([c.name, confidence === undefined ? "unrecorded" : confidence, match.method || match.match_method,
+          evidence && typeof evidence === "object" ? JSON.stringify(evidence) : evidence,
+          match.aliases ? JSON.stringify(match.aliases) : ""]);
+      }
+    });
+    section("Identity matching decisions", ["Candidate", "Match confidence", "Method", "Evidence", "Aliases"], matchRows);
+    var publication = D.publication || {}, hashes = publication.source_sha256 || {};
+    var stamp = document.createElement("p");
+    stamp.textContent = "Saved report generation: " + (publication.generation || "unrecorded") + ". Source fingerprints identify saved evidence; they do not prove live collection or human acceptance.";
+    box.appendChild(stamp);
+    section("Source fingerprints (SHA-256)", ["Saved source", "SHA-256"], Object.keys(hashes).sort().map(function (path) { return [path, hashes[path]]; }));
+  }
+
+  function drawAll() { drawRank(); drawPareto(); drawDimensions(); drawGrid(); drawWeights(); }
+  header(); drawAll(); drawTable(); drawEvidence();
   var timer; window.addEventListener("resize", function () { clearTimeout(timer); timer = setTimeout(drawAll, 120); });
 })();
 </script>

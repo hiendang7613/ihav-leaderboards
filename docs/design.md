@@ -1,6 +1,6 @@
 # ihav-leaderboards: design spec v1 (draft)
 
-Status: v1, 2026-10-03. v0 plus a peer design review (findings F1-F7, applied here). Release 0.1.0 implemented S3, S6, S6a and S6b in the `weigh` and `score` commands; S1, S2, S4 and S5 are agent-driven steps in the skill workflow; release 0.2.0 adds the HTML report (section 3).
+Status: design v1, 2026-10-03; deterministic 0.3.0 changes are an unreleased candidate (2026-10-06). v0 plus a peer design review (findings F1-F7, applied here). Release 0.1.0 implemented S3, S6, S6a and S6b in the `weigh` and `score` commands; S1, S2, S4 and S5 are agent-driven steps in the skill workflow; release 0.2.0 adds the HTML report (section 3).
 Owner decisions of 2026-10-03 are listed in section 1.
 Evidence labels: **owner** = owner decision; **verified** = read in a local file on 2026-10-03; **proposed** = design choice made here, open to review; **unverified** = needs a live check.
 
@@ -42,9 +42,9 @@ Every stage writes its output to `./.ihav_space/ihav-leaderboards/runs/<run-id>/
 
 - The plugin writes one deep-research prompt per run. It asks each chatbot for up to 32 public leaderboards or benchmarks for the domain, each with URL, owner, what it measures, main metric and direction, and last update date. Answer format: a fenced JSON list, so parsing is deterministic.
 - Default providers: ChatGPT and Gemini (owner). Option `--providers a,b,c` or `--providers all` passes through to `ihav-web-chat run --providers`.
-- `ihav-web-chat run` returns at once; answers arrive by callback (per the ihav-web-chat design contract, section 4, locally inspected; not demonstrated at runtime). S1 waits through `delivery wait/read`. A provider that ends `failed`, `timeout` or `login_required` is reported; the run continues with the others (`partial`). Zero answers stops the run with a clear message.
+- `ihav-web-chat run` returns at once and only queues one job per provider (verified on the installed 0.0.5 bundle, 2026-10-06: `run --dry-run --json`, `run lookup --request-key`, `delivery wait`, `delivery read --include-text`). There is no callback. S1 previews with `--dry-run`, queues only after the user approves the exact prompt, saves the run id, and waits through `delivery wait/read`. A request key per run prevents a resend. ihav-web-chat 0.0.5 has no command that sends a queued job (its CLI says "a worker sends and observes, and it has no CLI command yet"), so S1 cannot finish live through the bundle until a release adds one. The bundle defines a `Worker` class but no entry point constructs it (checked by search of the 0.0.5 bundle); another process could still run a sender on the same queue (**unverified**). A provider that ends `failed`, `timeout` or `login_required` is reported; the run continues with the others (`partial`). Zero answers stops the run with a clear message.
 - Dependency (unverified): the owner goal asks for automatic install of ihav-web-chat. No verified plugin-to-plugin install mechanism exists in either host yet, so this goal is **open**, not fulfilled (review O5). Until it is resolved, S1 locates ihav-web-chat through an explicit host/plugin locator plus a version and contract check (not an assumed binary on `PATH`). If absent or incompatible, it prints the exact install command and stops.
-- Bound (verified): ihav-web-chat v0 is macOS-only; its first milestone is ChatGPT, Gemini and Perplexity. `--providers all` means "all providers the installed ihav-web-chat supports".
+- Bound (verified): ihav-web-chat v0 is macOS-only; its first milestone is ChatGPT, Gemini and Perplexity. `--providers all` means "all providers the installed ihav-web-chat supports". The installed 0.0.5 bundle registers only `chatgpt` (`providers --json`, `verified_live: false`); Gemini, an owner default, is reported as missing, not replaced.
 
 ### S2 collect (proposed)
 
@@ -95,7 +95,7 @@ Rules (review F4):
 - Canonical identity = vendor + product type (API, model, library) + model/version + benchmarked configuration when known.
 - Normalization (case, punctuation, vendor prefix, "API"/"model" suffix) only **proposes** matches. It never proves identity. Each proposal is checked by the agent with the evidence it has.
 - Two names merge only with source-supported evidence that they measure the same entity and configuration. Two vendors' products with the same name stay separate. A model and its API wrapper stay separate unless a source says they are measured the same way.
-- Collisions: if two rows on one board map to one canonical candidate, the board keeps the best-evidenced row and reports the other as a duplicate.
+- Collisions: if verified rows on one board map to one canonical candidate with differing values, the agent marks exactly one best-evidenced row `"preferred": true` and records why in `matches.json`. Equal values need no preferred marker; the CLI keeps the marked row or the first row. Multiple preferred rows, or differing values without exactly one preferred row, make the whole board `unverified` with `duplicate_conflicts`, so it does not score. Other rows in a resolved group are reported as duplicates. The user is not asked (Q6).
 - Versions stay separate unless a source states they are the same.
 - Unresolved aliases stay separate automatically. No user step (owner Q6). Low-confidence decisions are listed in the report.
 
@@ -144,6 +144,8 @@ Run folder: `request.json`, `discovery/`, `leaderboards/`, `matches.json`, `weig
 
 Resume (review): each stage saves dependency versions, source digests, configuration and its schema version. Changed inputs invalidate downstream stages. Confirmed child runs of ihav-web-chat are reused, never re-sent.
 
+Deterministic 0.3.0 candidate contract: `weigh` and `score` use schema-2 `run_state.json` receipts with validated generation IDs, runtime, configuration, recorded dependency metadata, input hashes and output hashes. `verify RUN --json` is read-only (0 current, 2 busy/stale/incomplete/no result, 64 malformed input; local I/O errors 1). Failed attempts archive prior generated outputs through verified copies before removal. An archive journal records actual progress; storage failures can leave old root files with a failed receipt. Four output files have no shared filesystem transaction: the complete receipt is written last, and consumers must verify it. Input/code drift invalidates publication. Live-board URLs bind traffic to the normalized collected host. Comparable dimensions require saved snapshot hashes and cell locators. This implements saved-stage integrity only; live discovery, clean-host dependency adoption and the human acceptance checks below remain separate gates.
+
 `report.html` is one static file with inline data and charts, styled like artificialanalysis.ai (dark-first, clean cards, labelled points). Charts:
 
 1. **Final score ranking**: horizontal bar of `final`; bar opacity or a side gauge shows `confidence`.
@@ -167,7 +169,7 @@ Same layout as the visit-counter plan (verified, its repo-plan section 3.1, the 
 | O2 | Weight for `rank_only` / no-data visits | Owner kept: floor = smallest finite positive visits; policy weight, one per domain; no-weight outcome in S3 rule 3 |
 | O3 | Pareto x-axis | Resolved by owner: every numeric dimension with data, within one comparable context (S6b) |
 | O4 | Too-few threshold | Owner kept: fewer than 3 distinct verified scores, or `max == min` |
-| O5 | Auto-install of ihav-web-chat | **Open owner goal**, not fulfilled. v0 prints install command; mechanism to be researched |
+| O5 | Auto-install of ihav-web-chat | **Open owner goal**, not fulfilled. ihav-web-chat is not in the ihav catalog yet, so no install command exists; the skill says so and stops S1. Mechanism to be researched |
 | O6 | Rank-only leaderboards | Changed after review: reported, not mixed into the metric score |
 
 ## 6. First live run acceptance (owner decision)

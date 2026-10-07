@@ -35,7 +35,10 @@
       "context": "base OCR, pay-as-you-go",
       "source_type": "official",
       "url": "https://example/pricing",
-      "date": "2026-10-01"
+      "date": "2026-10-01",
+      "snapshot": "snapshots/dimensions.json",
+      "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a",
+      "cell": "/observations/0/value"
     },
     {
       "id": "l0",
@@ -45,7 +48,10 @@
       "context": "1-page PDF, p50",
       "source_type": "leaderboard",
       "board": "doc-arena",
-      "date": "2026-09-20"
+      "date": "2026-09-20",
+      "snapshot": "snapshots/doc-arena.json",
+      "snapshot_sha256": "f7659ecc844fe14b194a1d17bb461a289bb62ad752c0bf0ece5d6855133337a6",
+      "cell": "/dimensions/0/value"
     },
     {
       "id": "h0",
@@ -54,7 +60,10 @@
       "value": false,
       "context": "documented",
       "source_type": "official",
-      "date": "2026-10-01"
+      "date": "2026-10-01",
+      "snapshot": "snapshots/dimensions.json",
+      "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a",
+      "cell": "/observations/2/value"
     },
     {
       "id": "p1",
@@ -64,7 +73,10 @@
       "context": "base OCR, pay-as-you-go",
       "source_type": "official",
       "url": "https://example/pricing",
-      "date": "2026-10-01"
+      "date": "2026-10-01",
+      "snapshot": "snapshots/dimensions.json",
+      "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a",
+      "cell": "/observations/3/value"
     },
     {
       "id": "l1",
@@ -74,7 +86,10 @@
       "context": "1-page PDF, p50",
       "source_type": "leaderboard",
       "board": "doc-arena",
-      "date": "2026-09-20"
+      "date": "2026-09-20",
+      "snapshot": "snapshots/doc-arena.json",
+      "snapshot_sha256": "f7659ecc844fe14b194a1d17bb461a289bb62ad752c0bf0ece5d6855133337a6",
+      "cell": "/dimensions/1/value"
     },
     {
       "id": "h1",
@@ -83,7 +98,10 @@
       "value": true,
       "context": "documented",
       "source_type": "official",
-      "date": "2026-10-01"
+      "date": "2026-10-01",
+      "snapshot": "snapshots/dimensions.json",
+      "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a",
+      "cell": "/observations/5/value"
     },
     {
       "id": "p2",
@@ -93,7 +111,10 @@
       "context": "base OCR, pay-as-you-go",
       "source_type": "official",
       "url": "https://example/pricing",
-      "date": "2026-10-01"
+      "date": "2026-10-01",
+      "snapshot": "snapshots/dimensions.json",
+      "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a",
+      "cell": "/observations/6/value"
     },
     {
       "id": "l2",
@@ -103,7 +124,10 @@
       "context": "1-page PDF, p50",
       "source_type": "leaderboard",
       "board": "doc-arena",
-      "date": "2026-09-20"
+      "date": "2026-09-20",
+      "snapshot": "snapshots/doc-arena.json",
+      "snapshot_sha256": "f7659ecc844fe14b194a1d17bb461a289bb62ad752c0bf0ece5d6855133337a6",
+      "cell": "/dimensions/2/value"
     },
     {
       "id": "h2",
@@ -112,7 +136,10 @@
       "value": true,
       "context": "documented",
       "source_type": "official",
-      "date": "2026-10-01"
+      "date": "2026-10-01",
+      "snapshot": "snapshots/dimensions.json",
+      "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a",
+      "cell": "/observations/8/value"
     },
     {
       "id": "p3",
@@ -122,7 +149,10 @@
       "context": "base OCR, pay-as-you-go",
       "source_type": "official",
       "url": "https://example/pricing",
-      "date": "2026-10-01"
+      "date": "2026-10-01",
+      "snapshot": "snapshots/dimensions.json",
+      "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a",
+      "cell": "/observations/9/value"
     },
     {
       "id": "l3",
@@ -132,7 +162,10 @@
       "context": "1-page PDF, p50",
       "source_type": "leaderboard",
       "board": "doc-arena",
-      "date": "2026-09-20"
+      "date": "2026-09-20",
+      "snapshot": "snapshots/doc-arena.json",
+      "snapshot_sha256": "f7659ecc844fe14b194a1d17bb461a289bb62ad752c0bf0ece5d6855133337a6",
+      "cell": "/dimensions/3/value"
     },
     {
       "id": "h3",
@@ -141,7 +174,10 @@
       "value": false,
       "context": "documented",
       "source_type": "official",
-      "date": "2026-10-01"
+      "date": "2026-10-01",
+      "snapshot": "snapshots/dimensions.json",
+      "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a",
+      "cell": "/observations/11/value"
     },
     {
       "id": "p4",
@@ -151,7 +187,10 @@
       "context": "base OCR, pay-as-you-go",
       "source_type": "official",
       "url": "https://example/pricing",
-      "date": "2026-10-01"
+      "date": "2026-10-01",
+      "snapshot": "snapshots/dimensions.json",
+      "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a",
+      "cell": "/observations/12/value"
     },
     {
       "id": "h4",
@@ -160,7 +199,10 @@
       "value": true,
       "context": "documented",
       "source_type": "official",
-      "date": "2026-10-01"
+      "date": "2026-10-01",
+      "snapshot": "snapshots/dimensions.json",
+      "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a",
+      "cell": "/observations/13/value"
     },
     {
       "id": "p5",
@@ -170,7 +212,10 @@
       "context": "base OCR, pay-as-you-go",
       "source_type": "official",
       "url": "https://example/pricing",
-      "date": "2026-10-01"
+      "date": "2026-10-01",
+      "snapshot": "snapshots/dimensions.json",
+      "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a",
+      "cell": "/observations/14/value"
     },
     {
       "id": "l5",
@@ -180,7 +225,10 @@
       "context": "1-page PDF, p50",
       "source_type": "leaderboard",
       "board": "doc-arena",
-      "date": "2026-09-20"
+      "date": "2026-09-20",
+      "snapshot": "snapshots/doc-arena.json",
+      "snapshot_sha256": "f7659ecc844fe14b194a1d17bb461a289bb62ad752c0bf0ece5d6855133337a6",
+      "cell": "/dimensions/4/value"
     },
     {
       "id": "h5",
@@ -189,7 +237,10 @@
       "value": true,
       "context": "documented",
       "source_type": "official",
-      "date": "2026-10-01"
+      "date": "2026-10-01",
+      "snapshot": "snapshots/dimensions.json",
+      "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a",
+      "cell": "/observations/16/value"
     },
     {
       "id": "p6",
@@ -199,7 +250,10 @@
       "context": "base OCR, pay-as-you-go",
       "source_type": "official",
       "url": "https://example/pricing",
-      "date": "2026-10-01"
+      "date": "2026-10-01",
+      "snapshot": "snapshots/dimensions.json",
+      "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a",
+      "cell": "/observations/17/value"
     },
     {
       "id": "l6",
@@ -209,7 +263,10 @@
       "context": "1-page PDF, p50",
       "source_type": "leaderboard",
       "board": "doc-arena",
-      "date": "2026-09-20"
+      "date": "2026-09-20",
+      "snapshot": "snapshots/doc-arena.json",
+      "snapshot_sha256": "f7659ecc844fe14b194a1d17bb461a289bb62ad752c0bf0ece5d6855133337a6",
+      "cell": "/dimensions/5/value"
     },
     {
       "id": "h6",
@@ -218,7 +275,10 @@
       "value": false,
       "context": "documented",
       "source_type": "official",
-      "date": "2026-10-01"
+      "date": "2026-10-01",
+      "snapshot": "snapshots/dimensions.json",
+      "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a",
+      "cell": "/observations/19/value"
     },
     {
       "id": "p7",
@@ -228,7 +288,10 @@
       "context": "base OCR, pay-as-you-go",
       "source_type": "official",
       "url": "https://example/pricing",
-      "date": "2026-10-01"
+      "date": "2026-10-01",
+      "snapshot": "snapshots/dimensions.json",
+      "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a",
+      "cell": "/observations/20/value"
     },
     {
       "id": "l7",
@@ -238,7 +301,10 @@
       "context": "1-page PDF, p50",
       "source_type": "leaderboard",
       "board": "doc-arena",
-      "date": "2026-09-20"
+      "date": "2026-09-20",
+      "snapshot": "snapshots/doc-arena.json",
+      "snapshot_sha256": "f7659ecc844fe14b194a1d17bb461a289bb62ad752c0bf0ece5d6855133337a6",
+      "cell": "/dimensions/6/value"
     },
     {
       "id": "h7",
@@ -247,7 +313,10 @@
       "value": true,
       "context": "documented",
       "source_type": "official",
-      "date": "2026-10-01"
+      "date": "2026-10-01",
+      "snapshot": "snapshots/dimensions.json",
+      "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a",
+      "cell": "/observations/22/value"
     },
     {
       "id": "p8",
@@ -257,7 +326,10 @@
       "context": "base OCR, pay-as-you-go",
       "source_type": "official",
       "url": "https://example/pricing",
-      "date": "2026-10-01"
+      "date": "2026-10-01",
+      "snapshot": "snapshots/dimensions.json",
+      "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a",
+      "cell": "/observations/23/value"
     },
     {
       "id": "l8",
@@ -267,7 +339,10 @@
       "context": "1-page PDF, p50",
       "source_type": "leaderboard",
       "board": "doc-arena",
-      "date": "2026-09-20"
+      "date": "2026-09-20",
+      "snapshot": "snapshots/doc-arena.json",
+      "snapshot_sha256": "f7659ecc844fe14b194a1d17bb461a289bb62ad752c0bf0ece5d6855133337a6",
+      "cell": "/dimensions/7/value"
     },
     {
       "id": "h8",
@@ -276,7 +351,10 @@
       "value": true,
       "context": "documented",
       "source_type": "official",
-      "date": "2026-10-01"
+      "date": "2026-10-01",
+      "snapshot": "snapshots/dimensions.json",
+      "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a",
+      "cell": "/observations/25/value"
     },
     {
       "id": "p9",
@@ -286,7 +364,10 @@
       "context": "base OCR, pay-as-you-go",
       "source_type": "official",
       "url": "https://example/pricing",
-      "date": "2026-10-01"
+      "date": "2026-10-01",
+      "snapshot": "snapshots/dimensions.json",
+      "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a",
+      "cell": "/observations/26/value"
     },
     {
       "id": "l9",
@@ -296,7 +377,10 @@
       "context": "1-page PDF, p50",
       "source_type": "leaderboard",
       "board": "doc-arena",
-      "date": "2026-09-20"
+      "date": "2026-09-20",
+      "snapshot": "snapshots/doc-arena.json",
+      "snapshot_sha256": "f7659ecc844fe14b194a1d17bb461a289bb62ad752c0bf0ece5d6855133337a6",
+      "cell": "/dimensions/8/value"
     },
     {
       "id": "h9",
@@ -305,7 +389,10 @@
       "value": false,
       "context": "documented",
       "source_type": "official",
-      "date": "2026-10-01"
+      "date": "2026-10-01",
+      "snapshot": "snapshots/dimensions.json",
+      "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a",
+      "cell": "/observations/28/value"
     }
   ]
 }

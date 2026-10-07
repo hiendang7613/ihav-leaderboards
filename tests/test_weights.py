@@ -76,6 +76,38 @@ class WeightTests(unittest.TestCase):
         doc = allocate([live("e", "e.com"), live("s", "s.com")], {"e.com": empty, "s.com": estimate("s.com", 10)})
         self.assertEqual(doc["floor_domains"], ["e.com"])
 
+    def test_trillion_text_estimate_splits_and_preserves_raw_null(self):
+        text_only = {"domain": "t.com", "kind": "estimate", "contract_version": 2,
+                     "monthly_visits": None, "monthly_visits_text": "1.25t"}
+        boards = [live("t-a", "t.com"), live("t-b", "t.com"), live("r", "r.com")]
+        doc = allocate(boards, {"t.com": text_only, "r.com": rank_only("r.com")})
+        out = {entry["slug"]: entry for entry in doc["boards"]}
+        self.assertEqual(doc["floor"], 1_250_000_000_000)
+        self.assertEqual(doc["floor_domains"], ["r.com"])
+        self.assertEqual(out["t-a"]["mass"], 625_000_000_000)
+        self.assertEqual(out["t-b"]["mass"], 625_000_000_000)
+        self.assertEqual(out["r"]["mass"], 1_250_000_000_000)
+        self.assertEqual(out["t-a"]["weight_basis"], "domain_split(2)")
+        self.assertEqual(out["r"]["weight_basis"], "floor+domain_split(1)")
+        self.assertIsNone(out["t-a"]["monthly_visits"])
+        self.assertIsNone(out["r"]["monthly_visits"])
+        self.assertEqual(out["t-a"]["monthly_visits_text"], "1.25t")
+        self.assertEqual(out["t-a"]["visit_contract_version"], 2)
+
+    def test_mixed_trillion_estimate_keeps_its_own_mass(self):
+        text_only = {"domain": "t.com", "kind": "estimate", "contract_version": 2,
+                     "monthly_visits": None, "monthly_visits_text": "1T"}
+        doc = allocate([live("t", "t.com"), live("s", "s.com")],
+                       {"t.com": text_only, "s.com": estimate("s.com", 1000)})
+        out = {entry["slug"]: entry for entry in doc["boards"]}
+        self.assertEqual(out["t"]["mass"], 1_000_000_000_000)
+        self.assertEqual(doc["floor"], 1000)
+        self.assertEqual(doc["floor_domains"], [])
+        self.assertEqual(out["s"]["mass"], 1000)
+        self.assertEqual(out["t"]["weight_basis"], "domain_split(1)")
+        self.assertIsNone(out["t"]["monthly_visits"])
+        self.assertEqual(out["t"]["monthly_visits_text"], "1T")
+
     def test_error_object_counts_as_no_data(self):
         # Visit counter exit 2/4/5 prints an error object, not a result.
         error = {"domain": "x.com", "error": {"code": "no_data", "notes": ["TrafficLens failed: HTTP 503; no retry was made."]}}
@@ -87,7 +119,8 @@ class WeightTests(unittest.TestCase):
         self.assertEqual(parse_visits_text("12k"), 12e3)
         self.assertEqual(parse_visits_text("1,234"), 1234.0)
         self.assertEqual(parse_visits_text("2.5B"), 2.5e9)
-        for bad in (None, "", "about 5M", "5T", 7):
+        self.assertEqual(parse_visits_text("5T"), 5_000_000_000_000)
+        for bad in (None, "", "about 5M", "5P", 7):
             self.assertIsNone(parse_visits_text(bad))
 
     def test_real_visit_counter_fixtures(self):

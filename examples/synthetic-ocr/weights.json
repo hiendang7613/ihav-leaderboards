@@ -8,68 +8,232 @@
     {
       "slug": "hub-handwriting",
       "domain": "bench-hub.example",
-      "monthly_visits": 9000000,
+      "monthly_visits": 9000000.0,
+      "monthly_visits_text": null,
       "visit_kind": "estimate",
       "visit_period": null,
       "visit_analyzed_at": "2026-10-03T00:00:00Z",
       "visit_source": "synthetic",
+      "visit_source_details": {
+        "name": "synthetic"
+      },
+      "visit_range": null,
+      "visit_confidence": null,
+      "visit_rank": {
+        "value": 5000,
+        "list": "synthetic",
+        "date": "2026-10-03"
+      },
+      "visit_error": null,
+      "visit_contract_version": null,
       "split": 2,
       "mass": 4500000.0,
       "weight_basis": "domain_split(2)",
+      "url": "https://bench-hub.example/hub-handwriting",
+      "final_url": "https://bench-hub.example/hub-handwriting",
       "selected": true
     },
     {
       "slug": "hub-ocr-accuracy",
       "domain": "bench-hub.example",
-      "monthly_visits": 9000000,
+      "monthly_visits": 9000000.0,
+      "monthly_visits_text": null,
       "visit_kind": "estimate",
       "visit_period": null,
       "visit_analyzed_at": "2026-10-03T00:00:00Z",
       "visit_source": "synthetic",
+      "visit_source_details": {
+        "name": "synthetic"
+      },
+      "visit_range": null,
+      "visit_confidence": null,
+      "visit_rank": {
+        "value": 5000,
+        "list": "synthetic",
+        "date": "2026-10-03"
+      },
+      "visit_error": null,
+      "visit_contract_version": null,
       "split": 2,
       "mass": 4500000.0,
       "weight_basis": "domain_split(2)",
+      "url": "https://bench-hub.example/hub-ocr-accuracy",
+      "final_url": "https://bench-hub.example/hub-ocr-accuracy",
       "selected": true
     },
     {
       "slug": "doc-arena",
       "domain": "doc-arena.example",
-      "monthly_visits": 2500000,
+      "monthly_visits": 2500000.0,
+      "monthly_visits_text": null,
       "visit_kind": "estimate",
       "visit_period": null,
       "visit_analyzed_at": "2026-10-03T00:00:00Z",
       "visit_source": "synthetic",
+      "visit_source_details": {
+        "name": "synthetic"
+      },
+      "visit_range": null,
+      "visit_confidence": null,
+      "visit_rank": {
+        "value": 5000,
+        "list": "synthetic",
+        "date": "2026-10-03"
+      },
+      "visit_error": null,
+      "visit_contract_version": null,
       "split": 1,
       "mass": 2500000.0,
       "weight_basis": "domain_split(1)",
+      "url": "https://doc-arena.example/doc-arena",
+      "final_url": "https://doc-arena.example/doc-arena",
       "selected": true
     },
     {
       "slug": "ocr-league-cer",
       "domain": "ocr-league.example",
-      "monthly_visits": 800000,
+      "monthly_visits": 800000.0,
+      "monthly_visits_text": null,
       "visit_kind": "estimate",
       "visit_period": null,
       "visit_analyzed_at": "2026-10-03T00:00:00Z",
       "visit_source": "synthetic",
+      "visit_source_details": {
+        "name": "synthetic"
+      },
+      "visit_range": null,
+      "visit_confidence": null,
+      "visit_rank": {
+        "value": 5000,
+        "list": "synthetic",
+        "date": "2026-10-03"
+      },
+      "visit_error": null,
+      "visit_contract_version": null,
       "split": 1,
       "mass": 800000.0,
       "weight_basis": "domain_split(1)",
+      "url": "https://ocr-league.example/ocr-league-cer",
+      "final_url": "https://ocr-league.example/ocr-league-cer",
       "selected": true
     },
     {
       "slug": "paperbench-rank",
       "domain": "paperbench.example",
       "monthly_visits": null,
+      "monthly_visits_text": null,
       "visit_kind": "rank_only",
       "visit_period": null,
       "visit_analyzed_at": "2026-10-03T00:00:00Z",
       "visit_source": "synthetic",
+      "visit_source_details": {
+        "name": "synthetic"
+      },
+      "visit_range": null,
+      "visit_confidence": null,
+      "visit_rank": {
+        "value": 5000,
+        "list": "synthetic",
+        "date": "2026-10-03"
+      },
+      "visit_error": null,
+      "visit_contract_version": null,
       "split": 1,
       "mass": 800000.0,
       "weight_basis": "floor+domain_split(1)",
+      "url": "https://paperbench.example/paperbench-rank",
+      "final_url": "https://paperbench.example/paperbench-rank",
       "selected": true
     }
   ],
-  "note": "Weights are allocated domain popularity, not page visits."
+  "note": "Weights are allocated domain popularity, not page visits.",
+  "dependencies": {
+    "packages": {},
+    "visit_contracts": {
+      "bench-hub.example": {
+        "contract_version": null,
+        "compatibility": "legacy_unversioned"
+      },
+      "doc-arena.example": {
+        "contract_version": null,
+        "compatibility": "legacy_unversioned"
+      },
+      "ocr-league.example": {
+        "contract_version": null,
+        "compatibility": "legacy_unversioned"
+      },
+      "paperbench.example": {
+        "contract_version": null,
+        "compatibility": "legacy_unversioned"
+      }
+    }
+  },
+  "warnings": [
+    "Synthetic fixture data; this report is not a live leaderboard evaluation.",
+    "Dependency package versions were not recorded by the host.",
+    "Legacy saved visit contracts retained without migration: bench-hub.example, doc-arena.example, ocr-league.example, paperbench.example."
+  ],
+  "collection": [
+    {
+      "slug": "hub-ocr-accuracy",
+      "url": "https://bench-hub.example/hub-ocr-accuracy",
+      "final_url": "https://bench-hub.example/hub-ocr-accuracy",
+      "domain": "bench-hub.example",
+      "status": "live",
+      "mentioned_by": [
+        "chatgpt",
+        "gemini"
+      ]
+    },
+    {
+      "slug": "hub-handwriting",
+      "url": "https://bench-hub.example/hub-handwriting",
+      "final_url": "https://bench-hub.example/hub-handwriting",
+      "domain": "bench-hub.example",
+      "status": "live",
+      "mentioned_by": [
+        "chatgpt",
+        "gemini"
+      ]
+    },
+    {
+      "slug": "doc-arena",
+      "url": "https://doc-arena.example/doc-arena",
+      "final_url": "https://doc-arena.example/doc-arena",
+      "domain": "doc-arena.example",
+      "status": "live",
+      "mentioned_by": [
+        "chatgpt",
+        "gemini"
+      ]
+    },
+    {
+      "slug": "ocr-league-cer",
+      "url": "https://ocr-league.example/ocr-league-cer",
+      "final_url": "https://ocr-league.example/ocr-league-cer",
+      "domain": "ocr-league.example",
+      "status": "live",
+      "mentioned_by": [
+        "chatgpt",
+        "gemini"
+      ]
+    },
+    {
+      "slug": "paperbench-rank",
+      "url": "https://paperbench.example/paperbench-rank",
+      "final_url": "https://paperbench.example/paperbench-rank",
+      "domain": "paperbench.example",
+      "status": "live",
+      "mentioned_by": [
+        "chatgpt",
+        "gemini"
+      ]
+    },
+    {
+      "slug": "old-ocr-board",
+      "url": "https://gone.example/x",
+      "domain": "gone.example",
+      "status": "dead"
+    }
+  ]
 }

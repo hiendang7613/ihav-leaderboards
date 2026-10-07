@@ -1,0 +1,46 @@
+{
+  "synthetic": true,
+  "note": "Fabricated offline fixture; not a provider response.",
+  "rows": [
+    {
+      "name": "Cobalt Docs",
+      "quality": 1.79,
+      "verified": true
+    },
+    {
+      "name": "Delta Read",
+      "quality": 4.25,
+      "verified": true
+    },
+    {
+      "name": "Ember Text",
+      "quality": 2.47,
+      "verified": true
+    },
+    {
+      "name": "Fjord Scan",
+      "quality": 2.99,
+      "verified": true
+    },
+    {
+      "name": "Glyph Cloud",
+      "quality": 4.3,
+      "verified": true
+    },
+    {
+      "name": "Harbor OCR",
+      "quality": 2.59,
+      "verified": true
+    },
+    {
+      "name": "Iris Parse",
+      "quality": 4.17,
+      "verified": true
+    },
+    {
+      "name": "Juniper Lens",
+      "quality": 2.65,
+      "verified": true
+    }
+  ]
+}

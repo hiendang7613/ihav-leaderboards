@@ -1,0 +1,69 @@
+{
+  "schema_version": 2,
+  "stages": {
+    "weigh": {
+      "status": "complete",
+      "generation": "40542f878c7065cf7ac87c3af525a587",
+      "config": {
+        "top_n": 32
+      },
+      "runtime": {
+        "version": "0.3.0",
+        "code_sha256": "c49fcaa6d1d73c5ed256e602e655f2cff47eabed212a890b5ce9a820c6a299f8"
+      },
+      "started_at": "2026-10-07T02:13:32+00:00",
+      "inputs": {
+        "request.json": "063b637b694dbc7f483ca8c71a9cca2a6164969172817e79e1493ace0a9000e9",
+        "boards.json": "00b12c4c273f8cf920d6c1bc478ee3d1844c2d6ff3fae5dea52da8c90cd69450",
+        "visits/bench-hub.example.json": "db84a855c4d7899b2317593712a7d4f12b6d1711d40e1990b703849e128779e6",
+        "visits/doc-arena.example.json": "8795920deb85a64634e8815b9b5b90a99d20bf16d19af558dd2b579725ee1396",
+        "visits/ocr-league.example.json": "fb8120a953f40eeb20fafa5f187904727a4aeec4b62d01bcf8d337001614b9a5",
+        "visits/paperbench.example.json": "253bb45f796deac7708709ff5948a8baa9a226d24ec1c3778b8f5a30cd808251"
+      },
+      "outputs": {
+        "weights.json": "f68108df8e371cb39f645a9cf8f2628483d11ecd0a83b4c828e592445be8c444"
+      },
+      "completed_at": "2026-10-07T02:13:32+00:00"
+    },
+    "score": {
+      "status": "complete",
+      "generation": "9110802f9132aa7978713080cb855528",
+      "config": {},
+      "runtime": {
+        "version": "0.3.0",
+        "code_sha256": "c49fcaa6d1d73c5ed256e602e655f2cff47eabed212a890b5ce9a820c6a299f8"
+      },
+      "started_at": "2026-10-07T02:13:32+00:00",
+      "inputs": {
+        "request.json": "063b637b694dbc7f483ca8c71a9cca2a6164969172817e79e1493ace0a9000e9",
+        "boards.json": "00b12c4c273f8cf920d6c1bc478ee3d1844c2d6ff3fae5dea52da8c90cd69450",
+        "visits/bench-hub.example.json": "db84a855c4d7899b2317593712a7d4f12b6d1711d40e1990b703849e128779e6",
+        "visits/doc-arena.example.json": "8795920deb85a64634e8815b9b5b90a99d20bf16d19af558dd2b579725ee1396",
+        "visits/ocr-league.example.json": "fb8120a953f40eeb20fafa5f187904727a4aeec4b62d01bcf8d337001614b9a5",
+        "visits/paperbench.example.json": "253bb45f796deac7708709ff5948a8baa9a226d24ec1c3778b8f5a30cd808251",
+        "weights.json": "f68108df8e371cb39f645a9cf8f2628483d11ecd0a83b4c828e592445be8c444",
+        "matches.json": "005db88e6ec57688a1a241344b7bab8db758803ae3f3a81ee2d89ea78a7cf87f",
+        "dimensions.json": "a251a13322cfbdc2aeadd00881182549cacae0e8aa8ba72079c6f3db5e852d03",
+        "leaderboards/doc-arena.json": "547cdc8ffd18be2ec11295dc0a84b2ea664770ca9fd4556581a06398d50ea033",
+        "snapshots/doc-arena.json": "f7659ecc844fe14b194a1d17bb461a289bb62ad752c0bf0ece5d6855133337a6",
+        "leaderboards/hub-handwriting.json": "869c9a17eabf7d0b08f852cf9eeae02c635e2551f51f02d7e738c98d23cb7b59",
+        "snapshots/hub-handwriting.json": "cbafd66b2aff6b498e7bcf4f40355845c0b7c36f5a7a45eff4b3fb9892a72c2a",
+        "leaderboards/hub-ocr-accuracy.json": "5068c02579384b2755345508a622e348a79f4bf76304a90c543512b205c03bea",
+        "snapshots/hub-ocr-accuracy.json": "62a4fae958f09069bbcc7fc6d39535e2fcc19c08850d4d421d24c68731819cdd",
+        "leaderboards/ocr-league-cer.json": "6ddaea135ea50d01ec7a1c9650f0f4346c799409fff8406b2fe822e7fc55f7a7",
+        "snapshots/ocr-league-cer.json": "1e88e468ec95ce02d9994ab6487d8930bfb4d8e8e881167dc9d954552fe240d3",
+        "leaderboards/paperbench-rank.json": "7b66d1d84753ac43ac92f93cedfd6de1420bfcc919516172dc44a717e8dc9fed",
+        "snapshots/paperbench-rank.json": "a9fd7a56bc611d7749ad7b908331d74ae6eff93245e0660dbae34ef90b0076c9",
+        "snapshots/dimensions.json": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a"
+      },
+      "outputs": {
+        "final.json": "eef592f555a9b4e7cac98579a82299d69916f81e7225a0b4e06e4c588728cf16",
+        "leaderboard.md": "cf8bf57b430183215736876636ee43f513938819fdc19154131c5446ef123547",
+        "leaderboard.csv": "6ee6f11c572ac119d661d27e7921c32eb9d9a8518ffa0234ca44d4955536fa46",
+        "report.html": "0cfcd885397a94bb4e93625153aa9d93400d07ae8d3c13f41ee07b0adf8e0d3f"
+      },
+      "completed_at": "2026-10-07T02:13:32+00:00",
+      "weigh_generation": "40542f878c7065cf7ac87c3af525a587"
+    }
+  }
+}

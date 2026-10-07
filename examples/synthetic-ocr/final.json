@@ -2,53 +2,505 @@
   "boards": [
     {
       "slug": "hub-handwriting",
+      "duplicates": [],
+      "duplicate_conflicts": [],
+      "unmatched": [],
+      "unusable": [],
+      "quality_values": {
+        "beacon-vision": 59.4,
+        "cobalt-docs": 88.7,
+        "delta-read": 50.6,
+        "ember-text": 82.2,
+        "fjord-scan": 66.3,
+        "glyph-cloud": 51.6,
+        "harbor-ocr": 69.2
+      },
+      "score_evidence": {
+        "beacon-vision": {
+          "name": "Beacon Vision",
+          "quality": 59.4,
+          "verified": true,
+          "cell": "/rows/0/quality",
+          "row_index": 0
+        },
+        "cobalt-docs": {
+          "name": "Cobalt Docs",
+          "quality": 88.7,
+          "verified": true,
+          "cell": "/rows/1/quality",
+          "row_index": 1
+        },
+        "delta-read": {
+          "name": "Delta Read",
+          "quality": 50.6,
+          "verified": true,
+          "cell": "/rows/2/quality",
+          "row_index": 2
+        },
+        "ember-text": {
+          "name": "Ember Text",
+          "quality": 82.2,
+          "verified": true,
+          "cell": "/rows/3/quality",
+          "row_index": 3
+        },
+        "fjord-scan": {
+          "name": "Fjord Scan",
+          "quality": 66.3,
+          "verified": true,
+          "cell": "/rows/4/quality",
+          "row_index": 4
+        },
+        "glyph-cloud": {
+          "name": "Glyph Cloud",
+          "quality": 51.6,
+          "verified": true,
+          "cell": "/rows/5/quality",
+          "row_index": 5
+        },
+        "harbor-ocr": {
+          "name": "Harbor OCR",
+          "quality": 69.2,
+          "verified": true,
+          "cell": "/rows/6/quality",
+          "row_index": 6
+        }
+      },
+      "final_url": "https://bench-hub.example/hub-handwriting",
+      "method": "direct",
+      "snapshot": "snapshots/hub-handwriting.json",
+      "snapshot_sha256": "cbafd66b2aff6b498e7bcf4f40355845c0b7c36f5a7a45eff4b3fb9892a72c2a",
+      "complete": true,
+      "quality_column": "Accuracy",
+      "direction": "higher_better",
+      "score_kind": "score",
+      "quality_min": 50.6,
+      "quality_max": 88.7,
       "status": "scored",
       "reason": "",
       "mass": 4500000.0,
       "weight": 0.36585365853658536,
-      "duplicates": [],
-      "unmatched": [],
-      "unusable": []
+      "domain": "bench-hub.example",
+      "url": "https://bench-hub.example/hub-handwriting",
+      "monthly_visits": 9000000.0,
+      "monthly_visits_text": null,
+      "visit_kind": "estimate",
+      "visit_period": null,
+      "visit_analyzed_at": "2026-10-03T00:00:00Z",
+      "visit_source": "synthetic",
+      "visit_source_details": {
+        "name": "synthetic"
+      },
+      "visit_range": null,
+      "visit_confidence": null,
+      "visit_rank": {
+        "value": 5000,
+        "list": "synthetic",
+        "date": "2026-10-03"
+      },
+      "visit_error": null,
+      "visit_contract_version": null,
+      "split": 2,
+      "weight_basis": "domain_split(2)"
     },
     {
       "slug": "hub-ocr-accuracy",
+      "duplicates": [],
+      "duplicate_conflicts": [],
+      "unmatched": [],
+      "unusable": [],
+      "quality_values": {
+        "atlas-ocr": 64.5,
+        "beacon-vision": 57.8,
+        "cobalt-docs": 80.4,
+        "delta-read": 60.5,
+        "ember-text": 73.4,
+        "fjord-scan": 67.4,
+        "glyph-cloud": 58.3,
+        "harbor-ocr": 78.9,
+        "iris-parse": 57.1
+      },
+      "score_evidence": {
+        "atlas-ocr": {
+          "name": "Atlas OCR",
+          "quality": 64.5,
+          "verified": true,
+          "cell": "/rows/0/quality",
+          "row_index": 0
+        },
+        "beacon-vision": {
+          "name": "Beacon Vision",
+          "quality": 57.8,
+          "verified": true,
+          "cell": "/rows/1/quality",
+          "row_index": 1
+        },
+        "cobalt-docs": {
+          "name": "Cobalt Docs",
+          "quality": 80.4,
+          "verified": true,
+          "cell": "/rows/2/quality",
+          "row_index": 2
+        },
+        "delta-read": {
+          "name": "Delta Read",
+          "quality": 60.5,
+          "verified": true,
+          "cell": "/rows/3/quality",
+          "row_index": 3
+        },
+        "ember-text": {
+          "name": "Ember Text",
+          "quality": 73.4,
+          "verified": true,
+          "cell": "/rows/4/quality",
+          "row_index": 4
+        },
+        "fjord-scan": {
+          "name": "Fjord Scan",
+          "quality": 67.4,
+          "verified": true,
+          "cell": "/rows/5/quality",
+          "row_index": 5
+        },
+        "glyph-cloud": {
+          "name": "Glyph Cloud",
+          "quality": 58.3,
+          "verified": true,
+          "cell": "/rows/6/quality",
+          "row_index": 6
+        },
+        "harbor-ocr": {
+          "name": "Harbor OCR",
+          "quality": 78.9,
+          "verified": true,
+          "cell": "/rows/7/quality",
+          "row_index": 7
+        },
+        "iris-parse": {
+          "name": "Iris Parse",
+          "quality": 57.1,
+          "verified": true,
+          "cell": "/rows/8/quality",
+          "row_index": 8
+        }
+      },
+      "final_url": "https://bench-hub.example/hub-ocr-accuracy",
+      "method": "direct",
+      "snapshot": "snapshots/hub-ocr-accuracy.json",
+      "snapshot_sha256": "62a4fae958f09069bbcc7fc6d39535e2fcc19c08850d4d421d24c68731819cdd",
+      "complete": true,
+      "quality_column": "Accuracy",
+      "direction": "higher_better",
+      "score_kind": "score",
+      "quality_min": 57.1,
+      "quality_max": 80.4,
       "status": "scored",
       "reason": "",
       "mass": 4500000.0,
       "weight": 0.36585365853658536,
-      "duplicates": [],
-      "unmatched": [],
-      "unusable": []
+      "domain": "bench-hub.example",
+      "url": "https://bench-hub.example/hub-ocr-accuracy",
+      "monthly_visits": 9000000.0,
+      "monthly_visits_text": null,
+      "visit_kind": "estimate",
+      "visit_period": null,
+      "visit_analyzed_at": "2026-10-03T00:00:00Z",
+      "visit_source": "synthetic",
+      "visit_source_details": {
+        "name": "synthetic"
+      },
+      "visit_range": null,
+      "visit_confidence": null,
+      "visit_rank": {
+        "value": 5000,
+        "list": "synthetic",
+        "date": "2026-10-03"
+      },
+      "visit_error": null,
+      "visit_contract_version": null,
+      "split": 2,
+      "weight_basis": "domain_split(2)"
     },
     {
       "slug": "doc-arena",
+      "duplicates": [],
+      "duplicate_conflicts": [],
+      "unmatched": [],
+      "unusable": [],
+      "quality_values": {
+        "atlas-ocr": 66.0,
+        "beacon-vision": 64.2,
+        "cobalt-docs": 77.8,
+        "delta-read": 58.7,
+        "ember-text": 77.8,
+        "fjord-scan": 68.4,
+        "glyph-cloud": 57.8,
+        "harbor-ocr": 70.9,
+        "iris-parse": 52.1,
+        "juniper-lens": 69.4
+      },
+      "score_evidence": {
+        "atlas-ocr": {
+          "name": "Atlas OCR",
+          "quality": 66.0,
+          "verified": true,
+          "cell": "/rows/0/quality",
+          "row_index": 0
+        },
+        "beacon-vision": {
+          "name": "Beacon Vision",
+          "quality": 64.2,
+          "verified": true,
+          "cell": "/rows/1/quality",
+          "row_index": 1
+        },
+        "cobalt-docs": {
+          "name": "Cobalt Docs",
+          "quality": 77.8,
+          "verified": true,
+          "cell": "/rows/2/quality",
+          "row_index": 2
+        },
+        "delta-read": {
+          "name": "Delta Read",
+          "quality": 58.7,
+          "verified": true,
+          "cell": "/rows/3/quality",
+          "row_index": 3
+        },
+        "ember-text": {
+          "name": "Ember Text",
+          "quality": 77.8,
+          "verified": true,
+          "cell": "/rows/4/quality",
+          "row_index": 4
+        },
+        "fjord-scan": {
+          "name": "Fjord Scan",
+          "quality": 68.4,
+          "verified": true,
+          "cell": "/rows/5/quality",
+          "row_index": 5
+        },
+        "glyph-cloud": {
+          "name": "Glyph Cloud",
+          "quality": 57.8,
+          "verified": true,
+          "cell": "/rows/6/quality",
+          "row_index": 6
+        },
+        "harbor-ocr": {
+          "name": "Harbor OCR",
+          "quality": 70.9,
+          "verified": true,
+          "cell": "/rows/7/quality",
+          "row_index": 7
+        },
+        "iris-parse": {
+          "name": "Iris Parse",
+          "quality": 52.1,
+          "verified": true,
+          "cell": "/rows/8/quality",
+          "row_index": 8
+        },
+        "juniper-lens": {
+          "name": "Juniper Lens",
+          "quality": 69.4,
+          "verified": true,
+          "cell": "/rows/9/quality",
+          "row_index": 9
+        }
+      },
+      "final_url": "https://doc-arena.example/doc-arena",
+      "method": "direct",
+      "snapshot": "snapshots/doc-arena.json",
+      "snapshot_sha256": "f7659ecc844fe14b194a1d17bb461a289bb62ad752c0bf0ece5d6855133337a6",
+      "complete": true,
+      "quality_column": "Accuracy",
+      "direction": "higher_better",
+      "score_kind": "score",
+      "quality_min": 52.1,
+      "quality_max": 77.8,
       "status": "scored",
       "reason": "",
       "mass": 2500000.0,
       "weight": 0.2032520325203252,
-      "duplicates": [],
-      "unmatched": [],
-      "unusable": []
+      "domain": "doc-arena.example",
+      "url": "https://doc-arena.example/doc-arena",
+      "monthly_visits": 2500000.0,
+      "monthly_visits_text": null,
+      "visit_kind": "estimate",
+      "visit_period": null,
+      "visit_analyzed_at": "2026-10-03T00:00:00Z",
+      "visit_source": "synthetic",
+      "visit_source_details": {
+        "name": "synthetic"
+      },
+      "visit_range": null,
+      "visit_confidence": null,
+      "visit_rank": {
+        "value": 5000,
+        "list": "synthetic",
+        "date": "2026-10-03"
+      },
+      "visit_error": null,
+      "visit_contract_version": null,
+      "split": 1,
+      "weight_basis": "domain_split(1)"
     },
     {
       "slug": "ocr-league-cer",
+      "duplicates": [],
+      "duplicate_conflicts": [],
+      "unmatched": [],
+      "unusable": [],
+      "quality_values": {
+        "cobalt-docs": 1.79,
+        "delta-read": 4.25,
+        "ember-text": 2.47,
+        "fjord-scan": 2.99,
+        "glyph-cloud": 4.3,
+        "harbor-ocr": 2.59,
+        "iris-parse": 4.17,
+        "juniper-lens": 2.65
+      },
+      "score_evidence": {
+        "cobalt-docs": {
+          "name": "Cobalt Docs",
+          "quality": 1.79,
+          "verified": true,
+          "cell": "/rows/0/quality",
+          "row_index": 0
+        },
+        "delta-read": {
+          "name": "Delta Read",
+          "quality": 4.25,
+          "verified": true,
+          "cell": "/rows/1/quality",
+          "row_index": 1
+        },
+        "ember-text": {
+          "name": "Ember Text",
+          "quality": 2.47,
+          "verified": true,
+          "cell": "/rows/2/quality",
+          "row_index": 2
+        },
+        "fjord-scan": {
+          "name": "Fjord Scan",
+          "quality": 2.99,
+          "verified": true,
+          "cell": "/rows/3/quality",
+          "row_index": 3
+        },
+        "glyph-cloud": {
+          "name": "Glyph Cloud",
+          "quality": 4.3,
+          "verified": true,
+          "cell": "/rows/4/quality",
+          "row_index": 4
+        },
+        "harbor-ocr": {
+          "name": "Harbor OCR",
+          "quality": 2.59,
+          "verified": true,
+          "cell": "/rows/5/quality",
+          "row_index": 5
+        },
+        "iris-parse": {
+          "name": "Iris Parse",
+          "quality": 4.17,
+          "verified": true,
+          "cell": "/rows/6/quality",
+          "row_index": 6
+        },
+        "juniper-lens": {
+          "name": "Juniper Lens",
+          "quality": 2.65,
+          "verified": true,
+          "cell": "/rows/7/quality",
+          "row_index": 7
+        }
+      },
+      "final_url": "https://ocr-league.example/ocr-league-cer",
+      "method": "direct",
+      "snapshot": "snapshots/ocr-league-cer.json",
+      "snapshot_sha256": "1e88e468ec95ce02d9994ab6487d8930bfb4d8e8e881167dc9d954552fe240d3",
+      "complete": true,
+      "quality_column": "CER",
+      "direction": "lower_better",
+      "score_kind": "score",
+      "quality_min": 1.79,
+      "quality_max": 4.3,
       "status": "scored",
       "reason": "",
       "mass": 800000.0,
       "weight": 0.06504065040650407,
-      "duplicates": [],
-      "unmatched": [],
-      "unusable": []
+      "domain": "ocr-league.example",
+      "url": "https://ocr-league.example/ocr-league-cer",
+      "monthly_visits": 800000.0,
+      "monthly_visits_text": null,
+      "visit_kind": "estimate",
+      "visit_period": null,
+      "visit_analyzed_at": "2026-10-03T00:00:00Z",
+      "visit_source": "synthetic",
+      "visit_source_details": {
+        "name": "synthetic"
+      },
+      "visit_range": null,
+      "visit_confidence": null,
+      "visit_rank": {
+        "value": 5000,
+        "list": "synthetic",
+        "date": "2026-10-03"
+      },
+      "visit_error": null,
+      "visit_contract_version": null,
+      "split": 1,
+      "weight_basis": "domain_split(1)"
     },
     {
       "slug": "paperbench-rank",
+      "duplicates": [],
+      "duplicate_conflicts": [],
+      "unmatched": [],
+      "unusable": [],
+      "quality_values": {},
+      "score_evidence": {},
+      "final_url": "https://paperbench.example/paperbench-rank",
+      "method": "direct",
+      "snapshot": "snapshots/paperbench-rank.json",
+      "snapshot_sha256": "a9fd7a56bc611d7749ad7b908331d74ae6eff93245e0660dbae34ef90b0076c9",
+      "complete": true,
+      "direction": "higher_better",
+      "score_kind": "rank_only",
       "status": "rank_only_unscored",
       "reason": "Board gives only an order; ranks are not mixed into the metric score.",
       "mass": 800000.0,
       "weight": 0.0,
-      "duplicates": [],
-      "unmatched": [],
-      "unusable": []
+      "domain": "paperbench.example",
+      "url": "https://paperbench.example/paperbench-rank",
+      "monthly_visits": null,
+      "monthly_visits_text": null,
+      "visit_kind": "rank_only",
+      "visit_period": null,
+      "visit_analyzed_at": "2026-10-03T00:00:00Z",
+      "visit_source": "synthetic",
+      "visit_source_details": {
+        "name": "synthetic"
+      },
+      "visit_range": null,
+      "visit_confidence": null,
+      "visit_rank": {
+        "value": 5000,
+        "list": "synthetic",
+        "date": "2026-10-03"
+      },
+      "visit_error": null,
+      "visit_contract_version": null,
+      "split": 1,
+      "weight_basis": "floor+domain_split(1)"
     }
   ],
   "candidates": [
@@ -63,12 +515,37 @@
         "doc-arena": 100.0,
         "ocr-league-cer": 100.0
       },
+      "match_method": null,
+      "match_evidence": "Synthetic: identical names.",
+      "match_confidence": "high",
+      "aliases": [
+        {
+          "board": "hub-ocr-accuracy",
+          "name": "Cobalt Docs"
+        },
+        {
+          "board": "hub-handwriting",
+          "name": "Cobalt Docs"
+        },
+        {
+          "board": "doc-arena",
+          "name": "Cobalt Docs"
+        },
+        {
+          "board": "ocr-league-cer",
+          "name": "Cobalt Docs"
+        },
+        {
+          "board": "paperbench-rank",
+          "name": "Cobalt Docs"
+        }
+      ],
       "rank": 1
     },
     {
       "id": "ember-text",
       "name": "Ember Text",
-      "final": 81.0050330598841,
+      "final": 81.00503305988408,
       "confidence": 1.0,
       "scores": {
         "hub-handwriting": 82.93963254593176,
@@ -76,19 +553,69 @@
         "doc-arena": 100.0,
         "ocr-league-cer": 72.90836653386454
       },
+      "match_method": null,
+      "match_evidence": "Synthetic: identical names.",
+      "match_confidence": "high",
+      "aliases": [
+        {
+          "board": "hub-ocr-accuracy",
+          "name": "Ember Text"
+        },
+        {
+          "board": "hub-handwriting",
+          "name": "Ember Text"
+        },
+        {
+          "board": "doc-arena",
+          "name": "Ember Text"
+        },
+        {
+          "board": "ocr-league-cer",
+          "name": "Ember Text"
+        },
+        {
+          "board": "paperbench-rank",
+          "name": "Ember Text"
+        }
+      ],
       "rank": 2
     },
     {
       "id": "harbor-ocr",
       "name": "Harbor OCR",
-      "final": 71.3899554270173,
+      "final": 71.38995542701731,
       "confidence": 1.0,
       "scores": {
-        "hub-handwriting": 48.81889763779528,
+        "hub-handwriting": 48.818897637795274,
         "hub-ocr-accuracy": 93.56223175965665,
         "doc-arena": 73.15175097276267,
         "ocr-league-cer": 68.12749003984064
       },
+      "match_method": null,
+      "match_evidence": "Synthetic: identical names.",
+      "match_confidence": "high",
+      "aliases": [
+        {
+          "board": "hub-ocr-accuracy",
+          "name": "Harbor OCR"
+        },
+        {
+          "board": "hub-handwriting",
+          "name": "Harbor OCR"
+        },
+        {
+          "board": "doc-arena",
+          "name": "Harbor OCR"
+        },
+        {
+          "board": "ocr-league-cer",
+          "name": "Harbor OCR"
+        },
+        {
+          "board": "paperbench-rank",
+          "name": "Harbor OCR"
+        }
+      ],
       "rank": 3
     },
     {
@@ -98,8 +625,33 @@
       "confidence": 0.2682926829268293,
       "scores": {
         "doc-arena": 67.3151750972763,
-        "ocr-league-cer": 65.7370517928287
+        "ocr-league-cer": 65.73705179282868
       },
+      "match_method": null,
+      "match_evidence": "Synthetic: identical names.",
+      "match_confidence": "high",
+      "aliases": [
+        {
+          "board": "hub-ocr-accuracy",
+          "name": "Juniper Lens"
+        },
+        {
+          "board": "hub-handwriting",
+          "name": "Juniper Lens"
+        },
+        {
+          "board": "doc-arena",
+          "name": "Juniper Lens"
+        },
+        {
+          "board": "ocr-league-cer",
+          "name": "Juniper Lens"
+        },
+        {
+          "board": "paperbench-rank",
+          "name": "Juniper Lens"
+        }
+      ],
       "rank": 4
     },
     {
@@ -109,33 +661,108 @@
       "confidence": 1.0,
       "scores": {
         "hub-handwriting": 41.20734908136482,
-        "hub-ocr-accuracy": 44.206008583691,
+        "hub-ocr-accuracy": 44.206008583690995,
         "doc-arena": 63.42412451361871,
-        "ocr-league-cer": 52.19123505976095
+        "ocr-league-cer": 52.19123505976094
       },
+      "match_method": null,
+      "match_evidence": "Synthetic: identical names.",
+      "match_confidence": "high",
+      "aliases": [
+        {
+          "board": "hub-ocr-accuracy",
+          "name": "Fjord Scan"
+        },
+        {
+          "board": "hub-handwriting",
+          "name": "Fjord Scan"
+        },
+        {
+          "board": "doc-arena",
+          "name": "Fjord Scan"
+        },
+        {
+          "board": "ocr-league-cer",
+          "name": "Fjord Scan"
+        },
+        {
+          "board": "paperbench-rank",
+          "name": "Fjord Scan"
+        }
+      ],
       "rank": 5
     },
     {
       "id": "atlas-ocr",
       "name": "Atlas OCR",
-      "final": 39.733208959674776,
+      "final": 39.73320895967478,
       "confidence": 0.5691056910569106,
       "scores": {
-        "hub-ocr-accuracy": 31.759656652360505,
-        "doc-arena": 54.08560311284047
+        "hub-ocr-accuracy": 31.7596566523605,
+        "doc-arena": 54.085603112840474
       },
+      "match_method": null,
+      "match_evidence": "Synthetic: identical names.",
+      "match_confidence": "high",
+      "aliases": [
+        {
+          "board": "hub-ocr-accuracy",
+          "name": "Atlas OCR"
+        },
+        {
+          "board": "hub-handwriting",
+          "name": "Atlas OCR"
+        },
+        {
+          "board": "doc-arena",
+          "name": "Atlas OCR"
+        },
+        {
+          "board": "ocr-league-cer",
+          "name": "Atlas OCR"
+        },
+        {
+          "board": "paperbench-rank",
+          "name": "Atlas OCR"
+        }
+      ],
       "rank": 6
     },
     {
       "id": "beacon-vision",
       "name": "Beacon Vision",
-      "final": 20.448747942119887,
+      "final": 20.44874794211989,
       "confidence": 0.9349593495934959,
       "scores": {
         "hub-handwriting": 23.09711286089238,
         "hub-ocr-accuracy": 3.0042918454935434,
         "doc-arena": 47.08171206225683
       },
+      "match_method": null,
+      "match_evidence": "Synthetic: identical names.",
+      "match_confidence": "high",
+      "aliases": [
+        {
+          "board": "hub-ocr-accuracy",
+          "name": "Beacon Vision"
+        },
+        {
+          "board": "hub-handwriting",
+          "name": "Beacon Vision"
+        },
+        {
+          "board": "doc-arena",
+          "name": "Beacon Vision"
+        },
+        {
+          "board": "ocr-league-cer",
+          "name": "Beacon Vision"
+        },
+        {
+          "board": "paperbench-rank",
+          "name": "Beacon Vision"
+        }
+      ],
       "rank": 7
     },
     {
@@ -149,19 +776,69 @@
         "doc-arena": 25.680933852140086,
         "ocr-league-cer": 1.9920318725099533
       },
+      "match_method": null,
+      "match_evidence": "Synthetic: identical names.",
+      "match_confidence": "high",
+      "aliases": [
+        {
+          "board": "hub-ocr-accuracy",
+          "name": "Delta Read"
+        },
+        {
+          "board": "hub-handwriting",
+          "name": "Delta Read"
+        },
+        {
+          "board": "doc-arena",
+          "name": "Delta Read"
+        },
+        {
+          "board": "ocr-league-cer",
+          "name": "Delta Read"
+        },
+        {
+          "board": "paperbench-rank",
+          "name": "Delta Read"
+        }
+      ],
       "rank": 8
     },
     {
       "id": "glyph-cloud",
       "name": "Glyph Cloud",
-      "final": 7.352395130439333,
+      "final": 7.352395130439334,
       "confidence": 1.0,
       "scores": {
         "hub-handwriting": 2.6246719160104988,
         "hub-ocr-accuracy": 5.150214592274659,
-        "doc-arena": 22.178988326848234,
+        "doc-arena": 22.178988326848238,
         "ocr-league-cer": 0.0
       },
+      "match_method": null,
+      "match_evidence": "Synthetic: identical names.",
+      "match_confidence": "high",
+      "aliases": [
+        {
+          "board": "hub-ocr-accuracy",
+          "name": "Glyph Cloud"
+        },
+        {
+          "board": "hub-handwriting",
+          "name": "Glyph Cloud"
+        },
+        {
+          "board": "doc-arena",
+          "name": "Glyph Cloud"
+        },
+        {
+          "board": "ocr-league-cer",
+          "name": "Glyph Cloud"
+        },
+        {
+          "board": "paperbench-rank",
+          "name": "Glyph Cloud"
+        }
+      ],
       "rank": 9
     },
     {
@@ -174,6 +851,31 @@
         "doc-arena": 0.0,
         "ocr-league-cer": 5.179282868525893
       },
+      "match_method": null,
+      "match_evidence": "Synthetic: identical names.",
+      "match_confidence": "high",
+      "aliases": [
+        {
+          "board": "hub-ocr-accuracy",
+          "name": "Iris Parse"
+        },
+        {
+          "board": "hub-handwriting",
+          "name": "Iris Parse"
+        },
+        {
+          "board": "doc-arena",
+          "name": "Iris Parse"
+        },
+        {
+          "board": "ocr-league-cer",
+          "name": "Iris Parse"
+        },
+        {
+          "board": "paperbench-rank",
+          "name": "Iris Parse"
+        }
+      ],
       "rank": 10
     }
   ],
@@ -188,6 +890,7 @@
     "Weights are allocated domain popularity, not page visits."
   ],
   "query": "OCR API (synthetic example)",
+  "synthetic": true,
   "registry": [
     {
       "key": "price",
@@ -221,21 +924,45 @@
         "observation": "p0",
         "source_type": "official",
         "url": "https://example/pricing",
-        "date": "2026-10-01"
+        "date": "2026-10-01",
+        "context": "base OCR, pay-as-you-go",
+        "board": null,
+        "method": null,
+        "snapshot": "snapshots/dimensions.json",
+        "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a",
+        "cell": "/observations/0/value",
+        "reason": "Comparable official observation; no usable comparable leaderboard observation; newer date, then observation ID.",
+        "source_reason": null
       },
       "latency": {
         "value": 2.47,
         "observation": "l0",
         "source_type": "leaderboard",
         "url": null,
-        "date": "2026-09-20"
+        "date": "2026-09-20",
+        "context": "1-page PDF, p50",
+        "board": "doc-arena",
+        "method": null,
+        "snapshot": "snapshots/doc-arena.json",
+        "snapshot_sha256": "f7659ecc844fe14b194a1d17bb461a289bb62ad752c0bf0ece5d6855133337a6",
+        "cell": "/dimensions/0/value",
+        "reason": "Comparable leaderboard observation; higher scored board weight, then newer date, then observation ID.",
+        "source_reason": null
       },
       "handwriting": {
         "value": false,
         "observation": "h0",
         "source_type": "official",
         "url": null,
-        "date": "2026-10-01"
+        "date": "2026-10-01",
+        "context": "documented",
+        "board": null,
+        "method": null,
+        "snapshot": "snapshots/dimensions.json",
+        "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a",
+        "cell": "/observations/2/value",
+        "reason": "Comparable official observation; no usable comparable leaderboard observation; newer date, then observation ID.",
+        "source_reason": null
       }
     },
     "beacon-vision": {
@@ -244,21 +971,45 @@
         "observation": "p1",
         "source_type": "official",
         "url": "https://example/pricing",
-        "date": "2026-10-01"
+        "date": "2026-10-01",
+        "context": "base OCR, pay-as-you-go",
+        "board": null,
+        "method": null,
+        "snapshot": "snapshots/dimensions.json",
+        "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a",
+        "cell": "/observations/3/value",
+        "reason": "Comparable official observation; no usable comparable leaderboard observation; newer date, then observation ID.",
+        "source_reason": null
       },
       "latency": {
         "value": 3.55,
         "observation": "l1",
         "source_type": "leaderboard",
         "url": null,
-        "date": "2026-09-20"
+        "date": "2026-09-20",
+        "context": "1-page PDF, p50",
+        "board": "doc-arena",
+        "method": null,
+        "snapshot": "snapshots/doc-arena.json",
+        "snapshot_sha256": "f7659ecc844fe14b194a1d17bb461a289bb62ad752c0bf0ece5d6855133337a6",
+        "cell": "/dimensions/1/value",
+        "reason": "Comparable leaderboard observation; higher scored board weight, then newer date, then observation ID.",
+        "source_reason": null
       },
       "handwriting": {
         "value": true,
         "observation": "h1",
         "source_type": "official",
         "url": null,
-        "date": "2026-10-01"
+        "date": "2026-10-01",
+        "context": "documented",
+        "board": null,
+        "method": null,
+        "snapshot": "snapshots/dimensions.json",
+        "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a",
+        "cell": "/observations/5/value",
+        "reason": "Comparable official observation; no usable comparable leaderboard observation; newer date, then observation ID.",
+        "source_reason": null
       }
     },
     "cobalt-docs": {
@@ -267,21 +1018,45 @@
         "observation": "p2",
         "source_type": "official",
         "url": "https://example/pricing",
-        "date": "2026-10-01"
+        "date": "2026-10-01",
+        "context": "base OCR, pay-as-you-go",
+        "board": null,
+        "method": null,
+        "snapshot": "snapshots/dimensions.json",
+        "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a",
+        "cell": "/observations/6/value",
+        "reason": "Comparable official observation; no usable comparable leaderboard observation; newer date, then observation ID.",
+        "source_reason": null
       },
       "latency": {
         "value": 1.44,
         "observation": "l2",
         "source_type": "leaderboard",
         "url": null,
-        "date": "2026-09-20"
+        "date": "2026-09-20",
+        "context": "1-page PDF, p50",
+        "board": "doc-arena",
+        "method": null,
+        "snapshot": "snapshots/doc-arena.json",
+        "snapshot_sha256": "f7659ecc844fe14b194a1d17bb461a289bb62ad752c0bf0ece5d6855133337a6",
+        "cell": "/dimensions/2/value",
+        "reason": "Comparable leaderboard observation; higher scored board weight, then newer date, then observation ID.",
+        "source_reason": null
       },
       "handwriting": {
         "value": true,
         "observation": "h2",
         "source_type": "official",
         "url": null,
-        "date": "2026-10-01"
+        "date": "2026-10-01",
+        "context": "documented",
+        "board": null,
+        "method": null,
+        "snapshot": "snapshots/dimensions.json",
+        "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a",
+        "cell": "/observations/8/value",
+        "reason": "Comparable official observation; no usable comparable leaderboard observation; newer date, then observation ID.",
+        "source_reason": null
       }
     },
     "delta-read": {
@@ -290,21 +1065,45 @@
         "observation": "p3",
         "source_type": "official",
         "url": "https://example/pricing",
-        "date": "2026-10-01"
+        "date": "2026-10-01",
+        "context": "base OCR, pay-as-you-go",
+        "board": null,
+        "method": null,
+        "snapshot": "snapshots/dimensions.json",
+        "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a",
+        "cell": "/observations/9/value",
+        "reason": "Comparable official observation; no usable comparable leaderboard observation; newer date, then observation ID.",
+        "source_reason": null
       },
       "latency": {
         "value": 0.83,
         "observation": "l3",
         "source_type": "leaderboard",
         "url": null,
-        "date": "2026-09-20"
+        "date": "2026-09-20",
+        "context": "1-page PDF, p50",
+        "board": "doc-arena",
+        "method": null,
+        "snapshot": "snapshots/doc-arena.json",
+        "snapshot_sha256": "f7659ecc844fe14b194a1d17bb461a289bb62ad752c0bf0ece5d6855133337a6",
+        "cell": "/dimensions/3/value",
+        "reason": "Comparable leaderboard observation; higher scored board weight, then newer date, then observation ID.",
+        "source_reason": null
       },
       "handwriting": {
         "value": false,
         "observation": "h3",
         "source_type": "official",
         "url": null,
-        "date": "2026-10-01"
+        "date": "2026-10-01",
+        "context": "documented",
+        "board": null,
+        "method": null,
+        "snapshot": "snapshots/dimensions.json",
+        "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a",
+        "cell": "/observations/11/value",
+        "reason": "Comparable official observation; no usable comparable leaderboard observation; newer date, then observation ID.",
+        "source_reason": null
       }
     },
     "ember-text": {
@@ -313,14 +1112,30 @@
         "observation": "p4",
         "source_type": "official",
         "url": "https://example/pricing",
-        "date": "2026-10-01"
+        "date": "2026-10-01",
+        "context": "base OCR, pay-as-you-go",
+        "board": null,
+        "method": null,
+        "snapshot": "snapshots/dimensions.json",
+        "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a",
+        "cell": "/observations/12/value",
+        "reason": "Comparable official observation; no usable comparable leaderboard observation; newer date, then observation ID.",
+        "source_reason": null
       },
       "handwriting": {
         "value": true,
         "observation": "h4",
         "source_type": "official",
         "url": null,
-        "date": "2026-10-01"
+        "date": "2026-10-01",
+        "context": "documented",
+        "board": null,
+        "method": null,
+        "snapshot": "snapshots/dimensions.json",
+        "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a",
+        "cell": "/observations/13/value",
+        "reason": "Comparable official observation; no usable comparable leaderboard observation; newer date, then observation ID.",
+        "source_reason": null
       }
     },
     "fjord-scan": {
@@ -329,21 +1144,45 @@
         "observation": "p5",
         "source_type": "official",
         "url": "https://example/pricing",
-        "date": "2026-10-01"
+        "date": "2026-10-01",
+        "context": "base OCR, pay-as-you-go",
+        "board": null,
+        "method": null,
+        "snapshot": "snapshots/dimensions.json",
+        "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a",
+        "cell": "/observations/14/value",
+        "reason": "Comparable official observation; no usable comparable leaderboard observation; newer date, then observation ID.",
+        "source_reason": null
       },
       "latency": {
         "value": 0.95,
         "observation": "l5",
         "source_type": "leaderboard",
         "url": null,
-        "date": "2026-09-20"
+        "date": "2026-09-20",
+        "context": "1-page PDF, p50",
+        "board": "doc-arena",
+        "method": null,
+        "snapshot": "snapshots/doc-arena.json",
+        "snapshot_sha256": "f7659ecc844fe14b194a1d17bb461a289bb62ad752c0bf0ece5d6855133337a6",
+        "cell": "/dimensions/4/value",
+        "reason": "Comparable leaderboard observation; higher scored board weight, then newer date, then observation ID.",
+        "source_reason": null
       },
       "handwriting": {
         "value": true,
         "observation": "h5",
         "source_type": "official",
         "url": null,
-        "date": "2026-10-01"
+        "date": "2026-10-01",
+        "context": "documented",
+        "board": null,
+        "method": null,
+        "snapshot": "snapshots/dimensions.json",
+        "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a",
+        "cell": "/observations/16/value",
+        "reason": "Comparable official observation; no usable comparable leaderboard observation; newer date, then observation ID.",
+        "source_reason": null
       }
     },
     "glyph-cloud": {
@@ -352,21 +1191,45 @@
         "observation": "p6",
         "source_type": "official",
         "url": "https://example/pricing",
-        "date": "2026-10-01"
+        "date": "2026-10-01",
+        "context": "base OCR, pay-as-you-go",
+        "board": null,
+        "method": null,
+        "snapshot": "snapshots/dimensions.json",
+        "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a",
+        "cell": "/observations/17/value",
+        "reason": "Comparable official observation; no usable comparable leaderboard observation; newer date, then observation ID.",
+        "source_reason": null
       },
       "latency": {
         "value": 0.54,
         "observation": "l6",
         "source_type": "leaderboard",
         "url": null,
-        "date": "2026-09-20"
+        "date": "2026-09-20",
+        "context": "1-page PDF, p50",
+        "board": "doc-arena",
+        "method": null,
+        "snapshot": "snapshots/doc-arena.json",
+        "snapshot_sha256": "f7659ecc844fe14b194a1d17bb461a289bb62ad752c0bf0ece5d6855133337a6",
+        "cell": "/dimensions/5/value",
+        "reason": "Comparable leaderboard observation; higher scored board weight, then newer date, then observation ID.",
+        "source_reason": null
       },
       "handwriting": {
         "value": false,
         "observation": "h6",
         "source_type": "official",
         "url": null,
-        "date": "2026-10-01"
+        "date": "2026-10-01",
+        "context": "documented",
+        "board": null,
+        "method": null,
+        "snapshot": "snapshots/dimensions.json",
+        "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a",
+        "cell": "/observations/19/value",
+        "reason": "Comparable official observation; no usable comparable leaderboard observation; newer date, then observation ID.",
+        "source_reason": null
       }
     },
     "harbor-ocr": {
@@ -375,21 +1238,45 @@
         "observation": "p7",
         "source_type": "official",
         "url": "https://example/pricing",
-        "date": "2026-10-01"
+        "date": "2026-10-01",
+        "context": "base OCR, pay-as-you-go",
+        "board": null,
+        "method": null,
+        "snapshot": "snapshots/dimensions.json",
+        "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a",
+        "cell": "/observations/20/value",
+        "reason": "Comparable official observation; no usable comparable leaderboard observation; newer date, then observation ID.",
+        "source_reason": null
       },
       "latency": {
         "value": 3.15,
         "observation": "l7",
         "source_type": "leaderboard",
         "url": null,
-        "date": "2026-09-20"
+        "date": "2026-09-20",
+        "context": "1-page PDF, p50",
+        "board": "doc-arena",
+        "method": null,
+        "snapshot": "snapshots/doc-arena.json",
+        "snapshot_sha256": "f7659ecc844fe14b194a1d17bb461a289bb62ad752c0bf0ece5d6855133337a6",
+        "cell": "/dimensions/6/value",
+        "reason": "Comparable leaderboard observation; higher scored board weight, then newer date, then observation ID.",
+        "source_reason": null
       },
       "handwriting": {
         "value": true,
         "observation": "h7",
         "source_type": "official",
         "url": null,
-        "date": "2026-10-01"
+        "date": "2026-10-01",
+        "context": "documented",
+        "board": null,
+        "method": null,
+        "snapshot": "snapshots/dimensions.json",
+        "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a",
+        "cell": "/observations/22/value",
+        "reason": "Comparable official observation; no usable comparable leaderboard observation; newer date, then observation ID.",
+        "source_reason": null
       }
     },
     "iris-parse": {
@@ -398,21 +1285,45 @@
         "observation": "p8",
         "source_type": "official",
         "url": "https://example/pricing",
-        "date": "2026-10-01"
+        "date": "2026-10-01",
+        "context": "base OCR, pay-as-you-go",
+        "board": null,
+        "method": null,
+        "snapshot": "snapshots/dimensions.json",
+        "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a",
+        "cell": "/observations/23/value",
+        "reason": "Comparable official observation; no usable comparable leaderboard observation; newer date, then observation ID.",
+        "source_reason": null
       },
       "latency": {
         "value": 3.55,
         "observation": "l8",
         "source_type": "leaderboard",
         "url": null,
-        "date": "2026-09-20"
+        "date": "2026-09-20",
+        "context": "1-page PDF, p50",
+        "board": "doc-arena",
+        "method": null,
+        "snapshot": "snapshots/doc-arena.json",
+        "snapshot_sha256": "f7659ecc844fe14b194a1d17bb461a289bb62ad752c0bf0ece5d6855133337a6",
+        "cell": "/dimensions/7/value",
+        "reason": "Comparable leaderboard observation; higher scored board weight, then newer date, then observation ID.",
+        "source_reason": null
       },
       "handwriting": {
         "value": true,
         "observation": "h8",
         "source_type": "official",
         "url": null,
-        "date": "2026-10-01"
+        "date": "2026-10-01",
+        "context": "documented",
+        "board": null,
+        "method": null,
+        "snapshot": "snapshots/dimensions.json",
+        "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a",
+        "cell": "/observations/25/value",
+        "reason": "Comparable official observation; no usable comparable leaderboard observation; newer date, then observation ID.",
+        "source_reason": null
       }
     },
     "juniper-lens": {
@@ -421,21 +1332,45 @@
         "observation": "p9",
         "source_type": "official",
         "url": "https://example/pricing",
-        "date": "2026-10-01"
+        "date": "2026-10-01",
+        "context": "base OCR, pay-as-you-go",
+        "board": null,
+        "method": null,
+        "snapshot": "snapshots/dimensions.json",
+        "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a",
+        "cell": "/observations/26/value",
+        "reason": "Comparable official observation; no usable comparable leaderboard observation; newer date, then observation ID.",
+        "source_reason": null
       },
       "latency": {
         "value": 2.9,
         "observation": "l9",
         "source_type": "leaderboard",
         "url": null,
-        "date": "2026-09-20"
+        "date": "2026-09-20",
+        "context": "1-page PDF, p50",
+        "board": "doc-arena",
+        "method": null,
+        "snapshot": "snapshots/doc-arena.json",
+        "snapshot_sha256": "f7659ecc844fe14b194a1d17bb461a289bb62ad752c0bf0ece5d6855133337a6",
+        "cell": "/dimensions/8/value",
+        "reason": "Comparable leaderboard observation; higher scored board weight, then newer date, then observation ID.",
+        "source_reason": null
       },
       "handwriting": {
         "value": false,
         "observation": "h9",
         "source_type": "official",
         "url": null,
-        "date": "2026-10-01"
+        "date": "2026-10-01",
+        "context": "documented",
+        "board": null,
+        "method": null,
+        "snapshot": "snapshots/dimensions.json",
+        "snapshot_sha256": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a",
+        "cell": "/observations/28/value",
+        "reason": "Comparable official observation; no usable comparable leaderboard observation; newer date, then observation ID.",
+        "source_reason": null
       }
     }
   },
@@ -456,7 +1391,11 @@
         "iris-parse"
       ],
       "plotted": 10,
-      "omitted": 0
+      "omitted": 0,
+      "omitted_reasons": {
+        "unusable_quality": 0,
+        "unusable_dimension": 0
+      }
     },
     "latency": {
       "unit": "seconds",
@@ -469,8 +1408,141 @@
         "glyph-cloud"
       ],
       "plotted": 9,
-      "omitted": 1
+      "omitted": 1,
+      "omitted_reasons": {
+        "unusable_quality": 0,
+        "unusable_dimension": 1
+      }
     }
   },
-  "generated_at": "2026-10-03"
+  "collection": [
+    {
+      "slug": "hub-ocr-accuracy",
+      "url": "https://bench-hub.example/hub-ocr-accuracy",
+      "final_url": "https://bench-hub.example/hub-ocr-accuracy",
+      "domain": "bench-hub.example",
+      "status": "live",
+      "mentioned_by": [
+        "chatgpt",
+        "gemini"
+      ]
+    },
+    {
+      "slug": "hub-handwriting",
+      "url": "https://bench-hub.example/hub-handwriting",
+      "final_url": "https://bench-hub.example/hub-handwriting",
+      "domain": "bench-hub.example",
+      "status": "live",
+      "mentioned_by": [
+        "chatgpt",
+        "gemini"
+      ]
+    },
+    {
+      "slug": "doc-arena",
+      "url": "https://doc-arena.example/doc-arena",
+      "final_url": "https://doc-arena.example/doc-arena",
+      "domain": "doc-arena.example",
+      "status": "live",
+      "mentioned_by": [
+        "chatgpt",
+        "gemini"
+      ]
+    },
+    {
+      "slug": "ocr-league-cer",
+      "url": "https://ocr-league.example/ocr-league-cer",
+      "final_url": "https://ocr-league.example/ocr-league-cer",
+      "domain": "ocr-league.example",
+      "status": "live",
+      "mentioned_by": [
+        "chatgpt",
+        "gemini"
+      ]
+    },
+    {
+      "slug": "paperbench-rank",
+      "url": "https://paperbench.example/paperbench-rank",
+      "final_url": "https://paperbench.example/paperbench-rank",
+      "domain": "paperbench.example",
+      "status": "live",
+      "mentioned_by": [
+        "chatgpt",
+        "gemini"
+      ]
+    },
+    {
+      "slug": "old-ocr-board",
+      "url": "https://gone.example/x",
+      "domain": "gone.example",
+      "status": "dead"
+    }
+  ],
+  "dependencies": {
+    "packages": {},
+    "visit_contracts": {
+      "bench-hub.example": {
+        "contract_version": null,
+        "compatibility": "legacy_unversioned"
+      },
+      "doc-arena.example": {
+        "contract_version": null,
+        "compatibility": "legacy_unversioned"
+      },
+      "ocr-league.example": {
+        "contract_version": null,
+        "compatibility": "legacy_unversioned"
+      },
+      "paperbench.example": {
+        "contract_version": null,
+        "compatibility": "legacy_unversioned"
+      }
+    }
+  },
+  "unselected_boards": [],
+  "warnings": [
+    "Synthetic fixture data; this report is not a live leaderboard evaluation.",
+    "Dependency package versions were not recorded by the host.",
+    "Legacy saved visit contracts retained without migration: bench-hub.example, doc-arena.example, ocr-league.example, paperbench.example."
+  ],
+  "generated_at": "2026-10-07",
+  "publication": {
+    "schema_version": 2,
+    "generation": "9110802f9132aa7978713080cb855528",
+    "runtime": {
+      "version": "0.3.0",
+      "code_sha256": "c49fcaa6d1d73c5ed256e602e655f2cff47eabed212a890b5ce9a820c6a299f8"
+    },
+    "input_sha256": {
+      "request.json": "063b637b694dbc7f483ca8c71a9cca2a6164969172817e79e1493ace0a9000e9",
+      "boards.json": "00b12c4c273f8cf920d6c1bc478ee3d1844c2d6ff3fae5dea52da8c90cd69450",
+      "visits/bench-hub.example.json": "db84a855c4d7899b2317593712a7d4f12b6d1711d40e1990b703849e128779e6",
+      "visits/doc-arena.example.json": "8795920deb85a64634e8815b9b5b90a99d20bf16d19af558dd2b579725ee1396",
+      "visits/ocr-league.example.json": "fb8120a953f40eeb20fafa5f187904727a4aeec4b62d01bcf8d337001614b9a5",
+      "visits/paperbench.example.json": "253bb45f796deac7708709ff5948a8baa9a226d24ec1c3778b8f5a30cd808251",
+      "weights.json": "f68108df8e371cb39f645a9cf8f2628483d11ecd0a83b4c828e592445be8c444",
+      "matches.json": "005db88e6ec57688a1a241344b7bab8db758803ae3f3a81ee2d89ea78a7cf87f",
+      "dimensions.json": "a251a13322cfbdc2aeadd00881182549cacae0e8aa8ba72079c6f3db5e852d03",
+      "leaderboards/doc-arena.json": "547cdc8ffd18be2ec11295dc0a84b2ea664770ca9fd4556581a06398d50ea033",
+      "snapshots/doc-arena.json": "f7659ecc844fe14b194a1d17bb461a289bb62ad752c0bf0ece5d6855133337a6",
+      "leaderboards/hub-handwriting.json": "869c9a17eabf7d0b08f852cf9eeae02c635e2551f51f02d7e738c98d23cb7b59",
+      "snapshots/hub-handwriting.json": "cbafd66b2aff6b498e7bcf4f40355845c0b7c36f5a7a45eff4b3fb9892a72c2a",
+      "leaderboards/hub-ocr-accuracy.json": "5068c02579384b2755345508a622e348a79f4bf76304a90c543512b205c03bea",
+      "snapshots/hub-ocr-accuracy.json": "62a4fae958f09069bbcc7fc6d39535e2fcc19c08850d4d421d24c68731819cdd",
+      "leaderboards/ocr-league-cer.json": "6ddaea135ea50d01ec7a1c9650f0f4346c799409fff8406b2fe822e7fc55f7a7",
+      "snapshots/ocr-league-cer.json": "1e88e468ec95ce02d9994ab6487d8930bfb4d8e8e881167dc9d954552fe240d3",
+      "leaderboards/paperbench-rank.json": "7b66d1d84753ac43ac92f93cedfd6de1420bfcc919516172dc44a717e8dc9fed",
+      "snapshots/paperbench-rank.json": "a9fd7a56bc611d7749ad7b908331d74ae6eff93245e0660dbae34ef90b0076c9",
+      "snapshots/dimensions.json": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a"
+    },
+    "source_sha256": {
+      "snapshots/doc-arena.json": "f7659ecc844fe14b194a1d17bb461a289bb62ad752c0bf0ece5d6855133337a6",
+      "snapshots/hub-handwriting.json": "cbafd66b2aff6b498e7bcf4f40355845c0b7c36f5a7a45eff4b3fb9892a72c2a",
+      "snapshots/hub-ocr-accuracy.json": "62a4fae958f09069bbcc7fc6d39535e2fcc19c08850d4d421d24c68731819cdd",
+      "snapshots/ocr-league-cer.json": "1e88e468ec95ce02d9994ab6487d8930bfb4d8e8e881167dc9d954552fe240d3",
+      "snapshots/paperbench-rank.json": "a9fd7a56bc611d7749ad7b908331d74ae6eff93245e0660dbae34ef90b0076c9",
+      "snapshots/dimensions.json": "e6c407d9fadb4534288cea6aa6f7e834387e16d48d979737e7c0f339e9d1309a"
+    },
+    "weigh_generation": "40542f878c7065cf7ac87c3af525a587"
+  }
 }

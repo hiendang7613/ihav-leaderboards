@@ -1,6 +1,6 @@
 {
   "slug": "ocr-league-cer",
-  "final_url": "https://example/ocr-league-cer",
+  "final_url": "https://ocr-league.example/ocr-league-cer",
   "method": "direct",
   "complete": true,
   "quality_column": "CER",
@@ -10,42 +10,52 @@
     {
       "name": "Cobalt Docs",
       "quality": 1.79,
-      "verified": true
+      "verified": true,
+      "cell": "/rows/0/quality"
     },
     {
       "name": "Delta Read",
       "quality": 4.25,
-      "verified": true
+      "verified": true,
+      "cell": "/rows/1/quality"
     },
     {
       "name": "Ember Text",
       "quality": 2.47,
-      "verified": true
+      "verified": true,
+      "cell": "/rows/2/quality"
     },
     {
       "name": "Fjord Scan",
       "quality": 2.99,
-      "verified": true
+      "verified": true,
+      "cell": "/rows/3/quality"
     },
     {
       "name": "Glyph Cloud",
       "quality": 4.3,
-      "verified": true
+      "verified": true,
+      "cell": "/rows/4/quality"
     },
     {
       "name": "Harbor OCR",
       "quality": 2.59,
-      "verified": true
+      "verified": true,
+      "cell": "/rows/5/quality"
     },
     {
       "name": "Iris Parse",
       "quality": 4.17,
-      "verified": true
+      "verified": true,
+      "cell": "/rows/6/quality"
     },
     {
       "name": "Juniper Lens",
       "quality": 2.65,
-      "verified": true
+      "verified": true,
+      "cell": "/rows/7/quality"
     }
-  ]
+  ],
+  "snapshot": "snapshots/ocr-league-cer.json",
+  "snapshot_sha256": "1e88e468ec95ce02d9994ab6487d8930bfb4d8e8e881167dc9d954552fe240d3"
 }

@@ -13,9 +13,10 @@ Rules (design S3, admin O1/O2):
 
 from __future__ import annotations
 
-import math
 import re
 from typing import Any, Dict, List, Optional
+
+from .numeric import finite_number
 
 TOP_N = 32
 
@@ -24,8 +25,8 @@ class NoWeightError(Exception):
     """No finite positive visit count exists, so visit weighting is unavailable."""
 
 
-_SUFFIX = {"": 1.0, "K": 1e3, "M": 1e6, "B": 1e9}
-_TEXT = re.compile(r"^\s*([0-9]+(?:\.[0-9]+)?)\s*([KMB]?)\s*$", re.I)
+_SUFFIX = {"": 1.0, "K": 1e3, "M": 1e6, "B": 1e9, "T": 1e12}
+_TEXT = re.compile(r"^\s*([0-9]+(?:\.[0-9]+)?)\s*([KMBT]?)\s*$", re.I)
 
 
 def parse_visits_text(text: Any) -> Optional[float]:
@@ -35,7 +36,8 @@ def parse_visits_text(text: Any) -> Optional[float]:
     match = _TEXT.match(text.replace(",", ""))
     if not match:
         return None
-    return float(match.group(1)) * _SUFFIX[match.group(2).upper()]
+    value = finite_number(float(match.group(1)))
+    return finite_number(value * _SUFFIX[match.group(2).upper()]) if value is not None else None
 
 
 def _positive_visits(result: Optional[Dict[str, Any]]) -> Optional[float]:
@@ -45,7 +47,8 @@ def _positive_visits(result: Optional[Dict[str, Any]]) -> Optional[float]:
     value = result.get("monthly_visits")
     if isinstance(value, bool) or not isinstance(value, (int, float)):
         value = parse_visits_text(result.get("monthly_visits_text"))
-    if value is None or not math.isfinite(value) or value <= 0:
+    value = finite_number(value)
+    if value is None or value <= 0:
         return None
     return float(value)
 
@@ -56,6 +59,14 @@ def allocate(boards: List[Dict[str, Any]], visits: Dict[str, Dict[str, Any]], to
     ``boards``: S2 entries with ``slug``, ``domain`` and ``status``.
     ``visits``: visit-counter JSON results keyed by domain; a missing key means no data.
     """
+    if isinstance(top_n, bool) or not isinstance(top_n, int) or top_n <= 0:
+        raise ValueError("top_n must be a positive integer.")
+    slugs = set()
+    for board in boards:
+        slug = board["slug"]
+        if slug in slugs:
+            raise ValueError("Duplicate board slug %s." % slug)
+        slugs.add(slug)
     live = [b for b in boards if b.get("status") == "live"]
     if not live:
         raise NoWeightError("No live leaderboard to weight.")
@@ -79,21 +90,34 @@ def allocate(boards: List[Dict[str, Any]], visits: Dict[str, Dict[str, Any]], to
         raw = known[domain]
         domain_mass = raw if raw is not None else floor
         split = len(domain_boards)
+        allocated = domain_mass / split
+        if allocated <= 0:
+            raise ValueError("Allocated mass for domain %s is not representable after its split." % domain)
+        source = result.get("source") or {}
+        if not isinstance(source, dict):
+            raise ValueError("Visit source for domain %s must be an object." % domain)
         for board in domain_boards:
             basis = "domain_split(%d)" % split if raw is not None else "floor+domain_split(%d)" % split
             entries.append({
                 "slug": board["slug"],
                 "domain": domain,
-                "monthly_visits": result.get("monthly_visits") if raw is not None else None,
+                "monthly_visits": finite_number(result.get("monthly_visits")) if raw is not None else None,
                 "monthly_visits_text": result.get("monthly_visits_text"),
                 "visit_kind": result.get("kind"),
                 "visit_period": result.get("period"),
                 "visit_analyzed_at": result.get("analyzed_at"),
-                "visit_source": (result.get("source") or {}).get("name"),
+                "visit_source": source.get("name"),
+                "visit_source_details": source,
+                "visit_range": result.get("range"),
+                "visit_confidence": result.get("confidence"),
+                "visit_rank": result.get("rank"),
+                "visit_error": result.get("error"),
+                "visit_contract_version": result.get("contract_version"),
                 "split": split,
-                "mass": domain_mass / split,
+                "mass": allocated,
                 "weight_basis": basis,
             })
+            entries[-1].update({key: board[key] for key in ("url", "final_url") if key in board})
 
     entries.sort(key=lambda e: (-e["mass"], e["slug"]))
     for index, entry in enumerate(entries):

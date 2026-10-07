@@ -1,6 +1,6 @@
 {
   "slug": "hub-handwriting",
-  "final_url": "https://example/hub-handwriting",
+  "final_url": "https://bench-hub.example/hub-handwriting",
   "method": "direct",
   "complete": true,
   "quality_column": "Accuracy",
@@ -10,37 +10,46 @@
     {
       "name": "Beacon Vision",
       "quality": 59.4,
-      "verified": true
+      "verified": true,
+      "cell": "/rows/0/quality"
     },
     {
       "name": "Cobalt Docs",
       "quality": 88.7,
-      "verified": true
+      "verified": true,
+      "cell": "/rows/1/quality"
     },
     {
       "name": "Delta Read",
       "quality": 50.6,
-      "verified": true
+      "verified": true,
+      "cell": "/rows/2/quality"
     },
     {
       "name": "Ember Text",
       "quality": 82.2,
-      "verified": true
+      "verified": true,
+      "cell": "/rows/3/quality"
     },
     {
       "name": "Fjord Scan",
       "quality": 66.3,
-      "verified": true
+      "verified": true,
+      "cell": "/rows/4/quality"
     },
     {
       "name": "Glyph Cloud",
       "quality": 51.6,
-      "verified": true
+      "verified": true,
+      "cell": "/rows/5/quality"
     },
     {
       "name": "Harbor OCR",
       "quality": 69.2,
-      "verified": true
+      "verified": true,
+      "cell": "/rows/6/quality"
     }
-  ]
+  ],
+  "snapshot": "snapshots/hub-handwriting.json",
+  "snapshot_sha256": "cbafd66b2aff6b498e7bcf4f40355845c0b7c36f5a7a45eff4b3fb9892a72c2a"
 }

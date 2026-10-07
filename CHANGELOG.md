@@ -1,5 +1,16 @@
 # Changelog
 
+## Unreleased
+
+- Visit estimates accept trillion (`T`) display labels while preserving the saved counter's raw integer or null. Single-domain and mixed-domain regressions cover the weighting policy.
+- Reject unknown extraction score kinds, require source snapshots for rank-only boards, and refuse a receipt that changes during read-only verification. The synthetic example carries current runtime receipts; long tooltip text wraps within its panel.
+- Deterministic CLI candidate 0.3.0: validated stage identities and SHA-256 receipts, read-only `verify`, stale-input refusal, and recoverable output archives. Archives verify backups before removal, journal partial failures and reject history symlinks. Failed HTML rebuilds retain the prior receipt for retry. This does not establish live/provider or clean-host acceptance.
+- Scores require literal verification and saved source/cell references. Conflicting duplicate rows require one explicit preferred row; no duplicate group can contain multiple preferred rows. Numeric conversion and normalization remain finite at float extremes.
+- Reports retain traffic and identity evidence, typed dimension choices and conflicts. Traffic binds to the collected URL host; error and result payloads cannot mix. Comparable dimensions need saved source hashes and cell locators; leaderboard dimensions bind to the referenced board snapshot. Numeric dimension cards and explicit chart omissions are visible. CSV text is formula-safe and carries a synthetic-data column; Markdown escapes dynamic cells.
+- Skills: ihav-web-chat is not in the ihav catalog yet, so the skill no longer prints an `ihav-web-chat@ihav` install command.
+- Discovery follows the ihav-web-chat 0.0.5 contract: `--dry-run` preview, approval of the exact prompt, one request key per run, `delivery wait/read`, no resend.
+- Stage 0 finds each dependency through `claude plugin list --json` or `codex plugin list --json` and checks its contract.
+
 ## 0.2.2 - 2026-10-04
 
 - Claude Code installs ihav-web-visit-counter automatically as a dependency (from the ihav catalog). Codex has no dependency install; the skill still checks and prints the install command.

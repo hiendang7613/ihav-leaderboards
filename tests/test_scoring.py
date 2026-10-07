@@ -41,6 +41,7 @@ class ScoreBoardTests(unittest.TestCase):
 
     def test_duplicate_rows_count_once(self):
         b = board("L", [("A", 1), ("A v2", 9), ("B", 2), ("C", 3)])
+        b["rows"][0]["preferred"] = True
         aliases = {("L", "A"): "A", ("L", "A v2"): "A", ("L", "B"): "B", ("L", "C"): "C"}
         out = score_board(b, aliases)
         self.assertEqual(out["duplicates"], ["A v2"])

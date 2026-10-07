@@ -2,14 +2,15 @@
 
 from __future__ import annotations
 
-import math
 from typing import Any, Dict, List
+
+from .numeric import finite_number
 
 DIRECTIONS = {"lower_better", "higher_better"}
 
 
 def _usable(value: Any) -> bool:
-    return isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value)
+    return finite_number(value) is not None
 
 
 def frontier(points: List[Dict[str, Any]], x_direction: str) -> List[str]:
